@@ -1,7 +1,11 @@
 using UnityEngine;
+using Data_Classes;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SO_Scripts
 {
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Midi Data", order = 1)]
     public class MidiData : ScriptableObject
     {
        [Header("MIDI Related & Time Offset Data")]
@@ -18,8 +22,10 @@ namespace SO_Scripts
        
        public float noteDespawnX //De-spawn position for notes
        {
-           get => noteTapX - (noteSpawnX - noteTapX);
-           set => noteDespawnX = value;
+           get
+           {
+               return noteTapX - (noteSpawnX - noteTapX);
+           } 
        }
        
        [Header("Note Prefabs")]

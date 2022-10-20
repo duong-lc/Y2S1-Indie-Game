@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core
+namespace Core.Singleton
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Component
     {

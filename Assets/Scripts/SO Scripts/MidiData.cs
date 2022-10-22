@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Data_Classes;
 using System.Collections;
@@ -17,14 +18,17 @@ namespace SO_Scripts
    
        public string fileLocation; //file location for the MIDI file
        public float noteTime; //how much time the note is going to be on the screen
-       public float noteSpawnX; //the X position for the note to be spawned at
-       public float noteTapX; //the X position where the player should press the note
+       public float noteSpawnZ; //the Z position for the note to be spawned at
+       public float noteTapZ; //the Z position where the player should press the note
+
+       private Vector3 _startPos;
+       private Vector3 _endPos;
        
-       public float noteDespawnX //De-spawn position for notes
+       public float noteDespawnZ //De-spawn position for notes
        {
            get
            {
-               return noteTapX - (noteSpawnX - noteTapX);
+               return noteTapZ - (noteSpawnZ - noteTapZ);
            } 
        }
        
@@ -64,5 +68,11 @@ namespace SO_Scripts
        [Range(0, 8)] public int laneOctave4;
        public List<BaseNoteType> AllNoteOnLaneList4 = new List<BaseNoteType>();
 
+       private void OnValidate()
+       {
+           
+       }
+       
+       public void Get
     }
 }

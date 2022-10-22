@@ -104,7 +104,7 @@ namespace Managers
             }
         }
         
-        public void DistributeNoteToLane()
+        public void DistributeNoteToLanes()
         {
             Lane[] laneArray = GetComponentsInChildren<Lane>();
             foreach (Lane lane in laneArray)

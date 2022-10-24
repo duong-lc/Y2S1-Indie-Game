@@ -3,6 +3,7 @@ using UnityEngine;
 using Data_Classes;
 using System.Collections;
 using System.Collections.Generic;
+using Data_Classes;
 
 namespace SO_Scripts
 {
@@ -21,9 +22,6 @@ namespace SO_Scripts
        public float noteSpawnZ; //the Z position for the note to be spawned at
        public float noteTapZ; //the Z position where the player should press the note
 
-       private Vector3 _startPos;
-       private Vector3 _endPos;
-       
        public float noteDespawnZ //De-spawn position for notes
        {
            get
@@ -72,7 +70,31 @@ namespace SO_Scripts
        {
            
        }
-       
-       public void Get
+
+       public Tuple<Vector3, Vector3> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
+       {
+           Vector3 hitPoint;
+           switch (noteOrientation)
+           {
+               case Data_Classes.NoteData.LaneOrientation.One:
+                   hitPoint = hitPoint1;
+                   break;
+               case Data_Classes.NoteData.LaneOrientation.Two:
+                   hitPoint = hitPoint2;
+                   break;
+               case Data_Classes.NoteData.LaneOrientation.Three:
+                   hitPoint = hitPoint3;
+                   break;
+               case Data_Classes.NoteData.LaneOrientation.Four:
+                   hitPoint = hitPoint4;
+                   break;
+               default:
+                   throw new ArgumentOutOfRangeException();
+           }
+           
+           Vector3 startPos = hitPoint + (dir * noteSpawnZ);
+           Vector3 endPos = hitPoint + (dir * noteDespawnZ);
+           return new Tuple<Vector3, Vector3>(startPos, endPos);
+       }
     }
 }

@@ -8,6 +8,7 @@ namespace NoteClasses
     {
         [Header("Base Note Attributes")] 
         protected bool CanMove = true;
+        protected double MarginOfError;
 
         [SerializeField] protected MidiData midiData;
         [SerializeField] protected SO_Scripts.NoteData noteData;
@@ -15,10 +16,9 @@ namespace NoteClasses
         public Data_Classes.NoteData.LaneOrientation noteOrientation;
 
 
-        protected virtual Tuple<Vector3, Vector3> GetCorePositions (Vector3 hitPoint, Vector3 dir, float spawnZ, float deSpawnZ)
+        private void Awake()
         {
-            Debug.Log("Calling from root class");
-            return new Tuple<Vector3, Vector3>(Vector3.zero, Vector3.zero);
+            MarginOfError = midiData.marginOfError;
         }
     }
 }

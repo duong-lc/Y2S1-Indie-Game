@@ -4,6 +4,7 @@ using Data_Classes;
 using System.Collections.Generic;
 using Managers;
 using DataClass = Data_Classes;
+using NoteClasses;
 
 public class Lane : MonoBehaviour
 {
@@ -109,6 +110,7 @@ public class Lane : MonoBehaviour
                     normalComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
                     //get the time the note should be tapped by player and add to the array
                     normalComp.assignedTime = noteNormalCast.timeStamp;
+                    normalComp.SetIndexOnLaneList(_spawnIndex);
                     
                     //increment the index
                     if(_spawnIndex + 1 <= allNotesList.Count - 1)

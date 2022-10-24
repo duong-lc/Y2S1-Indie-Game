@@ -14,40 +14,51 @@ namespace NoteClasses
         private Vector3 _startPos;
         private Vector3 _endPos;
 
+        private int _indexOnLaneList;
+        
         private void Start()
         {
             _timeInstantiated = SongManager.GetAudioSourceTime();
 
-            Tuple<Vector3, Vector3> tuple;
-            Vector3 hitPoint;
-            switch (noteOrientation)
-            {
-                case NoteData.LaneOrientation.One:
-                    hitPoint = midiData.hitPoint1;
-                    break;
-                case NoteData.LaneOrientation.Two:
-                    hitPoint = midiData.hitPoint2;
-                    break;
-                case NoteData.LaneOrientation.Three:
-                    hitPoint = midiData.hitPoint3;
-                    break;
-                case NoteData.LaneOrientation.Four:
-                    hitPoint = midiData.hitPoint4;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
-            tuple = GetCorePositions(midiData.hitPoint1, Vector3.forward, midiData.noteSpawnZ, midiData.noteDespawnZ);
+            var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
             _startPos = tuple.Item1;
             _endPos = tuple.Item2;
         }
-        
-        protected override Tuple<Vector3, Vector3> GetCorePositions (Vector3 hitPoint, Vector3 dir, float spawnZ, float deSpawnZ)
+
+        private void Update()
         {
-            Vector3 startPos = hitPoint + (dir * spawnZ);
-            Vector3 endPos = hitPoint + (dir * deSpawnZ);
-            return new Tuple<Vector3, Vector3>(startPos, endPos);
+            if (!CanMove) return;
+            
+        }
+
+        private void InterpolateNotePos()
+        {
+            double timeSinceInstantiated = SongManager.GetAudioSourceTime() - _timeInstantiated;
+            //divide that with the time between the spawn Y and despawn Y to get the alpha position of the note relative to its total travel dist
+            float alpha = (float)(timeSinceInstantiated / (midiData.noteTime * 2));
+
+            if(alpha <= 1f)//otherwise, the position of note will be lerped between the spawn position and despawn position based on the alpha
+            {
+                transform.position = Vector3.Lerp(_startPos, _endPos, alpha);
+            }
+        }
+
+
+        public void OnNoteRegisterNormalNote()
+        {
+            double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
+
+            if (Math.Abs(currAudioTime - assignedTime) < MarginOfError) //hitting the note within the margin of error
+            {
+                
+            }
+        }
+        
+        
+        //might not use this function so remember to delete if it isn't used
+        public void SetIndexOnLaneList(int indexToSet)
+        {
+            _indexOnLaneList = indexToSet;
         }
     }
 }

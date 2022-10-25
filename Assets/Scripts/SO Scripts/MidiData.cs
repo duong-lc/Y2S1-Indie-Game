@@ -71,7 +71,7 @@ namespace SO_Scripts
            
        }
 
-       public Tuple<Vector3, Vector3> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
+       public Tuple<Vector3, Vector3, float> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
        {
            Vector3 hitPoint;
            switch (noteOrientation)
@@ -94,7 +94,7 @@ namespace SO_Scripts
            
            Vector3 startPos = hitPoint + (dir * noteSpawnZ);
            Vector3 endPos = hitPoint + (dir * noteDespawnZ);
-           return new Tuple<Vector3, Vector3>(startPos, endPos);
+           return new Tuple<Vector3, Vector3, float>(startPos, endPos, hitPoint.z);
        }
     }
 }

@@ -2,6 +2,7 @@
 using Managers;
 using UnityEngine;
 using Data_Classes;
+using Melanchall.DryWetMidi.MusicTheory;
 
 namespace NoteClasses
 {
@@ -14,21 +15,17 @@ namespace NoteClasses
         private Vector3 _startPos;
         private Vector3 _endPos;
 
-        private int _indexOnLaneList;
-        
         private void Start()
         {
-            _timeInstantiated = SongManager.GetAudioSourceTime();
-
-            var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
-            _startPos = tuple.Item1;
-            _endPos = tuple.Item2;
+            SetUpVariables();
         }
 
         private void Update()
         {
-            if (!CanMove) return;
+            OnNoteMissNormalNote();
             
+            if (!CanMove) return;
+            InterpolateNotePos();
         }
 
         private void InterpolateNotePos()
@@ -44,21 +41,39 @@ namespace NoteClasses
         }
 
 
-        public void OnNoteRegisterNormalNote()
+        public void OnNoteHitNormalNote()
         {
-            double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
+            //double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
 
-            if (Math.Abs(currAudioTime - assignedTime) < MarginOfError) //hitting the note within the margin of error
+            if (Math.Abs(SongManager.Instance.GetCurrentAudioTime() - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
-                
+                //Hit
+            }
+        }
+
+        public void OnNoteMissNormalNote()
+        {
+            if (assignedTime + MarginOfError <= SongManager.Instance.GetCurrentAudioTime())
+            {
+                //Miss
             }
         }
         
         
-        //might not use this function so remember to delete if it isn't used
-        public void SetIndexOnLaneList(int indexToSet)
+        public void InitializeDataOnSpawn(ref int octave, ref NoteData.LaneOrientation laneOrientation, ref double timeStamp)
         {
-            _indexOnLaneList = indexToSet;
+            octaveNum = octave;
+            noteOrientation = laneOrientation;//pass the orientation property
+            assignedTime = timeStamp;//get the time the note should be tapped by player and add to the array
+        }
+
+        private void SetUpVariables()
+        {
+            _timeInstantiated = SongManager.GetAudioSourceTime();
+
+            var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
+            _startPos = tuple.Item1;
+            _endPos = tuple.Item2;
         }
     }
 }

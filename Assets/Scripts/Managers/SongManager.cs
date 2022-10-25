@@ -11,7 +11,7 @@ namespace Managers
 {
     public class SongManager : Singleton<SongManager>
     {
-        [SerializeField] private MidiData _midiData;
+        [SerializeField] private MidiData midiData;
         public AudioSource audioSource; //audio source to play the song
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
         
@@ -35,7 +35,7 @@ namespace Managers
         private IEnumerator ReadFromWebsite()
         {
             //requesting unity web request the midi file
-            using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + _midiData.fileLocation)){
+            using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + midiData.fileLocation)){
                 yield return www.SendWebRequest();
                 
                 //checking to see if there's any network errors
@@ -65,10 +65,10 @@ namespace Managers
         /// </summary>
         private void ReadFromFile()
         {
-            MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + _midiData.fileLocation);
+            MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiData.fileLocation);
             //convert midi data to necessary data for rhythm game, append them all to list
             LaneManager.Instance.CompileDataFromMidi(MidiFile);
-            Invoke(nameof(StartSong), _midiData.songDelayInSeconds);
+            Invoke(nameof(StartSong), midiData.songDelayInSeconds);
         }
         
         public void StartSong()
@@ -83,6 +83,15 @@ namespace Managers
         public static double GetAudioSourceTime()
         {
             return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        }
+
+        /// <summary>
+        /// Get Current AudioTime with inputDelay compensated
+        /// </summary>
+        /// <returns></returns>
+        public double GetCurrentAudioTime()
+        {
+            return (double) (GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0));
         }
             
             

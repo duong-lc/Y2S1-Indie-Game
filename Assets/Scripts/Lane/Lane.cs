@@ -105,19 +105,19 @@ public class Lane : MonoBehaviour
                     allNotesList[_spawnIndex].noteObj = noteObj;
                     var normalComp = noteObj.GetComponent<NoteNormal>();
                     
-                    normalComp.octaveNum = allNotesList[_spawnIndex].octaveNum;
-                    //pass the orientation property
-                    normalComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
-                    //get the time the note should be tapped by player and add to the array
-                    normalComp.assignedTime = noteNormalCast.timeStamp;
-                    normalComp.SetIndexOnLaneList(_spawnIndex);
+                    normalComp.InitializeDataOnSpawn(
+                        ref noteNormalCast.octaveNum,
+                        ref noteNormalCast.laneOrientation,
+                        ref noteNormalCast.timeStamp);
                     
-                    //increment the index
-                    if(_spawnIndex + 1 <= allNotesList.Count - 1)
-                        _spawnIndex++;
-                    else
-                        _isSpawn = false;
-
+                    // normalComp.octaveNum = allNotesList[_spawnIndex].octaveNum;
+                    // //pass the orientation property
+                    // normalComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
+                    // //get the time the note should be tapped by player and add to the array
+                    // normalComp.assignedTime = noteNormalCast.timeStamp;
+                    // normalComp.SetIndexOnLaneList(_spawnIndex);
+                    
+                    IncrementSpawnIndex();
                 }
 
                 break;
@@ -134,22 +134,31 @@ public class Lane : MonoBehaviour
                     allNotesList[_spawnIndex].noteObj = NoteSliderObj;
                     var sliderComp = NoteSliderObj.GetComponent<NoteSlider>();
                     
-                    sliderComp.octaveNum = allNotesList[_spawnIndex].octaveNum;
-                    //pass the orientation property
-                    sliderComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
-                    //Passing data to the newly spawned slider 
-                    sliderComp.data = noteSliderCast.sliderData;
+                    sliderComp.InitializeDataOnSpawn(
+                        ref noteSliderCast.octaveNum,
+                        ref noteSliderCast.laneOrientation,
+                        ref noteSliderCast.sliderData);
                     
-                    //increment the index
-                    if(_spawnIndex + 1 <= allNotesList.Count - 1)
-                        _spawnIndex++;
-                    else
-                        _isSpawn = false;
+                    // sliderComp.octaveNum = allNotesList[_spawnIndex].octaveNum;
+                    // //pass the orientation property
+                    // sliderComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
+                    // //Passing data to the newly spawned slider 
+                    // sliderComp.data = noteSliderCast.sliderData;
 
+                   IncrementSpawnIndex();
                 }
 
                 break;
         }
+    }
+
+    private void IncrementSpawnIndex()
+    {
+        //increment the index
+        if(_spawnIndex + 1 <= allNotesList.Count - 1)
+            _spawnIndex++;
+        else
+            _isSpawn = false;
     }
     
 }

@@ -20,5 +20,7 @@ namespace NoteClasses
         {
             MarginOfError = midiData.marginOfError;
         }
+
+
     }
 }

@@ -38,6 +38,10 @@ namespace NoteClasses
             {
                 transform.position = Vector3.Lerp(_startPos, _endPos, alpha);
             }
+            else
+            {
+                
+            }
         }
 
 

@@ -50,6 +50,11 @@ namespace NoteClasses
         {
             
         }
+
+        private void InterpolateEndNotePos()
+        {
+            
+        }
         
         private void SetUpLineControllers()
         {

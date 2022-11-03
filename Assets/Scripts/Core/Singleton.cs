@@ -1,9 +1,6 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Singleton
+namespace Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Component
     {

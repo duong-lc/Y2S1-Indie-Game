@@ -15,6 +15,8 @@ namespace NoteClasses
         private Vector3 _startPos;
         private Vector3 _endPos;
 
+        private double TimeSinceInstantiated => CurrentSongTimeRaw - _timeInstantiated;
+        private float Alpha => ((float)(TimeSinceInstantiated / (midiData.noteTime * 2)));
         private void Start()
         {
             SetUpVariables();
@@ -30,17 +32,13 @@ namespace NoteClasses
 
         private void InterpolateNotePos()
         {
-            double timeSinceInstantiated = SongManager.GetAudioSourceTime() - _timeInstantiated;
-            //divide that with the time between the spawn Y and despawn Y to get the alpha position of the note relative to its total travel dist
-            float alpha = (float)(timeSinceInstantiated / (midiData.noteTime * 2));
-
-            if(alpha <= 1f)//otherwise, the position of note will be lerped between the spawn position and despawn position based on the alpha
+            if(Alpha <= 1f)//otherwise, the position of note will be lerped between the spawn position and despawn position based on the alpha
             {
-                transform.position = Vector3.Lerp(_startPos, _endPos, alpha);
+                transform.position = Vector3.Lerp(_startPos, _endPos, Alpha);
             }
             else
             {
-                
+                Destroy(gameObject);
             }
         }
 
@@ -48,8 +46,7 @@ namespace NoteClasses
         public void OnNoteHitNormalNote()
         {
             //double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
-
-            if (Math.Abs(SongManager.Instance.GetCurrentAudioTime() - assignedTime) < MarginOfError) //hitting the note within the margin of error
+            if (Math.Abs(SongManager.Instance.GetAudioSourceTimeAdjusted() - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
                 //Hit
             }
@@ -57,7 +54,7 @@ namespace NoteClasses
 
         public void OnNoteMissNormalNote()
         {
-            if (assignedTime + MarginOfError <= SongManager.Instance.GetCurrentAudioTime())
+            if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
             {
                 //Miss
             }
@@ -73,7 +70,7 @@ namespace NoteClasses
 
         private void SetUpVariables()
         {
-            _timeInstantiated = SongManager.GetAudioSourceTime();
+            _timeInstantiated = SongManager.GetAudioSourceTimeRaw();
 
             var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
             _startPos = tuple.Item1;

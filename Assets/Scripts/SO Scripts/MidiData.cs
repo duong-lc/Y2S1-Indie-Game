@@ -22,14 +22,8 @@ namespace SO_Scripts
        public float noteSpawnZ; //the Z position for the note to be spawned at
        public float noteTapZ; //the Z position where the player should press the note
 
-       public float noteDespawnZ //De-spawn position for notes
-       {
-           get
-           {
-               return noteTapZ - (noteSpawnZ - noteTapZ);
-           } 
-       }
-       
+       public float NoteDespawnZ => noteTapZ - (noteSpawnZ - noteTapZ); //De-spawn position for notes
+
        [Header("Note Prefabs")]
        public GameObject noteNormalPrefab;
        public GameObject noteSliderPrefab;
@@ -71,7 +65,7 @@ namespace SO_Scripts
            
        }
 
-       public Tuple<Vector3, Vector3, float> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
+       public Tuple<Vector3, Vector3, Vector3> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
        {
            Vector3 hitPoint;
            switch (noteOrientation)
@@ -93,8 +87,8 @@ namespace SO_Scripts
            }
            
            Vector3 startPos = hitPoint + (dir * noteSpawnZ);
-           Vector3 endPos = hitPoint + (dir * noteDespawnZ);
-           return new Tuple<Vector3, Vector3, float>(startPos, endPos, hitPoint.z);
+           Vector3 endPos = hitPoint + (dir * NoteDespawnZ);
+           return new Tuple<Vector3, Vector3, Vector3>(startPos, endPos, hitPoint);
        }
     }
 }

@@ -25,6 +25,8 @@ public class Lane : MonoBehaviour
     private double _marginOfError;
     private float _inputDelay;
 
+    private double AudioTimeRaw => SongManager.GetAudioSourceTimeRaw();
+    
     private void Awake()
     {
         _laneHitPoint = gameObject.tag switch
@@ -97,7 +99,7 @@ public class Lane : MonoBehaviour
                 NoteNormalType noteNormalCast = (NoteNormalType) allNotesList[_spawnIndex];
 
                 //if current song time reaches point to spawn a note
-                if (SongManager.GetAudioSourceTime() >= noteNormalCast.timeStamp - _travelTime)
+                if (AudioTimeRaw >= noteNormalCast.timeStamp - _travelTime)
                 {
                     //Spawn a note
                     var noteObj = Instantiate(_normalNotePrefab, transform);
@@ -124,8 +126,7 @@ public class Lane : MonoBehaviour
             case DataClass.NoteData.NoteID.SliderNote:
                 NoteSliderType noteSliderCast = (NoteSliderType) allNotesList[_spawnIndex];
 
-                if (SongManager.GetAudioSourceTime() >=
-                    noteSliderCast.sliderData.timeStampKeyDown - _travelTime)
+                if (AudioTimeRaw >= noteSliderCast.sliderData.timeStampKeyDown - _travelTime)
                 {
                     //print($"{gameObject.name}");
                     //Spawn a slider prefab

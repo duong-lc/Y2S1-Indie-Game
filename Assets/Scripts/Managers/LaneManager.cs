@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Core.Singleton;
+using Core;
 using UnityEngine;
 using SO_Scripts;
 using Melanchall.DryWetMidi.Core;

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Core.Singleton;
 using Melanchall.DryWetMidi.Core;
 using UnityEngine;
 using SO_Scripts;
 using System.IO;
+using Core;
 using UnityEngine.Networking;
 
 namespace Managers
@@ -80,18 +80,18 @@ namespace Managers
         ///This is an utility function to return the audio source time
         ///Instead of using "AudioSource.time" we returning a double of playback pos in PCM sample divided by freq (Hz) for the accuracy 
         ///</summary>
-        public static double GetAudioSourceTime()
+        public static double GetAudioSourceTimeRaw()
         {
             return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
         }
 
         /// <summary>
-        /// Get Current AudioTime with inputDelay compensated
+        /// Get Current AudioTime with inputDelay compensated, mainly used for detecting hits for notes
         /// </summary>
         /// <returns></returns>
-        public double GetCurrentAudioTime()
+        public double GetAudioSourceTimeAdjusted()
         {
-            return (double) (GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0));
+            return (double) (GetAudioSourceTimeRaw() - (midiData.inputDelayInMilliseconds / 1000.0));
         }
             
             

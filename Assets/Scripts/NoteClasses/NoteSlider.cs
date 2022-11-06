@@ -53,10 +53,15 @@ namespace NoteClasses
 
         private void Update()
         {
-            if (!CanMove) return;
-            InterpolateStartNotePos();
-            if (!_canMoveEndNote) return;
-            InterpolateEndNotePos();
+            if (CanMove) {
+                InterpolateStartNotePos();
+            }
+            if (_canMoveEndNote) {
+                InterpolateEndNotePos();
+            }
+            
+            
+            
         }
 
         private void InterpolateStartNotePos()
@@ -96,6 +101,9 @@ namespace NoteClasses
             }
         }
 
+        /// <summary>
+        /// Called when pressing hit button or smt
+        /// </summary>
         private void OnNoteHitStartNote()
         {
             if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < midiData.marginOfError)
@@ -108,10 +116,57 @@ namespace NoteClasses
                 //Locking note position to hit point side based on its current side (left or right)
                 startNote.transform.position = _sliderLockPoint;
             }
-                
         }
-        
-        
+
+        private void UpdateStartNoteFail()//put in update
+        {
+            //Doesn't press, let start note passes
+            if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
+            {
+                //Miss
+            }
+        }
+
+        private void UpdateStartNoteHoldStatus()//put in update
+        {
+            //if(Input.GetKey(holdKey)){}
+            if (_isStartNoteHitCorrect)
+            {
+                _isHolding = true;
+            }
+        }
+
+        private void OnNoteHitEndNote()
+        {
+            if (_isStartNoteHitCorrect && _isHolding)
+            {
+                if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) < MarginOfError)
+                {
+                    //Hit
+
+                    _isEndNoteHitCorrect = true;
+                }
+            }
+        }
+
+        private void UpdateEndNoteFailStatus()
+        {
+            if (_isStartNoteHitCorrect && _isHolding)
+            {
+                //release too early
+                if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) >= MarginOfError)
+                {
+                    //miss
+                }
+                //release too late <- will probably throw away as this game mode does not account for late releases.
+                else if (_sliderData.timeStampKeyUp + MarginOfError <= CurrentSongTimeAdjusted)
+                {
+                    //miss
+                }
+            }
+        }
+
+
         #region Initializer Methods
         private void ActivateStartNote()
         {

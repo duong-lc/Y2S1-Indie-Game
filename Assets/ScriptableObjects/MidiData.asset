@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16113f939bba78429498462f0ca293f, type: 3}
+  m_Name: MidiData
+  m_EditorClassIdentifier: 
+  songClip: {fileID: 0}
+  songDelayInSeconds: 0
+  marginOfError: 0.15
+  inputDelayInMilliseconds: 0
+  fileLocation: 
+  noteTime: 0
+  noteSpawnZ: 0
+  noteTapZ: 0
+  noteNormalPrefab: {fileID: 0}
+  noteSliderPrefab: {fileID: 0}
+  hitPoint1: {x: 0, y: 0, z: 0}
+  hitPoint2: {x: 0, y: 0, z: 0}
+  hitPoint3: {x: 0, y: 0, z: 0}
+  hitPoint4: {x: 0, y: 0, z: 0}
+  noteRestrictionNormalNote: 0
+  noteRestrictionSliderNote: 0
+  input1: 0
+  laneOctave1: 0
+  input2: 0
+  laneOctave2: 0
+  input3: 0
+  laneOctave3: 0
+  input4: 0
+  laneOctave4: 0

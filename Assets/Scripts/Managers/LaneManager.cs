@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Core;
+using Core.Patterns;
 using UnityEngine;
 using SO_Scripts;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using DataClass = Data_Classes;
+
 
 namespace Managers
 {

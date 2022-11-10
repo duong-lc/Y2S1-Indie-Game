@@ -4,7 +4,7 @@ using Melanchall.DryWetMidi.Core;
 using UnityEngine;
 using SO_Scripts;
 using System.IO;
-using Core;
+using Core.Patterns;
 using UnityEngine.Networking;
 
 namespace Managers

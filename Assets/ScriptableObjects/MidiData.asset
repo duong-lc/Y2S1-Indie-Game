@@ -17,22 +17,22 @@ MonoBehaviour:
   marginOfError: 0.15
   inputDelayInMilliseconds: 0
   fileLocation: 
-  noteTime: 0
-  noteSpawnZ: 0
-  noteTapZ: 0
+  noteTime: 3
+  noteSpawnZ: 150
+  noteTapZ: -10.5
   noteNormalPrefab: {fileID: 0}
   noteSliderPrefab: {fileID: 0}
-  hitPoint1: {x: 0, y: 0, z: 0}
-  hitPoint2: {x: 0, y: 0, z: 0}
-  hitPoint3: {x: 0, y: 0, z: 0}
-  hitPoint4: {x: 0, y: 0, z: 0}
+  hitPoint1: {x: -7.5, y: 0, z: -10.5}
+  hitPoint2: {x: -2.5, y: 0, z: -10.5}
+  hitPoint3: {x: 2.5, y: 0, z: -10.5}
+  hitPoint4: {x: 7.5, y: 0, z: -10.5}
   noteRestrictionNormalNote: 0
-  noteRestrictionSliderNote: 0
-  input1: 0
+  noteRestrictionSliderNote: 2
+  input1: 113
   laneOctave1: 0
-  input2: 0
-  laneOctave2: 0
-  input3: 0
-  laneOctave3: 0
-  input4: 0
-  laneOctave4: 0
+  input2: 119
+  laneOctave2: 1
+  input3: 107
+  laneOctave3: 2
+  input4: 108
+  laneOctave4: 3

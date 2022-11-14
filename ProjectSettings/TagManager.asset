@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Lane Dividers
+    uniqueID: 3264716491
+    locked: 0
+  - name: Hit Border
+    uniqueID: 3005486611
+    locked: 0
+  - name: Note
+    uniqueID: 2198639645
+    locked: 0

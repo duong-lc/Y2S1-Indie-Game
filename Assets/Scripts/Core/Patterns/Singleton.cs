@@ -2,42 +2,45 @@ using Core.Logging;
 using UnityEngine;
 
 namespace Core.Patterns {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
-        private static T      _instance;
-        private static object _lock = new object();
-        private static bool isQuitting = false;
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    {
 
-        /// <summary>
-        /// Returns the singleton instance.
-        /// </summary>
+        private static T _instance;
+        private static readonly object _instanceLock = new object();
+        private static bool _quitting = false;
+
         public static T Instance {
             get {
-                if (isQuitting) {
-                    return null;
-                }
-                
-                lock (_lock) {
-                    if (_instance == null) {
-                        var instances = FindObjectsOfType<T>();
-                        if (instances.Length > 1) {
-                            NCLogger.Log("More than one instance of singleton found in scene!", LogLevel.WARNING);
-                            _instance = instances[0];
-                            return _instance;
+                lock(_instanceLock){
+                    if(_instance==null && !_quitting){
+
+                        _instance = GameObject.FindObjectOfType<T>();
+                        if(_instance==null){
+                            GameObject go = new GameObject(typeof(T).ToString());
+                            _instance = go.AddComponent<T>();
+
+                            DontDestroyOnLoad(_instance.gameObject);
                         }
                     }
 
-                    if (_instance == null) {
-                        NCLogger.Log($"No instances found, creating new {typeof(T)} instance.");
-                        _instance = new GameObject($"{typeof(T)} (singleton)").AddComponent<T>();
-                        DontDestroyOnLoad(_instance);
-                    }
-                    return _instance; 
+                    return _instance;
                 }
             }
         }
-    
-        protected void OnDestroy() {
-            isQuitting = true;
+
+        protected virtual void Awake()
+        {
+            if(_instance==null) _instance = gameObject.GetComponent<T>();
+            else if(_instance.GetInstanceID()!=GetInstanceID()){
+                Destroy(gameObject);
+                throw new System.Exception(string.Format("Instance of {0} already exists, removing {1}",GetType().FullName,ToString()));
+            }
         }
+
+        protected virtual void OnApplicationQuit() 
+        {
+            _quitting = true;
+        }
+
     }
 }

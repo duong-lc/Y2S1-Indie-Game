@@ -1,29 +1,42 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Core.Logging;
 using Core.Patterns;
 using UnityEngine;
 using SO_Scripts;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using DataClass = Data_Classes;
+using EventType = Core.Events.EventType;
 
 
 namespace Managers
 {
-    public class LaneManager : Singleton<LaneManager>
+    public class LaneManager : MonoBehaviour
     {
         [SerializeField] private MidiData midiData;
         private Note[] _rawNoteArray;
-        private List<int> _ignoreIndexList = new List<int>();    
+        private List<int> _ignoreIndexList = new List<int>();
+
+        private void Awake()
+        {
+            Core.Events.EventDispatcher.Instance.AddListener(EventType.CompileDataFromMidiEvent,
+                param => CompileDataFromMidi((MidiFile) param));
+        }
         
-        public void CompileDataFromMidi(MidiFile midiFile)
+        private void Start()
+        {
+        }
+
+        private void CompileDataFromMidi(MidiFile midiFile)
         {
             ICollection<Note> notes = midiFile.GetNotes();
             _rawNoteArray = new Note[notes.Count];
             notes.CopyTo(_rawNoteArray, 0);
-
+            
             SetTimeStampsAllLanes();
-
+            
             DistributeNoteToLanes();
         }
         private void SetTimeStampsAllLanes()

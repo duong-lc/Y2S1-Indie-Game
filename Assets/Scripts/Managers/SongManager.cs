@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Melanchall.DryWetMidi.Core;
 using UnityEngine;
 using SO_Scripts;
 using System.IO;
+using Core.Events;
 using Core.Patterns;
 using UnityEngine.Networking;
+using EventType = Core.Events.EventType;
 
 namespace Managers
 {
@@ -14,7 +17,13 @@ namespace Managers
         [SerializeField] private MidiData midiData;
         public AudioSource audioSource; //audio source to play the song
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
-        
+
+        private void Awake()
+        {
+            EventDispatcher.Instance.AddListener(EventType.RequestSourceTimeRaw, param => GetAudioSourceTimeRaw());
+            
+        }
+
         private void Start()
         {
             /*
@@ -54,7 +63,8 @@ namespace Managers
                     using (var stream = new MemoryStream(results))
                     {
                         MidiFile = MidiFile.Read(stream);
-                        LaneManager.Instance.CompileDataFromMidi(MidiFile);
+                        //LaneManager.Instance.CompileDataFromMidi(MidiFile);
+                        Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
                     }
                 }
             }
@@ -67,7 +77,8 @@ namespace Managers
         {
             MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiData.fileLocation);
             //convert midi data to necessary data for rhythm game, append them all to list
-            LaneManager.Instance.CompileDataFromMidi(MidiFile);
+            //LaneManager.Instance.CompileDataFromMidi(MidiFile);
+            Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
             Invoke(nameof(StartSong), midiData.songDelayInSeconds);
         }
         
@@ -82,7 +93,8 @@ namespace Managers
         ///</summary>
         public static double GetAudioSourceTimeRaw()
         {
-            return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+            var sourceTimeRaw = (double) Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+            return sourceTimeRaw;
         }
 
         /// <summary>

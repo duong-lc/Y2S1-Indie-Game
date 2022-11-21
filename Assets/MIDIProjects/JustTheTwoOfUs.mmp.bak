@@ -42,7 +42,6 @@
           <fxchain numofeffects="0" enabled="0"/>
         </instrumenttrack>
         <pattern name="hihat_closed01.ogg" steps="16" type="1" muted="0" pos="0">
-          <note len="9" vol="100" pan="0" key="3" pos="40"/>
           <note len="48" vol="178" pan="0" key="53" pos="10392"/>
           <note len="48" vol="178" pan="0" key="51" pos="22776"/>
         </pattern>

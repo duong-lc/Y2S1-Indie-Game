@@ -24,6 +24,7 @@ public class Lane : MonoBehaviour
     private float _travelTime;
     private double _marginOfError;
     private float _inputDelay;
+    private Vector3 _spawnLocation;
 
     private double AudioTimeRaw => SongManager.GetAudioSourceTimeRaw();
     

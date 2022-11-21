@@ -3,7 +3,7 @@
 <lmms-project type="song" creator="LMMS" version="1.0" creatorversion="1.2.2">
   <head bpm="140" mastervol="100" timesig_denominator="4" masterpitch="0" timesig_numerator="4"/>
   <song>
-    <trackcontainer type="song" width="2304" visible="1" y="-128" minimized="0" maximized="0" height="277" x="5">
+    <trackcontainer type="song" width="2304" visible="1" y="5" minimized="0" maximized="0" height="277" x="5">
       <track type="0" name="TripleOscillator" muted="0" solo="0">
         <instrumenttrack pan="0" fxch="0" usemasterpitch="1" pitchrange="1" vol="100" pitch="0" basenote="57">
           <instrument name="tripleoscillator">
@@ -24,7 +24,7 @@
         <sampletrack pan="0" vol="100.3">
           <fxchain numofeffects="0" enabled="0"/>
         </sampletrack>
-        <sampletco pos="0" muted="0" src="D:/Users/duong.lc/Downloads/just the 2 of us.wav" sample_rate="44100" len="26608"/>
+        <sampletco pos="0" muted="0" src="E:/_School Projects/Y2S1-Indie-Game/Assets/Assets/Audio/just the 2 of us.wav" sample_rate="44100" len="27744"/>
       </track>
       <track type="0" name="hihat_closed01.ogg" muted="0" solo="0">
         <instrumenttrack pan="0" fxch="0" usemasterpitch="1" pitchrange="1" vol="100" pitch="0" basenote="57">
@@ -42,22 +42,22 @@
           <fxchain numofeffects="0" enabled="0"/>
         </instrumenttrack>
         <pattern type="1" name="hihat_closed01.ogg" pos="0" steps="16" muted="0">
-          <note pan="0" vol="100" pos="0" key="36" len="6"/>
-          <note pan="0" vol="100" pos="0" key="24" len="6"/>
-          <note pan="0" vol="100" pos="0" key="12" len="6"/>
-          <note pan="0" vol="100" pos="0" key="0" len="6"/>
-          <note pan="0" vol="100" pos="36" key="25" len="6"/>
-          <note pan="0" vol="100" pos="36" key="13" len="6"/>
-          <note pan="0" vol="100" pos="36" key="1" len="6"/>
-          <note pan="0" vol="100" pos="39" key="37" len="6"/>
-          <note pan="0" vol="100" pos="81" key="37" len="6"/>
-          <note pan="0" vol="100" pos="81" key="25" len="6"/>
-          <note pan="0" vol="100" pos="84" key="13" len="6"/>
-          <note pan="0" vol="100" pos="84" key="1" len="6"/>
-          <note pan="0" vol="100" pos="108" key="0" len="6"/>
-          <note pan="0" vol="100" pos="111" key="36" len="6"/>
-          <note pan="0" vol="100" pos="111" key="24" len="6"/>
-          <note pan="0" vol="100" pos="111" key="12" len="6"/>
+          <note pan="0" vol="195" pos="1152" key="36" len="19"/>
+          <note pan="0" vol="195" pos="1152" key="24" len="19"/>
+          <note pan="0" vol="195" pos="1152" key="12" len="19"/>
+          <note pan="0" vol="195" pos="1152" key="0" len="19"/>
+          <note pan="0" vol="195" pos="1269" key="36" len="19"/>
+          <note pan="0" vol="195" pos="1269" key="24" len="19"/>
+          <note pan="0" vol="195" pos="1269" key="12" len="19"/>
+          <note pan="0" vol="195" pos="1272" key="0" len="19"/>
+          <note pan="0" vol="195" pos="1317" key="26" len="19"/>
+          <note pan="0" vol="195" pos="1317" key="14" len="19"/>
+          <note pan="0" vol="195" pos="1320" key="38" len="19"/>
+          <note pan="0" vol="195" pos="1320" key="2" len="19"/>
+          <note pan="0" vol="195" pos="1428" key="14" len="19"/>
+          <note pan="0" vol="195" pos="1428" key="2" len="19"/>
+          <note pan="0" vol="195" pos="1437" key="26" len="19"/>
+          <note pan="0" vol="195" pos="1440" key="38" len="19"/>
           <note pan="0" vol="178" pos="10392" key="53" len="48"/>
           <note pan="0" vol="178" pos="22776" key="51" len="48"/>
         </pattern>
@@ -71,15 +71,15 @@
       <automationpattern name="Master volume" pos="0" tens="1" prog="0" mute="0" len="192"/>
       <automationpattern name="Master pitch" pos="0" tens="1" prog="0" mute="0" len="192"/>
     </track>
-    <fxmixer width="543" visible="1" y="177" minimized="0" maximized="0" height="333" x="5">
+    <fxmixer width="543" visible="1" y="310" minimized="0" maximized="0" height="333" x="5">
       <fxchannel name="Master" muted="0" num="0" volume="1" soloed="0">
         <fxchain numofeffects="0" enabled="0"/>
       </fxchannel>
     </fxmixer>
-    <ControllerRackView width="350" visible="1" y="177" minimized="0" maximized="0" height="200" x="680"/>
-    <pianoroll width="1679" visible="1" y="156" minimized="0" maximized="0" height="775" x="481"/>
-    <automationeditor width="860" visible="0" y="-132" minimized="0" maximized="0" height="400" x="1"/>
-    <projectnotes width="687" visible="0" y="-123" minimized="0" maximized="0" height="400" x="700"><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+    <ControllerRackView width="350" visible="1" y="310" minimized="0" maximized="0" height="200" x="680"/>
+    <pianoroll width="1679" visible="1" y="187" minimized="0" maximized="0" height="728" x="360"/>
+    <automationeditor width="860" visible="0" y="1" minimized="0" maximized="0" height="400" x="1"/>
+    <projectnotes width="687" visible="0" y="10" minimized="0" maximized="0" height="400" x="700"><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">

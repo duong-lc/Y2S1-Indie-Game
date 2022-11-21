@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16113f939bba78429498462f0ca293f, type: 3}
   m_Name: MidiData
   m_EditorClassIdentifier: 
-  songClip: {fileID: 8300000, guid: 14561180ebe879d47815f6fb676e71e6, type: 3}
+  songClip: {fileID: 8300000, guid: cf429ef392be624499a73265c5da3c15, type: 3}
   songDelayInSeconds: 0
   marginOfError: 0.15
   inputDelayInMilliseconds: 0

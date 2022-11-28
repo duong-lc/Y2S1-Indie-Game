@@ -3,6 +3,7 @@ using UnityEngine;
 using Data_Classes;
 using System.Collections;
 using System.Collections.Generic;
+using Melanchall.DryWetMidi.MusicTheory;
 
 
 namespace SO_Scripts

@@ -1,8 +1,10 @@
 ﻿using System;
+using Core.Events;
 using Managers;
 using UnityEngine;
 using Data_Classes;
 using Melanchall.DryWetMidi.MusicTheory;
+using EventType = Core.Events.EventType;
 
 namespace NoteClasses
 {
@@ -49,6 +51,7 @@ namespace NoteClasses
             if (Math.Abs(SongManager.Instance.GetAudioSourceTimeAdjusted() - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
                 //Hit
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
             }
         }
 
@@ -57,6 +60,7 @@ namespace NoteClasses
             if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
             {
                 //Miss
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
             }
         }
         

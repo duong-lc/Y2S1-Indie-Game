@@ -3,7 +3,7 @@ namespace Core.Events {
         TestEvent = 0,
         LogEvent,
         CompileDataFromMidiEvent,
-        RequestSourceTimeRaw,
-        ReceiveSourceTimeRaw,
+        OnNoteHitEvent,
+        OnNoteMissEvent,
     }
 }

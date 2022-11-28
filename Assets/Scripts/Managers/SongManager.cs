@@ -20,7 +20,6 @@ namespace Managers
 
         private void Awake()
         {
-            EventDispatcher.Instance.AddListener(EventType.RequestSourceTimeRaw, param => GetAudioSourceTimeRaw());
             
         }
 

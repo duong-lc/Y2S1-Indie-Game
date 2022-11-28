@@ -1,5 +1,6 @@
 ﻿using System;
 using Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 using DataClasses = Data_Classes;
 
@@ -18,7 +19,7 @@ namespace NoteClasses
 
         [SerializeField] private Transform[] lineRendererPoints;
         private LineRendererController[] _lineControllers;
-        
+
         //Booleans to check note hit reg status
         private bool _isStartNoteHitCorrect = false;//is pressed down on start note correctly?
         private bool _isHolding = false;            //is slider being held on correctly?
@@ -46,9 +47,9 @@ namespace NoteClasses
 
         private void Start()
         {
-            SetUpLineControllers();
             SetUpVariables();
             ToggleLineRenderers(true);
+            SetUpLineControllers();
         }
 
         private void Update()
@@ -186,10 +187,7 @@ namespace NoteClasses
         
         private void SetUpLineControllers()
         {
-            _lineControllers = GetComponentsInChildren<LineRendererController>();
-
-            foreach (var line in _lineControllers)
-            {
+            foreach (var line in _lineControllers) {
                 line.SetUpLine(lineRendererPoints);
             }
         }
@@ -197,11 +195,14 @@ namespace NoteClasses
         private void ToggleLineRenderers(bool status)
         {
             foreach (var line in _lineControllers)
+            {
                 line.gameObject.SetActive(status);
+            }
         }
 
         private void SetUpVariables()
         {
+            _lineControllers = GetComponentsInChildren<LineRendererController>();
             //setting up spawn time stamps
             _startNoteSpawnTime = _sliderData.timeStampKeyDown - midiData.noteTime;
             _endNoteSpawnTime = _sliderData.timeStampKeyUp - midiData.noteTime;

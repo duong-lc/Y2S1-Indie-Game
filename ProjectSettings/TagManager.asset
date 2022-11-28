@@ -8,6 +8,8 @@ TagManager:
   - Lane2
   - Lane3
   - Lane4
+  - subLR
+  - mainLR
   layers:
   - Default
   - TransparentFX
@@ -53,4 +55,10 @@ TagManager:
     locked: 0
   - name: Note
     uniqueID: 2198639645
+    locked: 0
+  - name: SubLR
+    uniqueID: 208803465
+    locked: 0
+  - name: MainLR
+    uniqueID: 581000347
     locked: 0

@@ -10,6 +10,8 @@ TagManager:
   - Lane4
   - subLR
   - mainLR
+  - NoteNormal
+  - NoteSlider
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - NoteLayer
   - 
   - 
   - 

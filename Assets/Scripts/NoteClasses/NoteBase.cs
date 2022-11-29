@@ -18,12 +18,23 @@ namespace NoteClasses
         public int octaveNum;
         public Data_Classes.NoteData.LaneOrientation noteOrientation;
 
+        private Collider _collider;
+        public Collider Collider {
+            get {
+                if (!_collider) _collider = GetComponent<Collider>();
+                return _collider;
+            }
+        }
 
         private void Awake()
         {
             MarginOfError = midiData.marginOfError;
         }
 
+        protected virtual void SetLookDir(Vector3 startPos, Vector3 endPos)
+        {
+            transform.forward = (endPos - startPos).normalized;
+        }
 
     }
 }

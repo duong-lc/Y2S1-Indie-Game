@@ -50,6 +50,7 @@ namespace NoteClasses
             SetUpVariables();
             ToggleLineRenderers(true);
             SetUpLineControllers();
+            SetLookDir(_startPosStartNote, _endPosStartNote);
         }
 
         private void Update()
@@ -60,9 +61,6 @@ namespace NoteClasses
             if (_canMoveEndNote) {
                 InterpolateEndNotePos();
             }
-            
-            
-            
         }
 
         private void InterpolateStartNotePos()

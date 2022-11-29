@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7503693863451581044}
   - component: {fileID: 7503693863451581045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7503693863451581043}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: -0.5}
   m_LocalScale: {x: 4.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,9 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7503693863679007524}
   - component: {fileID: 7503693863679007525}
-  m_Layer: 0
+  - component: {fileID: 2186583546072315892}
+  m_Layer: 6
   m_Name: Note Normal
-  m_TagString: Untagged
+  m_TagString: NoteNormal
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,3 +135,16 @@ MonoBehaviour:
   octaveNum: 0
   noteOrientation: 0
   assignedTime: 0
+--- !u!65 &2186583546072315892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503693863679007523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.5, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}

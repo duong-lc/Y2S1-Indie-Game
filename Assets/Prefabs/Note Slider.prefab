@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2580888398691125520}
   - component: {fileID: 2580888398691125526}
   - component: {fileID: 2580888398691125521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LineRendererMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2580888398691125523}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.854}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,7 +76,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -85,7 +85,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6325283
+        value: 0.8157319
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2580888398795309145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EndNote
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -185,9 +185,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2580888399268996798}
   - component: {fileID: 2580888399268996793}
-  m_Layer: 0
+  - component: {fileID: 6224276929495668633}
+  m_Layer: 6
   m_Name: Note Slider
-  m_TagString: Untagged
+  m_TagString: NoteSlider
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,6 +233,19 @@ MonoBehaviour:
   lineRendererPoints:
   - {fileID: 2580888399268996798}
   - {fileID: 2580888398795309145}
+--- !u!65 &6224276929495668633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2580888399268996792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}
 --- !u!1 &2580888399867781867
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2580888399867781864}
   - component: {fileID: 2580888399867781865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +341,7 @@ GameObject:
   - component: {fileID: 2580888400164266307}
   - component: {fileID: 2580888400164266305}
   - component: {fileID: 2580888400164266304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LineRendererSub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +406,7 @@ LineRenderer:
   m_SortingOrder: 1
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.5

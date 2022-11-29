@@ -22,6 +22,7 @@ namespace NoteClasses
         private void Start()
         {
             SetUpVariables();
+            SetLookDir(_startPos, _endPos);
         }
 
         private void Update()
@@ -53,6 +54,7 @@ namespace NoteClasses
                 //Hit
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
             }
+            
         }
 
         public void OnNoteMissNormalNote()

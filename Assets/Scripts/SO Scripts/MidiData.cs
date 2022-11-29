@@ -61,31 +61,35 @@ namespace SO_Scripts
        [Range(0, 8)] public int laneOctave4;
        public List<BaseNoteType> AllNoteOnLaneList4 = new List<BaseNoteType>();
 
-       private void OnValidate()
+       public Dictionary<KeyCode, Data_Classes.NoteData.LaneOrientation> InputDict;
+       public Dictionary<Data_Classes.NoteData.LaneOrientation, Vector3> HitPointDict;
+
+       private void OnEnable()
        {
-           
+           InputDict = new Dictionary<KeyCode, Data_Classes.NoteData.LaneOrientation>()
+           {
+               { input1, Data_Classes.NoteData.LaneOrientation.One },
+               { input2, Data_Classes.NoteData.LaneOrientation.Two },
+               { input3, Data_Classes.NoteData.LaneOrientation.Three },
+               { input4, Data_Classes.NoteData.LaneOrientation.Four }
+           };
+
+           HitPointDict = new Dictionary<Data_Classes.NoteData.LaneOrientation, Vector3>()
+           {
+               { Data_Classes.NoteData.LaneOrientation.One, hitPoint1},
+               { Data_Classes.NoteData.LaneOrientation.Two, hitPoint2},
+               { Data_Classes.NoteData.LaneOrientation.Three, hitPoint3},
+               { Data_Classes.NoteData.LaneOrientation.Four , hitPoint4}
+           };
+
        }
 
        public Tuple<Vector3, Vector3, Vector3> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
        {
-           Vector3 hitPoint;
-           switch (noteOrientation)
-           {
-               case Data_Classes.NoteData.LaneOrientation.One:
-                   hitPoint = hitPoint1;
-                   break;
-               case Data_Classes.NoteData.LaneOrientation.Two:
-                   hitPoint = hitPoint2;
-                   break;
-               case Data_Classes.NoteData.LaneOrientation.Three:
-                   hitPoint = hitPoint3;
-                   break;
-               case Data_Classes.NoteData.LaneOrientation.Four:
-                   hitPoint = hitPoint4;
-                   break;
-               default:
-                   throw new ArgumentOutOfRangeException();
-           }
+           var vectorZero = new Vector3(0, 0, 0);
+           var failReturn = new Tuple<Vector3, Vector3, Vector3>(vectorZero, vectorZero, vectorZero);
+           
+           if(!HitPointDict.TryGetValue(noteOrientation, out var hitPoint)) return failReturn;
            
            Vector3 startPos = hitPoint + (dir * noteSpawnZ);
            Vector3 endPos = hitPoint + (dir * NoteDespawnZ);

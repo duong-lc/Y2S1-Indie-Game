@@ -26,7 +26,7 @@ public class Lane : MonoBehaviour
     private float _inputDelay;
     private Vector3 _spawnLocation;
 
-    private double AudioTimeRaw => SongManager.GetAudioSourceTimeRaw();
+    private double AudioTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
     
     private void Awake()
     {
@@ -44,6 +44,7 @@ public class Lane : MonoBehaviour
         _travelTime = _midiData.noteTime;
         _marginOfError = _midiData.marginOfError;
         _inputDelay = _midiData.inputDelayInMilliseconds;
+        _spawnLocation = new Vector3(_laneHitPoint.x, 0, _midiData.noteSpawnZ);
     }
     
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)
@@ -103,7 +104,7 @@ public class Lane : MonoBehaviour
                 if (AudioTimeRaw >= noteNormalCast.timeStamp - _travelTime)
                 {
                     //Spawn a note
-                    var noteObj = Instantiate(_normalNotePrefab, transform);
+                    var noteObj = Instantiate(_normalNotePrefab, _spawnLocation , Quaternion.identity);
                     //updating the game object ref in the note
                     allNotesList[_spawnIndex].noteObj = noteObj;
                     var normalComp = noteObj.GetComponent<NoteNormal>();
@@ -131,7 +132,7 @@ public class Lane : MonoBehaviour
                 {
                     //print($"{gameObject.name}");
                     //Spawn a slider prefab
-                    var NoteSliderObj = Instantiate(_sliderNotePrefab, transform);
+                    var NoteSliderObj = Instantiate(_sliderNotePrefab, _spawnLocation , Quaternion.identity);
                     //updating the game object ref in the note
                     allNotesList[_spawnIndex].noteObj = NoteSliderObj;
                     var sliderComp = NoteSliderObj.GetComponent<NoteSlider>();

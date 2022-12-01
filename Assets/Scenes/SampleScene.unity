@@ -1104,8 +1104,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cf429ef392be624499a73265c5da3c15, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1343,14 +1343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb524db68390f34bafe1f6d1aae8649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 0}
+  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
   anchorPoints:
   - {fileID: 1309138803}
   - {fileID: 820765580}
   - {fileID: 1262529366}
   - {fileID: 275576078}
-  castDist: 0
-  boxSize: {x: 0, y: 0, z: 0}
+  castDist: 15
+  boxSize: {x: 2, y: 1, z: 1}
+  noteLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &2085640286
 Transform:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songClip: {fileID: 8300000, guid: cf429ef392be624499a73265c5da3c15, type: 3}
   songDelayInSeconds: 0
-  marginOfError: 0.15
+  marginOfError: 3
   inputDelayInMilliseconds: 0
   fileLocation: JustTheTwoOfUs.mid
   noteTime: 5

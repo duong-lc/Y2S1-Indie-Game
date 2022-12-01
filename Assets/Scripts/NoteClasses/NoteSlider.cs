@@ -103,9 +103,9 @@ namespace NoteClasses
         /// <summary>
         /// Called when pressing hit button or smt
         /// </summary>
-        private void OnNoteHitStartNote()
+        public void OnNoteHitStartNote()
         {
-            if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < midiData.marginOfError)
+            if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
             {
                 //Hit
                 

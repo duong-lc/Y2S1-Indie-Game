@@ -36,7 +36,7 @@ namespace Data_Classes
     }
 
     [Serializable]
-    public class NoteData : MonoBehaviour
+    public class NoteData
     {
         //NoteID enum to check for noteType
         [Serializable]

@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Events;
+using Core.Logging;
 using Managers;
 using UnityEngine;
 using Data_Classes;
@@ -48,11 +49,14 @@ namespace NoteClasses
 
         public void OnNoteHitNormalNote()
         {
+            NCLogger.Log($"current: {CurrentSongTimeAdjusted} assigned: {assignedTime}\n{Math.Abs(CurrentSongTimeAdjusted - assignedTime)} startPos: {_startPos} endPos: {_endPos}");
             //double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
-            if (Math.Abs(SongManager.Instance.GetAudioSourceTimeAdjusted() - assignedTime) < MarginOfError) //hitting the note within the margin of error
+            if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
                 //Hit
+                NCLogger.Log($"hit normal good");
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                Destroy(gameObject);
             }
             
         }
@@ -76,7 +80,7 @@ namespace NoteClasses
 
         private void SetUpVariables()
         {
-            _timeInstantiated = SongManager.GetAudioSourceTimeRaw();
+            _timeInstantiated = SongManager.Instance.GetAudioSourceTimeRaw();
 
             var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
             _startPos = tuple.Item1;

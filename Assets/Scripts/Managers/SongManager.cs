@@ -90,9 +90,9 @@ namespace Managers
         ///This is an utility function to return the audio source time
         ///Instead of using "AudioSource.time" we returning a double of playback pos in PCM sample divided by freq (Hz) for the accuracy 
         ///</summary>
-        public static double GetAudioSourceTimeRaw()
+        public double GetAudioSourceTimeRaw()
         {
-            var sourceTimeRaw = (double) Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+            var sourceTimeRaw = (double) audioSource.timeSamples / audioSource.clip.frequency;
             return sourceTimeRaw;
         }
 

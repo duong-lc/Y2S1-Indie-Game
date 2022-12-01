@@ -11,7 +11,7 @@ namespace NoteClasses
         protected bool CanMove = true;
         protected double MarginOfError;
         protected static double CurrentSongTimeAdjusted => SongManager.Instance.GetAudioSourceTimeAdjusted();
-        protected static double CurrentSongTimeRaw => SongManager.GetAudioSourceTimeRaw();
+        protected static double CurrentSongTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
         
         [SerializeField] protected MidiData midiData;
         [SerializeField] protected SO_Scripts.NoteData noteData;

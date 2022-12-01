@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Logging;
+using NoteClasses;
 using UnityEngine;
 using SO_Scripts;
 using UnityEditor.PackageManager;
@@ -18,16 +20,16 @@ namespace Managers
         [SerializeField] private Vector3 boxSize;
         [SerializeField] private LayerMask noteLayer;
         
-        private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict;
+        private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>();
 
         private void Start()
         {
             _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>()
             {
-                { NoteData.LaneOrientation.One, GetAnchorPoint("Lane1").position },
-                { NoteData.LaneOrientation.Two, GetAnchorPoint("Lane2").position },
-                { NoteData.LaneOrientation.Three, GetAnchorPoint("Lane3").position },
-                { NoteData.LaneOrientation.Four, GetAnchorPoint("Lane4").position }
+                { NoteData.LaneOrientation.One, GetAnchorPoint("Lane1").position},
+                { NoteData.LaneOrientation.Two, GetAnchorPoint("Lane2").position},
+                { NoteData.LaneOrientation.Three, GetAnchorPoint("Lane3").position},
+                { NoteData.LaneOrientation.Four, GetAnchorPoint("Lane4").position}
             };
         }
 
@@ -38,31 +40,48 @@ namespace Managers
             {
                 if (Input.GetKeyDown(entry.Key))
                 {
+                    NCLogger.Log($"{midiData.NoteDespawnZ}");
                     _castOriginDict.TryGetValue(entry.Value, out var castOrigin);
-                    bool cast = Physics.BoxCast(castOrigin, 
-                        boxSize, 
-                        Vector3.forward, 
-                        out var hit, 
-                        Quaternion.identity, 
-                        castDist, 
-                        noteLayer);
+                    if (!Physics.BoxCast(castOrigin,
+                            boxSize,
+                            Vector3.forward,
+                            out var hit,
+                            Quaternion.identity,
+                            castDist,
+                            noteLayer)) continue;
+                    
+                    //TODO: Instead of getting component, get the lane based on the keyEntry.
+                    //In said lane, there will be a List that store all Active Notes in scene  -List<NoteBase>
+                    //use linq to compare hit.object with notebase.object in list. If matches, return notebase with
+                    //game object tag, then use switch to cast to normal or slider.
+                    var note = hit.collider.gameObject.GetComponent<NoteBase>();
+                    if (note.CompareTag("NoteNormal"))
+                    {
+                        var filteredNote = (NoteNormal)note;
+                        filteredNote.OnNoteHitNormalNote();
+                    }else if (note.CompareTag("NoteSlider"))
+                    {
+                        var filteredNote = (NoteSlider)note;
+                        filteredNote.OnNoteHitStartNote();
+                    }
+                }
 
-                    if (!cast) continue;
-
-                    var note = hit.collider.gameObject;
-                    //if(note)
-
+                if (Input.GetKeyUp(entry.Key))
+                {
+                    
                 }
             }
         }
 
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.red;
             foreach (var anchor in anchorPoints) {
-                Gizmos.DrawSphere(anchor.position, 1);
+                Gizmos.DrawWireCube(anchor.position, boxSize*2);
+                Gizmos.DrawWireCube(anchor.position + Vector3.forward * castDist, boxSize*2);
             }
         }
 
-        private Transform GetAnchorPoint(string tag) => anchorPoints.Where(t => t.CompareTag(tag)) as Transform;
+        private Transform GetAnchorPoint(string tag) => anchorPoints.Find(t => t.CompareTag(tag));
     }
 }

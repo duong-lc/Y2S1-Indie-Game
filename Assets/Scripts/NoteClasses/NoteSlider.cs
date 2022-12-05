@@ -1,8 +1,10 @@
 ﻿using System;
+using Core.Events;
 using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 using DataClasses = Data_Classes;
+using EventType = Core.Events.EventType;
 
 namespace NoteClasses
 {
@@ -55,12 +57,16 @@ namespace NoteClasses
 
         private void Update()
         {
-            if (CanMove) {
+            if (_canMoveStartNote) {
                 InterpolateStartNotePos();
             }
             if (_canMoveEndNote) {
                 InterpolateEndNotePos();
             }
+
+
+            UpdateStartNoteFail();
+            UpdateEndNoteFailStatus();
         }
 
         private void InterpolateStartNotePos()
@@ -108,11 +114,13 @@ namespace NoteClasses
             if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
             {
                 //Hit
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
+                _isHolding = true;
+                
                 _canMoveStartNote = false;
-                //Locking note position to hit point side based on its current side (left or right)
                 startNote.transform.position = _sliderLockPoint;
             }
         }
@@ -123,44 +131,54 @@ namespace NoteClasses
             if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
             {
                 //Miss
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
             }
         }
 
-        private void UpdateStartNoteHoldStatus()//put in update
-        {
-            //if(Input.GetKey(holdKey)){}
-            if (_isStartNoteHitCorrect)
-            {
-                _isHolding = true;
-            }
-        }
+        // private void UpdateStartNoteHoldStatus()//put in update
+        // {
+        //     //if(Input.GetKey(holdKey)){}
+        //     if (_isStartNoteHitCorrect)
+        //     {
+        //         _isHolding = true;
+        //     }
+        // }
 
-        private void OnNoteHitEndNote()
+        public bool OnNoteHitEndNote()//when release key
         {
+            bool isDestroy = false;
             if (_isStartNoteHitCorrect && _isHolding)
             {
                 if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) < MarginOfError)
                 {
                     //Hit
-
                     _isEndNoteHitCorrect = true;
+
+                    isDestroy = true;
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                   
+                }
+                else if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) >= MarginOfError)
+                {
+                    isDestroy = true;
+                    //release too early
+                    //miss
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
                 }
             }
+            
+            return isDestroy;
         }
 
         private void UpdateEndNoteFailStatus()
         {
             if (_isStartNoteHitCorrect && _isHolding)
             {
-                //release too early
-                if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) >= MarginOfError)
-                {
-                    //miss
-                }
                 //release too late <- will probably throw away as this game mode does not account for late releases.
-                else if (_sliderData.timeStampKeyUp + MarginOfError <= CurrentSongTimeAdjusted)
+                if (_sliderData.timeStampKeyUp + MarginOfError <= CurrentSongTimeAdjusted)
                 {
                     //miss
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
                 }
             }
         }

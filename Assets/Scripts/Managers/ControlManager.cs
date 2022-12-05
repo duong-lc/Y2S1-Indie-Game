@@ -5,7 +5,6 @@ using Core.Logging;
 using NoteClasses;
 using UnityEngine;
 using SO_Scripts;
-using UnityEditor.PackageManager;
 using NoteData = Data_Classes.NoteData;
 
 namespace Managers
@@ -21,7 +20,7 @@ namespace Managers
         [SerializeField] private LayerMask noteLayer;
         
         private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>();
-
+        private List<NoteSlider> _currentHoldSliders = new List<NoteSlider>();
         private void Start()
         {
             _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>()
@@ -38,6 +37,7 @@ namespace Managers
         {
             foreach (var entry in midiData.InputDict)
             {
+                
                 if (Input.GetKeyDown(entry.Key))
                 {
                     NCLogger.Log($"{midiData.NoteDespawnZ}");
@@ -59,16 +59,24 @@ namespace Managers
                     {
                         var filteredNote = (NoteNormal)note;
                         filteredNote.OnNoteHitNormalNote();
-                    }else if (note.CompareTag("NoteSlider"))
+                    }
+                    else if (note.CompareTag("NoteSlider"))
                     {
                         var filteredNote = (NoteSlider)note;
                         filteredNote.OnNoteHitStartNote();
+                        _currentHoldSliders.Add(filteredNote);
                     }
                 }
 
                 if (Input.GetKeyUp(entry.Key))
                 {
+                    var slider = _currentHoldSliders.Find(x => x.noteOrientation == entry.Value);
+                    if(!slider) continue;
                     
+                    var status = slider.OnNoteHitEndNote();
+
+                    _currentHoldSliders.Remove(slider);
+                    if(status) Destroy(slider.gameObject);
                 }
             }
         }

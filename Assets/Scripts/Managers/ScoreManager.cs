@@ -7,6 +7,9 @@ using EventType = Core.Events.EventType;
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField] private AudioSource hitAudioSource;
+    [SerializeField] private AudioSource missAudioSource;
+    
     private void Awake()
     {
         EventDispatcher.Instance.AddListener(EventType.OnNoteHitEvent, param => OnHit());
@@ -27,11 +30,11 @@ public class ScoreManager : MonoBehaviour
 
     private void OnHit()
     {
-        
+        hitAudioSource.Play();
     }
 
     private void OnMiss()
     {
-        
+        missAudioSource.Play();
     }
 }

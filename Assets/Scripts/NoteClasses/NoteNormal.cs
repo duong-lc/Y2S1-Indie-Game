@@ -49,12 +49,12 @@ namespace NoteClasses
 
         public void OnNoteHitNormalNote()
         {
-            NCLogger.Log($"current: {CurrentSongTimeAdjusted} assigned: {assignedTime}\n{Math.Abs(CurrentSongTimeAdjusted - assignedTime)} startPos: {_startPos} endPos: {_endPos}");
+            //NCLogger.Log($"current: {CurrentSongTimeAdjusted} assigned: {assignedTime}\n{Math.Abs(CurrentSongTimeAdjusted - assignedTime)} startPos: {_startPos} endPos: {_endPos}");
             //double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
             if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
                 //Hit
-                NCLogger.Log($"hit normal good");
+                //NCLogger.Log($"hit normal good");
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
                 Destroy(gameObject);
             }
@@ -66,7 +66,7 @@ namespace NoteClasses
             if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
             {
                 //Miss
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
             }
         }
         

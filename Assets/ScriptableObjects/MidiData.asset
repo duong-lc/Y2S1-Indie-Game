@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songClip: {fileID: 8300000, guid: cf429ef392be624499a73265c5da3c15, type: 3}
   songDelayInSeconds: 0
-  marginOfError: 3
+  marginOfError: 0.15
   inputDelayInMilliseconds: 0
   fileLocation: JustTheTwoOfUs.mid
-  noteTime: 5
+  noteTime: 1
   noteSpawnZ: 50
   noteTapZ: -10.5
   noteNormalPrefab: {fileID: 7503693863679007523, guid: 8de00af407265554183b8e33f17111b0, type: 3}
@@ -36,3 +36,5 @@ MonoBehaviour:
   laneOctave3: 2
   input4: 108
   laneOctave4: 3
+  hitTextPrefab: {fileID: 7279105763972304832, guid: ac6f9984350cb304385b8bdae2e50b10, type: 3}
+  missTextPrefab: {fileID: 1995304790187793672, guid: cfdae89814ec9624aba4d76224f84682, type: 3}

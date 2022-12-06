@@ -64,6 +64,11 @@ namespace SO_Scripts
        public Dictionary<KeyCode, Data_Classes.NoteData.LaneOrientation> InputDict;
        public Dictionary<Data_Classes.NoteData.LaneOrientation, Vector3> HitPointDict;
 
+       [Space]
+       [Header("Visuals")]
+       public GameObject hitTextPrefab;
+       public GameObject missTextPrefab;
+       
        private void OnEnable()
        {
            InputDict = new Dictionary<KeyCode, Data_Classes.NoteData.LaneOrientation>()

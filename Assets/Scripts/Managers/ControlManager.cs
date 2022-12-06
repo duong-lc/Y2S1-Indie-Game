@@ -37,7 +37,6 @@ namespace Managers
         {
             foreach (var entry in midiData.InputDict)
             {
-                
                 if (Input.GetKeyDown(entry.Key))
                 {
                     NCLogger.Log($"{midiData.NoteDespawnZ}");
@@ -53,7 +52,8 @@ namespace Managers
                     //TODO: Instead of getting component, get the lane based on the keyEntry.
                     //In said lane, there will be a List that store all Active Notes in scene  -List<NoteBase>
                     //use linq to compare hit.object with notebase.object in list. If matches, return notebase with
-                    //game object tag, then use switch to cast to normal or slider.
+                    //game object tag, then use switch to cast to normal or slider. 
+                    //the purpose is to have less performance intensive code but haven't really measured - just a theory.
                     var note = hit.collider.gameObject.GetComponent<NoteBase>();
                     if (note.CompareTag("NoteNormal"))
                     {

@@ -66,7 +66,7 @@ namespace NoteClasses
 
 
             UpdateStartNoteFail();
-            UpdateEndNoteFailStatus();
+            UpdateEndNoteHoldStatus();
         }
 
         private void InterpolateStartNotePos()
@@ -114,7 +114,7 @@ namespace NoteClasses
             if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
             {
                 //Hit
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
@@ -131,7 +131,8 @@ namespace NoteClasses
             if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
             {
                 //Miss
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
+                Destroy(gameObject);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
             }
         }
 
@@ -155,7 +156,7 @@ namespace NoteClasses
                     _isEndNoteHitCorrect = true;
 
                     isDestroy = true;
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
                    
                 }
                 else if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) >= MarginOfError)
@@ -163,22 +164,23 @@ namespace NoteClasses
                     isDestroy = true;
                     //release too early
                     //miss
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
                 }
             }
             
             return isDestroy;
         }
 
-        private void UpdateEndNoteFailStatus()
+        private void UpdateEndNoteHoldStatus()
         {
             if (_isStartNoteHitCorrect && _isHolding)
             {
                 //release too late <- will probably throw away as this game mode does not account for late releases.
                 if (_sliderData.timeStampKeyUp + MarginOfError <= CurrentSongTimeAdjusted)
                 {
-                    //miss
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
+                    //hit - since passes the end note, auto hit
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+                    Destroy(gameObject);
                 }
             }
         }

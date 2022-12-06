@@ -55,7 +55,7 @@ namespace NoteClasses
             {
                 //Hit
                 //NCLogger.Log($"hit normal good");
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
                 Destroy(gameObject);
             }
             
@@ -66,7 +66,8 @@ namespace NoteClasses
             if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
             {
                 //Miss
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+                Destroy(gameObject);
             }
         }
         

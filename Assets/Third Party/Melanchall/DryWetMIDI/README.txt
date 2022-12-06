@@ -1,6 +1,6 @@
 ------------------------------
 
-DryWetMIDI 6.1.2 by Melanchall
+DryWetMIDI 6.1.3 by Melanchall
 
 ------------------------------
 
@@ -17,7 +17,7 @@ DryWetMIDI is the .NET library to work with MIDI data and MIDI devices. It allow
 ------------------------------
 
 Project GitHub: https://github.com/melanchall/drywetmidi
-Full changelog: https://github.com/melanchall/drywetmidi/releases/tag/v6.1.2
+Full changelog: https://github.com/melanchall/drywetmidi/releases/tag/v6.1.3
 Project documentation: https://melanchall.github.io/drywetmidi
 
 ------------------------------

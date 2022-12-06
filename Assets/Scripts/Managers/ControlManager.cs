@@ -39,7 +39,7 @@ namespace Managers
             {
                 if (Input.GetKeyDown(entry.Key))
                 {
-                    NCLogger.Log($"{midiData.NoteDespawnZ}");
+                    //NCLogger.Log($"{midiData.NoteDespawnZ}");
                     _castOriginDict.TryGetValue(entry.Value, out var castOrigin);
                     if (!Physics.BoxCast(castOrigin,
                             boxSize,

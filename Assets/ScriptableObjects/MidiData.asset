@@ -17,7 +17,7 @@ MonoBehaviour:
   marginOfError: 0.15
   inputDelayInMilliseconds: 0
   fileLocation: JustTheTwoOfUs.mid
-  noteTime: 1
+  noteTime: 5
   noteSpawnZ: 50
   noteTapZ: -10.5
   noteNormalPrefab: {fileID: 7503693863679007523, guid: 8de00af407265554183b8e33f17111b0, type: 3}

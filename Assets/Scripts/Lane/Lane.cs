@@ -104,7 +104,7 @@ public class Lane : MonoBehaviour
                 if (AudioTimeRaw >= noteNormalCast.timeStamp - _travelTime)
                 {
                     //Spawn a note
-                    var noteObj = Instantiate(_normalNotePrefab, _spawnLocation , Quaternion.identity);
+                    var noteObj = Instantiate(_normalNotePrefab, _spawnLocation , Quaternion.identity, transform);
                     //updating the game object ref in the note
                     allNotesList[_spawnIndex].noteObj = noteObj;
                     var normalComp = noteObj.GetComponent<NoteNormal>();
@@ -132,7 +132,7 @@ public class Lane : MonoBehaviour
                 {
                     //print($"{gameObject.name}");
                     //Spawn a slider prefab
-                    var NoteSliderObj = Instantiate(_sliderNotePrefab, _spawnLocation , Quaternion.identity);
+                    var NoteSliderObj = Instantiate(_sliderNotePrefab, _spawnLocation , Quaternion.identity, transform);
                     //updating the game object ref in the note
                     allNotesList[_spawnIndex].noteObj = NoteSliderObj;
                     var sliderComp = NoteSliderObj.GetComponent<NoteSlider>();

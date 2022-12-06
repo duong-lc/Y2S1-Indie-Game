@@ -3162,51 +3162,6 @@
             Initializes a new instance of the <see cref="T:Melanchall.DryWetMidi.Core.HeaderChunk"/>.
             </summary>
         </member>
-        <member name="P:Melanchall.DryWetMidi.Core.HeaderChunk.FileFormat">
-            <summary>
-            Gets or sets format of a file where current instance of the <see cref="T:Melanchall.DryWetMidi.Core.HeaderChunk"/>
-            is written or will be written.
-            </summary>
-            <remarks>
-            MIDI file can be stored in one of the three possible formats:
-            <see cref="F:Melanchall.DryWetMidi.Core.MidiFileFormat.SingleTrack"/> - the file contains a single multi-channel track;
-            <see cref="F:Melanchall.DryWetMidi.Core.MidiFileFormat.MultiTrack"/> - the file contains one or more simultaneous tracks
-            (or MIDI outputs) of a sequence;
-            <see cref="F:Melanchall.DryWetMidi.Core.MidiFileFormat.MultiSequence"/> - the file contains one or more sequentially independent
-            single-track patterns.
-            </remarks>
-        </member>
-        <member name="P:Melanchall.DryWetMidi.Core.HeaderChunk.TimeDivision">
-            <summary>
-            Gets or sets time division used in a file where current instance of the <see cref="T:Melanchall.DryWetMidi.Core.HeaderChunk"/>
-            is written or will be written.
-            </summary>
-            <remarks>
-            Time division specifies the meaning of the delta-times of events. There are two types of
-            the time division: ticks per quarter note and SMPTE. Time division of the first type has bit 15 set
-            to 0. In this case bits 14 thru 0 represent the number of ticks which make up a quarter-note.
-            Division of the second type has bit 15 set to 1. In this case bits 14 thru 8 contain one of the four
-            values: -24, -25, -29, or -30, corresponding to the four standard SMPTE and MIDI Time Code formats
-            (-29 corresponds to 30 drop frame), and represents the number of frames per second. Bits 7 thru 0
-            (which represent a byte stored positive) is the resolution within a frame: typical values may be 4
-            (MIDI Time Code resolution), 8, 10, 80 (bit resolution), or 100.
-            </remarks>
-        </member>
-        <member name="P:Melanchall.DryWetMidi.Core.HeaderChunk.TracksNumber">
-            <summary>
-            Gets or sets the number of track chunks that are stored or will be stored in a file
-            follow the header chunk.
-            </summary>
-            <remarks>
-            Number of tracks should be 1 for a file stored in <see cref="F:Melanchall.DryWetMidi.Core.MidiFileFormat.SingleTrack"/> format.
-            </remarks>
-        </member>
-        <member name="M:Melanchall.DryWetMidi.Core.HeaderChunk.Clone">
-            <summary>
-            Clones chunk by creating a copy of it.
-            </summary>
-            <returns>Copy of the chunk.</returns>
-        </member>
         <member name="M:Melanchall.DryWetMidi.Core.HeaderChunk.ReadContent(Melanchall.DryWetMidi.Core.MidiReader,Melanchall.DryWetMidi.Core.ReadingSettings,System.UInt32)">
             <summary>
             Reads content of a <see cref="T:Melanchall.DryWetMidi.Core.HeaderChunk"/>.
@@ -7290,6 +7245,297 @@
             about the source or destination.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="info"/> is <c>null</c>.</exception>
         </member>
+        <member name="T:Melanchall.DryWetMidi.Core.Lazy.EnumerateEventsResult">
+            <summary>
+            Represents a result of the <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensReaderUtilities.EnumerateEvents(Melanchall.DryWetMidi.Core.MidiTokensReader)"/>
+            method.
+            </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.Lazy.EnumerateEventsResult.Events">
+            <summary>
+            Gets a lazy collection of MIDI events.
+            </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.Lazy.EnumerateEventsResult.NextToken">
+            <summary>
+            Gets a MIDI token following the last MIDI event iterated by the
+            <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensReaderUtilities.EnumerateEvents(Melanchall.DryWetMidi.Core.MidiTokensReader)"/> method.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiToken">
+            <summary>
+            Represents a single MIDI token from a MIDI file.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiToken.#ctor(Melanchall.DryWetMidi.Core.MidiTokenType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiToken"/> with the
+            specified token type.
+            </summary>
+            <param name="tokenType">The type of a MIDI token.</param>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.MidiToken.TokenType">
+            <summary>
+            Gets the type of the current MIDI token.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiTokensReader">
+            <summary>
+            Provides a way to read a MIDI file sequentially token by token keeping
+            low memory consumption.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensReader.ReadToken">
+            <summary>
+            Reads a next MIDI token from the underlying stream.
+            </summary>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiToken"/>.</returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while reading the file.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.NoHeaderChunkException">There is no header chunk in a file and that should be treated as error
+            according to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.NoHeaderChunkPolicy"/> of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.InvalidChunkSizeException">Actual header or track chunk's size differs from the one declared
+            in its header and that should be treated as error according to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.InvalidChunkSizePolicy"/>
+            of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.UnknownChunkException">Chunk to be read has unknown ID and that
+            should be treated as error accordng to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.UnknownChunkIdPolicy"/> of the
+            used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.UnexpectedTrackChunksCountException">Actual track chunks
+            count differs from the expected one (declared in the file header) and that should be treated as error according to
+            the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.UnexpectedTrackChunksCountPolicy"/> of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.UnknownFileFormatException">The header chunk of the file specifies unknown file format and
+            that should be treated as error according to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.UnknownFileFormatPolicy"/> of
+            the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.InvalidChannelEventParameterValueException">Value of a channel event's parameter
+            just read is invalid (is out of [0; 127] range) and that should be treated as error according to the
+            <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.InvalidChannelEventParameterValuePolicy"/> of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.InvalidMetaEventParameterValueException">Value of a meta event's parameter
+            just read is invalid and that should be treated as error according to the
+            <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.InvalidMetaEventParameterValuePolicy"/> of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.UnknownChannelEventException">Reader has encountered an unknown channel event and that
+            should be treated as error according to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.UnknownChannelEventPolicy"/> of
+            the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.NotEnoughBytesException">MIDI file data cannot be read since the reader's underlying stream doesn't
+            have enough bytes and that should be treated as error according to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.NotEnoughBytesPolicy"/>
+            of the used settings.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.UnexpectedRunningStatusException">Unexpected running status is encountered.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.MissedEndOfTrackEventException">Track chunk doesn't end with <c>End Of Track</c> event and that
+            should be treated as error accordng to the <see cref="P:Melanchall.DryWetMidi.Core.ReadingSettings.MissedEndOfTrackPolicy"/> of
+            the used settings.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Melanchall.DryWetMidi.Core.ReaderSettings.Buffer"/> of the used settings
+            is <c>null</c> in case of <see cref="P:Melanchall.DryWetMidi.Core.ReaderSettings.BufferingPolicy"/> set to
+            <see cref="F:Melanchall.DryWetMidi.Core.BufferingPolicy.UseCustomBuffer"/>.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensReader.Dispose">
+            <summary>
+            Releases all resources used by the current <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiTokensReaderUtilities">
+            <summary>
+            Provides useful utility methods for <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensReaderUtilities.EnumerateTokens(Melanchall.DryWetMidi.Core.MidiTokensReader)">
+            <summary>
+            Returns all MIDI tokens read with the specified <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+            as a lazy collection.
+            </summary>
+            <param name="reader"><see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> to read MIDI tokens with.</param>
+            <returns>Lazy collection of MIDI tokens read with the <paramref name="reader"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="reader"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensReaderUtilities.EnumerateEvents(Melanchall.DryWetMidi.Core.MidiTokensReader)">
+            <summary>
+            Returns all consecutive MIDI events read with the specified <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+            as a lazy collection.
+            </summary>
+            <remarks>
+            <para>
+            A collection contained in the returned object will iterate over MIDI tokens with the <paramref name="reader"/>
+            until a file's end or start of a next chunk occurred.
+            </para>
+            <para>
+            For example, the reader is now at the first MIDI events of a track chunk that contains 10 events.
+            The method will return an object that contains a lazy collection that will iterate over those 10 events
+            only, because a next MIDI token in the file is not a MIDI event.
+            </para>
+            </remarks>
+            <param name="reader"><see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> to read MIDI events with.</param>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.Lazy.EnumerateEventsResult"/> containing a lazy collection of consecutive
+            MIDI events read with the <paramref name="reader"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="reader"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiTokensWriter">
+            <summary>
+            Provides a way to write data to a MIDI file sequentially token by token keeping
+            low memory consumption.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.StartTrackChunk">
+            <summary>
+            Starts a new track chunk writing the chunk's header.
+            </summary>
+            <remarks>
+            If the current track chunk is not ended properly via <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.EndTrackChunk"/>,
+            the <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.EndTrackChunk"/> method will be called automatically on <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.StartTrackChunk"/>
+            called.
+            </remarks>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the file.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.EndTrackChunk">
+            <summary>
+            Ends the current track chunk.
+            </summary>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the file.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.WriteEvent(Melanchall.DryWetMidi.Core.MidiEvent)">
+            <summary>
+            Writes the specified MIDI event.
+            </summary>
+            <param name="midiEvent"></param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="midiEvent"/> is <c>null</c>.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the file.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description>A track chunk is not started (see <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.StartTrackChunk"/>).</description>
+            </item>
+            <item>
+            <description><paramref name="midiEvent"/> is of <see cref="T:Melanchall.DryWetMidi.Core.EndOfTrackEvent"/> type but
+            previously written event is of the same type, writing of two End of Track events
+            is prohibited.</description>
+            </item>
+            </list>
+            </exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.WriteChunk(Melanchall.DryWetMidi.Core.MidiChunk)">
+            <summary>
+            Writes the specified chunk.
+            </summary>
+            <param name="chunk">A chunk to write.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="chunk"/> is <c>null</c>.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the file.</exception>
+            <exception cref="T:System.InvalidOperationException">Another chunk is being written, end it first.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.Dispose">
+            <summary>
+            Releases all resources used by the current <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/>
+            and also flushes all remaining data to the underlying stream.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiTokenType">
+            <summary>
+            The type of a MIDI token.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="F:Melanchall.DryWetMidi.Core.MidiTokenType.ChunkHeader">
+            <summary>
+            A chunk's header. See <see cref="T:Melanchall.DryWetMidi.Core.ChunkHeaderToken"/>.
+            </summary>
+        </member>
+        <member name="F:Melanchall.DryWetMidi.Core.MidiTokenType.FileHeader">
+            <summary>
+            The data of a header chunk of a MIDI file. See <see cref="T:Melanchall.DryWetMidi.Core.FileHeaderToken"/>.
+            </summary>
+        </member>
+        <member name="F:Melanchall.DryWetMidi.Core.MidiTokenType.MidiEvent">
+            <summary>
+            A MIDI event. See <see cref="T:Melanchall.DryWetMidi.Core.MidiEventToken"/>.
+            </summary>
+        </member>
+        <member name="F:Melanchall.DryWetMidi.Core.MidiTokenType.BytesPacket">
+            <summary>
+            A bytes packet. See <see cref="T:Melanchall.DryWetMidi.Core.BytesPacketToken"/>.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.BytesPacketToken">
+            <summary>
+            Represents a bytes packet.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.BytesPacketToken.Data">
+            <summary>
+            Gets the data of the current bytes packet.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.BytesPacketToken.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.ChunkHeaderToken">
+            <summary>
+            Represents a chunk's header.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.ChunkHeaderToken.ChunkId">
+            <summary>
+            Gets the ID of a chunk.
+            </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.ChunkHeaderToken.ChunkContentSize">
+            <summary>
+            Gets the size (in bytes) of a chunk's content.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.ChunkHeaderToken.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.FileHeaderToken">
+            <summary>
+            Represents the data of a header chunk of a MIDI file.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.FileHeaderToken.FileFormat">
+            <summary>
+            Gets the format (see <see cref="T:Melanchall.DryWetMidi.Core.MidiFileFormat"/>) of a MIDI file.
+            </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.FileHeaderToken.TimeDivision">
+            <summary>
+            Gets the time division of a MIDI file.
+            </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.FileHeaderToken.TracksNumber">
+            <summary>
+            Gets the number of track chunks in a MIDI file.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.FileHeaderToken.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Core.MidiEventToken">
+            <summary>
+            Represents a MIDI event.
+            </summary>
+            <seealso cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.MidiEventToken.Event">
+            <summary>
+            Gets a MIDI event.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiEventToken.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
         <member name="T:Melanchall.DryWetMidi.Core.MidiFile">
             <summary>
             Represents a MIDI file.
@@ -7358,7 +7604,7 @@
         </member>
         <member name="P:Melanchall.DryWetMidi.Core.MidiFile.TimeDivision">
             <summary>
-            Gets or sets a time division of a MIDI file.
+            Gets or sets the time division of a MIDI file.
             </summary>
             <remarks>
             <para>Time division specifies the meaning of the delta-times of MIDI events within <see cref="T:Melanchall.DryWetMidi.Core.TrackChunk"/>.
@@ -7465,6 +7711,41 @@
             is <c>null</c> in case of <see cref="P:Melanchall.DryWetMidi.Core.ReaderSettings.BufferingPolicy"/> set to
             <see cref="F:Melanchall.DryWetMidi.Core.BufferingPolicy.UseCustomBuffer"/>.</exception>
         </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiFile.ReadLazy(System.String,Melanchall.DryWetMidi.Core.ReadingSettings)">
+            <summary>
+            Creates an instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> allowing to read a MIDI file sequentially
+            token by token keeping low memory consumption.
+            </summary>
+            <param name="filePath">Path to the file to read.</param>
+            <param name="settings">Settings according to which the file must be read. Specify <c>null</c> to use
+            default settings.</param>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> wrapped around the specified file.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="filePath"/> is a zero-length string,
+            contains only white space, or contains one or more invalid characters as defined by
+            <see cref="F:System.IO.Path.InvalidPathChars"/>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="filePath"/> is <c>null</c>.</exception>
+            <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined
+            maximum length. For example, on Windows-based platforms, paths must be less than 248 characters,
+            and file names must be less than 260 characters.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example,
+            it is on an unmapped drive).</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while reading the file.</exception>
+            <exception cref="T:System.NotSupportedException"><paramref name="filePath"/> is in an invalid format.</exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description>This operation is not supported on the current platform.</description>
+            </item>
+            <item>
+            <description><paramref name="filePath"/> specified a directory.</description>
+            </item>
+            <item>
+            <description>The caller does not have the required permission.</description>
+            </item>
+            </list>
+            </exception>
+        </member>
         <member name="M:Melanchall.DryWetMidi.Core.MidiFile.Write(System.String,System.Boolean,Melanchall.DryWetMidi.Core.MidiFileFormat,Melanchall.DryWetMidi.Core.WritingSettings)">
             <summary>
             Writes the MIDI file to location specified by full path.
@@ -7472,7 +7753,7 @@
             <param name="filePath">Full path of the file to write to.</param>
             <param name="overwriteFile">If <c>true</c> and file specified by <paramref name="filePath"/> already
             exists it will be overwritten; if <c>false</c> and the file exists exception will be thrown.</param>
-            <param name="format">MIDI file format to write in.</param>
+            <param name="format">Format of a MIDI file.</param>
             <param name="settings">Settings according to which the file must be written. Specify <c>null</c> to use
             default settings.</param>
             <exception cref="T:System.ArgumentException"><paramref name="filePath"/> is a zero-length string,
@@ -7505,9 +7786,54 @@
             <exception cref="T:Melanchall.DryWetMidi.Core.TooManyTrackChunksException">Count of track chunks presented in the file
             exceeds maximum value allowed for MIDI file.</exception>
         </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiFile.WriteLazy(System.String,System.Boolean,Melanchall.DryWetMidi.Core.MidiFileFormat,Melanchall.DryWetMidi.Core.WritingSettings,Melanchall.DryWetMidi.Core.TimeDivision)">
+            <summary>
+            Creates an instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> allowing to write data to a
+            MIDI file sequentially token by token keeping low memory consumption.
+            </summary>
+            <param name="filePath">Full path of the file to write to.</param>
+            <param name="overwriteFile">If <c>true</c> and file specified by <paramref name="filePath"/> already
+            exists it will be overwritten; if <c>false</c> and the file exists exception will be thrown.</param>
+            <param name="format">Format of a MIDI file (default value is <see cref="F:Melanchall.DryWetMidi.Core.MidiFileFormat.MultiTrack"/>).</param>
+            <param name="settings">Settings according to which the file must be written. Specify <c>null</c>
+            (default value) to use default settings.</param>
+            <param name="timeDivision">The time division to write to a file. Specify <c>null</c>
+            (default value) to use the default one - <see cref="F:Melanchall.DryWetMidi.Core.TicksPerQuarterNoteTimeDivision.DefaultTicksPerQuarterNote"/>
+            ticks per quarter note.</param>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> wrapped around the specified file.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="filePath"/> is a zero-length string,
+            contains only white space, or contains one or more invalid characters as defined by
+            <see cref="F:System.IO.Path.InvalidPathChars"/>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="filePath"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="format"/> specified an invalid value.</exception>
+            <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined
+            maximum length. For example, on Windows-based platforms, paths must be less than 248 characters,
+            and file names must be less than 260 characters.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example,
+            it is on an unmapped drive).</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the file.</exception>
+            <exception cref="T:System.NotSupportedException"><paramref name="filePath"/> is in an invalid format.</exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description>This operation is not supported on the current platform.</description>
+            </item>
+            <item>
+            <description><paramref name="filePath"/> specified a directory.</description>
+            </item>
+            <item>
+            <description>The caller does not have the required permission.</description>
+            </item>
+            </list>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">Time division is <c>null</c>.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.TooManyTrackChunksException">Count of track chunks presented in the file
+            exceeds maximum value allowed for MIDI file.</exception>
+        </member>
         <member name="M:Melanchall.DryWetMidi.Core.MidiFile.Read(System.IO.Stream,Melanchall.DryWetMidi.Core.ReadingSettings)">
             <summary>
-            Reads a MIDI file from the stream.
+            Reads a MIDI file from the specified stream.
             </summary>
             <param name="stream">Stream to read file from.</param>
             <param name="settings">Settings according to which the file must be read. Specify <c>null</c> to use
@@ -7576,6 +7902,45 @@
             is <c>null</c> in case of <see cref="P:Melanchall.DryWetMidi.Core.ReaderSettings.BufferingPolicy"/> set to
             <see cref="F:Melanchall.DryWetMidi.Core.BufferingPolicy.UseCustomBuffer"/>.</exception>
         </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiFile.ReadLazy(System.IO.Stream,Melanchall.DryWetMidi.Core.ReadingSettings)">
+            <summary>
+            Creates an instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> allowing to read a MIDI file
+            from the specified stream sequentially token by token keeping low memory consumption.
+            </summary>
+            <param name="stream">Stream to read file from.</param>
+            <param name="settings">Settings according to which the file must be read. Specify <c>null</c> to use
+            default settings.</param>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/> wrapped around the <paramref name="stream"/>.</returns>
+            <remarks>
+            Stream must be readable, seekable and be able to provide its position and length via <see cref="P:System.IO.Stream.Position"/>
+            and <see cref="P:System.IO.Stream.Length"/> properties.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="stream"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description><paramref name="stream"/> doesn't support reading.</description>
+            </item>
+            <item>
+            <description><paramref name="stream"/> is already read.</description>
+            </item>
+            </list>
+            </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while reading the file.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description>This operation is not supported on the current platform.</description>
+            </item>
+            <item>
+            <description>The caller does not have the required permission.</description>
+            </item>
+            </list>
+            </exception>
+        </member>
         <member name="M:Melanchall.DryWetMidi.Core.MidiFile.Write(System.IO.Stream,Melanchall.DryWetMidi.Core.MidiFileFormat,Melanchall.DryWetMidi.Core.WritingSettings)">
             <summary>
             Writes current <see cref="T:Melanchall.DryWetMidi.Core.MidiFile"/> to the stream.
@@ -7592,6 +7957,38 @@
             <exception cref="T:System.ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
             <exception cref="T:Melanchall.DryWetMidi.Core.TooManyTrackChunksException">Count of track chunks presented in the file
             exceeds maximum value allowed for MIDI file.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Core.MidiFile.WriteLazy(System.IO.Stream,Melanchall.DryWetMidi.Core.WritingSettings,Melanchall.DryWetMidi.Core.MidiFileFormat,Melanchall.DryWetMidi.Core.TimeDivision)">
+            <summary>
+            Creates an instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> allowing to write data to the
+            specified stream sequentially token by token keeping low memory consumption.
+            </summary>
+            <param name="stream">Stream to write file's data to.</param>
+            <param name="format">Format of the file to be written.</param>
+            <param name="settings">Settings according to which the file must be written. Specify <c>null</c> to use
+            default settings.</param>
+            <param name="timeDivision">The time division to write to a file. Specify <c>null</c>
+            (default value) to use the default one - <see cref="F:Melanchall.DryWetMidi.Core.TicksPerQuarterNoteTimeDivision.DefaultTicksPerQuarterNote"/>
+            ticks per quarter note.</param>
+            <returns>An instance of the <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> wrapped around the <paramref name="stream"/>.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="stream"/> doesn't support writing.</exception>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="format"/> specified an invalid value.</exception>
+            <exception cref="T:System.InvalidOperationException">Time division is <c>null</c>.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing to the stream.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
+            <exception cref="T:Melanchall.DryWetMidi.Core.TooManyTrackChunksException">Count of track chunks presented in the file
+            exceeds maximum value allowed for MIDI file.</exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            One of the following errors occured:
+            <list type="bullet">
+            <item>
+            <description><paramref name="stream"/> doesn't support writing (<see cref="P:System.IO.Stream.CanWrite"/> is <c>false</c>).</description>
+            </item>
+            <item>
+            <description><paramref name="stream"/> doesn't support seeking (<see cref="P:System.IO.Stream.CanSeek"/> is <c>false</c>).</description>
+            </item>
+            </list>
+            </exception>
         </member>
         <member name="M:Melanchall.DryWetMidi.Core.MidiFile.Clone">
             <summary>
@@ -7859,6 +8256,11 @@
             </exception>
             <exception cref="T:System.ArgumentException"><paramref name="stream"/> does not support writing,
             or is already closed.</exception>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.MidiWriter.Length">
+            <summary>
+            Gets the current count of written bytes.
+            </summary>
         </member>
         <member name="M:Melanchall.DryWetMidi.Core.MidiWriter.WriteByte(System.Byte)">
             <summary>
@@ -8220,6 +8622,12 @@
             Gets or sets the buffer that will be used by <see cref="T:Melanchall.DryWetMidi.Core.MidiReader"/> in case of
             <see cref="F:Melanchall.DryWetMidi.Core.BufferingPolicy.UseCustomBuffer"/> policy used for <see cref="P:Melanchall.DryWetMidi.Core.ReaderSettings.BufferingPolicy"/>.
             </summary>
+        </member>
+        <member name="P:Melanchall.DryWetMidi.Core.ReaderSettings.BytesPacketMaxLength">
+            <summary>
+            Gets or sets the maximum length of a bytes packet that will be used by <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensReader"/>.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="value"/> is zero or negative.</exception>
         </member>
         <member name="T:Melanchall.DryWetMidi.Core.ReadingSettings">
             <summary>
@@ -9769,6 +10177,19 @@
             <returns>Collection of objects of the specified types extracted from <paramref name="midiEvents"/>.
             Objects are ordered by time.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="midiEvents"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Interaction.GetObjectsUtilities.EnumerateObjects(System.Collections.Generic.IEnumerable{Melanchall.DryWetMidi.Core.MidiEvent},Melanchall.DryWetMidi.Interaction.ObjectType,Melanchall.DryWetMidi.Interaction.ObjectDetectionSettings)">
+            <summary>
+            Extracts objects of the specified types from a collection of <see cref="T:Melanchall.DryWetMidi.Core.MidiEvent"/>
+            returning them as a lazy collection.
+            </summary>
+            <param name="midiEvents">Collection of <see cref="T:Melanchall.DryWetMidi.Core.MidiEvent"/> to extract objects from.</param>
+            <param name="objectType">Combination of desired objects types.</param>
+            <param name="settings">Settings according to which objects should be detected and built.</param>
+            <returns>A lazy collection of objects built on top of <paramref name="midiEvents"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="midiEvents"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="objectType"/> contains the
+            <see cref="F:Melanchall.DryWetMidi.Interaction.ObjectType.Rest"/> which is not supported by the method.</exception>
         </member>
         <member name="M:Melanchall.DryWetMidi.Interaction.GetObjectsUtilities.GetObjects(Melanchall.DryWetMidi.Core.EventsCollection,Melanchall.DryWetMidi.Interaction.ObjectType,Melanchall.DryWetMidi.Interaction.ObjectDetectionSettings)">
             <summary>
@@ -13718,6 +14139,56 @@
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting
             unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter">
+            <summary>
+            Provides a wrapper around <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> to write objects to it keeping
+            low memory consumption.
+            </summary>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter.#ctor(Melanchall.DryWetMidi.Core.MidiTokensWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter"/> with the specified
+            instance of <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/>.
+            </summary>
+            <param name="tokensWriter"><see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/> that will be used to write objects.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="tokensWriter"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter.WriteObject(Melanchall.DryWetMidi.Interaction.ITimedObject)">
+            <summary>
+            Writes the specified object with the underlying <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/>.
+            </summary>
+            <remarks>
+            Objects passed to each next call of the method must be ordered in non-descending
+            order by their times.
+            </remarks>
+            <param name="timedObject">Object to write.</param>
+            <exception cref="T:System.InvalidOperationException">Object's time is less than the current
+            time of the underlying writer.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the object.</exception>
+            <exception cref="T:System.InvalidOperationException">A track chunk is not started
+            (see <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.StartTrackChunk"/>).</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter.WriteObjects(System.Collections.Generic.IEnumerable{Melanchall.DryWetMidi.Interaction.ITimedObject})">
+            <summary>
+            Writes the specified objects with the underlying <see cref="T:Melanchall.DryWetMidi.Core.MidiTokensWriter"/>.
+            </summary>
+            <remarks>
+            Objects passed to each next call of the method must be ordered in non-descending
+            order by their times.
+            </remarks>
+            <param name="timedObjects">Objects to write.</param>
+            <exception cref="T:System.InvalidOperationException">An object's time is less than the current
+            time of the underlying writer.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while writing the object.</exception>
+            <exception cref="T:System.InvalidOperationException">A track chunk is not started
+            (see <see cref="M:Melanchall.DryWetMidi.Core.MidiTokensWriter.StartTrackChunk"/>).</exception>
+        </member>
+        <member name="M:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter.Dispose">
+            <summary>
+            Releases all resources used by the current <see cref="T:Melanchall.DryWetMidi.Interaction.TimedObjectsWriter"/>
+            and also flushes all remaining data to the underlying stream.
             </summary>
         </member>
         <member name="T:Melanchall.DryWetMidi.Interaction.TimedObjectUtilities">

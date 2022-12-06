@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Events;
+using Core.Logging;
 using DG.Tweening;
 using SO_Scripts;
 using TMPro;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
+
 
 public class ScoreManager : MonoBehaviour
 {
@@ -20,10 +22,12 @@ public class ScoreManager : MonoBehaviour
     private int _currentCombo;
     private int _maxCombo;
     private int _missCount;
+    private Camera _mainCam;
     
     public int MissCount => _missCount;
     public int CurrentCombo => _currentCombo;
     public int MaxCombo => _maxCombo;
+    
     
     private void Awake()
     {
@@ -34,7 +38,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+        _mainCam = Camera.main;
     }
 
     // Update is called once per frame
@@ -78,18 +82,23 @@ public class ScoreManager : MonoBehaviour
         }
 
         TweenHitText(hitStatus
-            ? Instantiate(midiData.hitTextPrefab, hitPoint, Quaternion.identity, transform)
-            : Instantiate(midiData.missTextPrefab, hitPoint, Quaternion.identity, transform));
+            ? Instantiate(midiData.hitTextPrefab, hitPoint, _mainCam.transform.rotation, transform)
+            : Instantiate(midiData.missTextPrefab, hitPoint, _mainCam.transform.rotation, transform));
     }
 
     private void TweenHitText(GameObject obj)
     {
         var t = obj.transform;
-        var dest = t.up * 5;
+        var dest = t.position + t.up * 1.5f;
+        var dest2 = dest + t.up * .5f;
+        var tmp = t.GetComponent<TMP_Text>();
 
-        t.DOMove(dest, .7f);
-        t.GetComponent<TMP_Text>().material.DOFade(255, 0.7f);
+        //Sequence hitSequence = DOTween.Sequence();
+        // hitSequence.Append(t.DOMove(dest, 2f));
+        // hitSequence.Append(DOTween.ToAlpha(()=> tmp.color, x=> tmp.color = x, 0, 1));
 
+        t.DOMove(dest, 2f);
+        DOTween.ToAlpha(() => tmp.color, x => tmp.color = x, 0, 1);
     }
     
 }

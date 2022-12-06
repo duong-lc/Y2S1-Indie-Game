@@ -20,7 +20,7 @@ TagManager:
   - Water
   - UI
   - NoteLayer
-  - 
+  - WorldUI
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: WorldUI
+    uniqueID: 2249812111
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

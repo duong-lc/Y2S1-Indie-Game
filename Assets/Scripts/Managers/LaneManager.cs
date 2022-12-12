@@ -7,6 +7,7 @@ using UnityEngine;
 using SO_Scripts;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using Sirenix.Utilities;
 using DataClass = Data_Classes;
 using EventType = Core.Events.EventType;
 
@@ -27,6 +28,7 @@ namespace Managers
 
         private void Start()
         {
+            //_ignoreIndexList.Clear();
         }
 
         private void CompileDataFromMidi(MidiFile midiFile)
@@ -42,6 +44,16 @@ namespace Managers
 
         private void SetTimeStampsAllLanes()
         {
+            if (!midiData.AllNoteOnLaneList1.IsNullOrEmpty() ||
+                !midiData.AllNoteOnLaneList2.IsNullOrEmpty() ||
+                !midiData.AllNoteOnLaneList3.IsNullOrEmpty() ||
+                !midiData.AllNoteOnLaneList4.IsNullOrEmpty())
+            {
+                NCLogger.Log($"something is NOT empty");
+                return;
+            }
+            
+
             for (int index = 0; index < _rawNoteArray.Length; index++) //for every note in the note array
             {
                 if (_ignoreIndexList.Contains(index)) continue;

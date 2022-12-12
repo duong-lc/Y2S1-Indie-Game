@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using SO_Scripts;
 using System;
+using Core.Events;
 using Managers;
+using EventType = Core.Events.EventType;
 
 namespace NoteClasses
 {
@@ -26,7 +28,7 @@ namespace NoteClasses
             }
         }
 
-        private void Awake()
+        protected void Awake()
         {
             MarginOfError = midiData.marginOfError;
         }
@@ -36,5 +38,11 @@ namespace NoteClasses
             transform.forward = (endPos - startPos).normalized;
         }
 
+        protected virtual void Start()
+        {
+            
+        }
+        
+        
     }
 }

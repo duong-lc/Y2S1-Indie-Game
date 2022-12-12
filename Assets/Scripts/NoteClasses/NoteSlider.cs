@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Events;
+using Core.Logging;
 using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -45,10 +46,11 @@ namespace NoteClasses
         private float  AlphaEnd => (float)(TimeSinceEndNoteSpawned / (midiData.noteTime * 2));
         private bool _runOnce = true;
         private bool _runOnce1 = true;
-        
+        private KeyCode _holdKey;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             SetUpVariables();
             ToggleLineRenderers(true);
             SetUpLineControllers();
@@ -57,13 +59,14 @@ namespace NoteClasses
 
         private void Update()
         {
-            if (_canMoveStartNote) {
+            //UpdateStartNoteHoldStatus();
+            if (GameModeManager.Instance.GetGameState() != GameModeManager.GameState.PlayMode) return;
+            if (_canMoveStartNote ) {
                 InterpolateStartNotePos();
             }
-            if (_canMoveEndNote) {
+            if (_canMoveEndNote ) {
                 InterpolateEndNotePos();
             }
-
 
             UpdateStartNoteFail();
             UpdateEndNoteHoldStatus();
@@ -136,15 +139,27 @@ namespace NoteClasses
             }
         }
 
-        // private void UpdateStartNoteHoldStatus()//put in update
-        // {
-        //     //if(Input.GetKey(holdKey)){}
-        //     if (_isStartNoteHitCorrect)
-        //     {
-        //         _isHolding = true;
-        //     }
-        // }
+        private void UpdateStartNoteHoldStatus()//put in update
+        {
+            if (_isStartNoteHitCorrect && Input.GetKeyUp(_holdKey))
+            {
+                _isHolding = false;
+                NCLogger.Log($"up!!");
+            }
+        }
 
+        public void CheckHoldingStatus()
+        {
+            NCLogger.Log($"{gameObject.name}");
+            if (!Input.GetKey(_holdKey) && _isStartNoteHitCorrect && _isHolding)
+            {
+                NCLogger.Log($"slider break!!");
+                _isHolding = false;
+                EventDispatcher.Instance.FireEvent(EventType.OnRemoveSliderFromHoldList, this);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+            }
+        }
+        
         public bool OnNoteHitEndNote()//when release key
         {
             bool isDestroy = false;
@@ -167,7 +182,7 @@ namespace NoteClasses
                     EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
                 }
             }
-            
+
             return isDestroy;
         }
 
@@ -176,7 +191,7 @@ namespace NoteClasses
             if (_isStartNoteHitCorrect && _isHolding)
             {
                 //release too late <- will probably throw away as this game mode does not account for late releases.
-                if (_sliderData.timeStampKeyUp + MarginOfError <= CurrentSongTimeAdjusted)
+                if (_sliderData.timeStampKeyUp + MarginOfError/2 <= CurrentSongTimeAdjusted)
                 {
                     //hit - since passes the end note, auto hit
                     EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
@@ -235,6 +250,10 @@ namespace NoteClasses
             _sliderLockPoint = tuple.Item3;
 
             _runOnce = _runOnce1 = true;
+
+            foreach (var entry in midiData.InputDict) {
+                if (entry.Value == noteOrientation) _holdKey = entry.Key;
+            } 
         }
 
         public void InitializeDataOnSpawn(ref int octave, ref DataClasses.NoteData.LaneOrientation orientation, ref DataClasses.NoteData.SliderData sliderData)

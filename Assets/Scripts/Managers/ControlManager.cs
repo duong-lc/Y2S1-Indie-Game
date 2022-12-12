@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using Core.Events;
 using Core.Logging;
 using NoteClasses;
 using UnityEngine;
 using SO_Scripts;
+using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
 
 namespace Managers
@@ -21,6 +25,13 @@ namespace Managers
         
         private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>();
         private List<NoteSlider> _currentHoldSliders = new List<NoteSlider>();
+
+        private void Awake()
+        {
+            EventDispatcher.Instance.AddListener(EventType.OnUnPauseEvent, param => CheckHoldStatus());
+            EventDispatcher.Instance.AddListener(EventType.OnRemoveSliderFromHoldList, param => RemoveSliderFromList((NoteSlider) param));
+        }
+
         private void Start()
         {
             _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>()
@@ -37,6 +48,9 @@ namespace Managers
         {
             foreach (var entry in midiData.InputDict)
             {
+               
+                if (GameModeManager.Instance.GetGameState() != GameModeManager.GameState.PlayMode) return;
+                
                 if (Input.GetKeyDown(entry.Key))
                 {
                     //NCLogger.Log($"{midiData.NoteDespawnZ}");
@@ -71,16 +85,46 @@ namespace Managers
                 if (Input.GetKeyUp(entry.Key))
                 {
                     var slider = _currentHoldSliders.Find(x => x.noteOrientation == entry.Value);
-                    if(!slider) continue;
+                    if (!slider) {
+                        _currentHoldSliders.Remove(slider);
+                        continue;
+                    }
                     
                     var status = slider.OnNoteHitEndNote();
 
                     _currentHoldSliders.Remove(slider);
                     if(status) Destroy(slider.gameObject);
                 }
+
+                
             }
         }
 
+        private void RemoveSliderFromList(NoteSlider slider)
+        {
+            StartCoroutine(DelayedRemoveSliderRoutine(slider));
+        }
+
+        /// <summary>
+        /// Delay removing the slider note from holding list by 1 frame due to
+        /// CheckHoldStatus() still iterating through the list.
+        /// </summary>
+        /// <param name="slider"></param>
+        /// <returns></returns>
+        private IEnumerator DelayedRemoveSliderRoutine(NoteSlider slider)
+        {
+            yield return null;
+            _currentHoldSliders.Remove(slider);
+            Destroy((slider.gameObject));
+        }
+
+        private void CheckHoldStatus()
+        {
+            foreach (var slider in _currentHoldSliders) {
+                slider.CheckHoldingStatus();
+            }
+        }
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

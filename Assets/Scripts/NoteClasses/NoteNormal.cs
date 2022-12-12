@@ -20,14 +20,16 @@ namespace NoteClasses
 
         private double TimeSinceInstantiated => CurrentSongTimeRaw - _timeInstantiated;
         private float Alpha => ((float)(TimeSinceInstantiated / (midiData.noteTime * 2)));
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             SetUpVariables();
             SetLookDir(_startPos, _endPos);
         }
 
         private void Update()
         {
+            if (GameModeManager.Instance.GetGameState() != GameModeManager.GameState.PlayMode) return;
             OnNoteMissNormalNote();
             
             if (!CanMove) return;

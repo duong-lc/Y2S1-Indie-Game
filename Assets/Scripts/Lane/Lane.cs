@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using SO_Scripts;
 using Data_Classes;
 using System.Collections.Generic;
+using Core.Logging;
 using Managers;
 using DataClass = Data_Classes;
 using NoteClasses;
@@ -46,9 +48,16 @@ public class Lane : MonoBehaviour
         _inputDelay = _midiData.inputDelayInMilliseconds;
         _spawnLocation = new Vector3(_laneHitPoint.x, 0, _midiData.noteSpawnZ);
     }
-    
+
+    private void Start()
+    {
+        //
+    }
+
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)
     {
+        allNotesList.Clear();
+        //NCLogger.Log($"{listToSet.Count}");
         allNotesList = listToSet;
         SetKeyInput();
     }

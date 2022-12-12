@@ -5,5 +5,7 @@ namespace Core.Events {
         CompileDataFromMidiEvent,
         OnNoteHitEvent,
         OnNoteMissEvent,
+        OnUnPauseEvent,
+        OnRemoveSliderFromHoldList
     }
 }

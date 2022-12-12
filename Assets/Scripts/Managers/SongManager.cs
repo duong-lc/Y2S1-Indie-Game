@@ -104,8 +104,15 @@ namespace Managers
         {
             return (double) (GetAudioSourceTimeRaw() - (midiData.inputDelayInMilliseconds / 1000.0));
         }
+
+        public static void PauseSong()
+        {
+            Instance.audioSource.Pause();
+        }
             
-            
-            
+        public static void PlaySong()
+        {
+            Instance.audioSource.Play();
+        }
     }
 }

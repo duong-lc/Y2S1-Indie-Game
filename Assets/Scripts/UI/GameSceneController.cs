@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Events;
+using Core.Logging;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,12 @@ public class GameSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseOverlay;
     [SerializeField] private GameObject inGameHUD;
+
+    private void Awake()
+    {
+        if(!pauseOverlay) NCLogger.Log($"pauseOverlay not assigned", LogLevel.ERROR);
+        if(!inGameHUD) NCLogger.Log($"inGameHUD not assigned", LogLevel.ERROR);
+    }
 
     private void Start()
     {

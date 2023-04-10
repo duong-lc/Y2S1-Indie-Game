@@ -756,6 +756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 275576078}
+  - component: {fileID: 275576079}
   m_Layer: 0
   m_Name: anchorLane4
   m_TagString: Lane4
@@ -778,6 +779,19 @@ Transform:
   m_Father: {fileID: 2085640286}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &275576079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275576077}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 20}
+  m_Center: {x: 0, y: 0, z: 6.5}
 --- !u!1 &326662733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820765580}
+  - component: {fileID: 820765581}
   m_Layer: 0
   m_Name: anchorLane2
   m_TagString: Lane2
@@ -2181,6 +2196,19 @@ Transform:
   m_Father: {fileID: 2085640286}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &820765581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820765579}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 20}
+  m_Center: {x: 0, y: 0, z: 6.5}
 --- !u!1001 &874310777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2545,6 +2573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262529366}
+  - component: {fileID: 1262529367}
   m_Layer: 0
   m_Name: anchorLane3
   m_TagString: Lane3
@@ -2567,6 +2596,19 @@ Transform:
   m_Father: {fileID: 2085640286}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1262529367
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262529365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 20}
+  m_Center: {x: 0, y: 0, z: 6.5}
 --- !u!1 &1309138802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,6 +2618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1309138803}
+  - component: {fileID: 1309138804}
   m_Layer: 0
   m_Name: anchorLane1
   m_TagString: Lane1
@@ -2598,6 +2641,19 @@ Transform:
   m_Father: {fileID: 2085640286}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1309138804
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309138802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 20}
+  m_Center: {x: 0, y: 0, z: 6.5}
 --- !u!1 &1360212361
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,3 +16,13 @@ MonoBehaviour:
   levelSelectionSceneName: LevelSelection
   gamePlaySceneName: SampleScene
   optionSceneName: 
+  earlyMOEBegin: -1.62
+  earlyMOEEnd: 0
+  perfectMOEBegin: 0
+  perfectMOEEnd: 0
+  lateMOEBegin: 0
+  lateMOEEnd: 0
+  inputLane1: 0
+  inputLane2: 0
+  inputLane3: 0
+  inputLane4: 0

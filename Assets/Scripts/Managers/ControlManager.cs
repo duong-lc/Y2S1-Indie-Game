@@ -17,6 +17,7 @@ namespace Managers
     public class ControlManager : MonoBehaviour
     {
         [SerializeField] private MidiData midiData;
+        [SerializeField] private GameModeData gameModeData;
         [Space]
         [SerializeField] private List<Transform> anchorPoints = new List<Transform>();
         [Space]
@@ -81,19 +82,19 @@ namespace Managers
                     if (!NoteInteractInputUp(entry)) continue;
                 }
 
-                if(Input.touchCount > 0 && Input.touches[0].phase.Equals(UnityEngine.InputSystem.TouchPhase.Began))
-                {
-                    Ray ray = camera.ScreenPointToRay(Input.touches[0].position);
-                    RaycastHit hit;
-                    if(Physics.Raycast(ray, out hit))
-                    {
-                        if(hit.collider != null)
-                        {
-                     
-                        }
-                    }
-                }
             }
+            // if(Input.touchCount > 0 && Input.touches[0].phase.Equals(UnityEngine.InputSystem.TouchPhase.Began))
+            // {
+            //     Ray ray = camera.ScreenPointToRay(Input.touches[0].position);
+            //     RaycastHit hit;
+            //     if(Physics.Raycast(ray, out hit))
+            //     {
+            //         if(hit.collider != null)
+            //         {
+            //             if (!NoteInteractInputDown(entry)) continue;
+            //         }
+            //     }
+            // }
         }
 
         private bool NoteInteractInputDown(KeyValuePair<KeyCode, Data_Classes.NoteData.LaneOrientation> entry )

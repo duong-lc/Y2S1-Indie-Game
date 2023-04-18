@@ -9,7 +9,24 @@ using TMPro;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
+[Serializable]
+public enum HitCondition {
+    Undefined,
+    Perfect,
+    Early,
+    Late,
+    Miss,
+}
 
+[Serializable]
+public class MarginOfError
+{
+    [SerializeField] private int beginMOE;
+    [SerializeField] private int endMOE;
+
+    public int BeginMOE => beginMOE;
+    public int EndMOE => endMOE;
+}
 
 public class ScoreManager : MonoBehaviour
 {

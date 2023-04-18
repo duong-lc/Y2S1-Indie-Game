@@ -6,6 +6,7 @@ using UnityEngine;
 using SO_Scripts;
 using System.IO;
 using Core.Events;
+using Core.Logging;
 using Core.Patterns;
 using UnityEngine.Networking;
 using EventType = Core.Events.EventType;
@@ -14,17 +15,21 @@ namespace Managers
 {
     public class SongManager : Singleton<SongManager>
     {
-        [SerializeField] private MidiData midiData;
+        private MidiData _midiData;
+        private GameModeData _gameModeData;
         public AudioSource audioSource; //audio source to play the song
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
 
-        private void Awake()
-        {
-            
+        private void Awake() {
+            _midiData = GameModeManager.Instance.CurrentMidiData;
+            _gameModeData = GameModeManager.Instance.GameModeData;
         }
 
         private void Start()
         {
+            if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
+            if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
+            
             /*
             checking if the "StreamingAssets" path is a website or not, depending on the platform that loads the midi file
                     for example, windows, mac, linux = file location where as webgl = website
@@ -43,7 +48,7 @@ namespace Managers
         private IEnumerator ReadFromWebsite()
         {
             //requesting unity web request the midi file
-            using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + midiData.fileLocation)){
+            using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + _midiData.fileLocation)){
                 yield return www.SendWebRequest();
                 
                 //checking to see if there's any network errors
@@ -74,11 +79,11 @@ namespace Managers
         /// </summary>
         private void ReadFromFile()
         {
-            MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + midiData.fileLocation);
+            MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + _midiData.fileLocation);
             //convert midi data to necessary data for rhythm game, append them all to list
             //LaneManager.Instance.CompileDataFromMidi(MidiFile);
             Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
-            Invoke(nameof(StartSong), midiData.songDelayInSeconds);
+            Invoke(nameof(StartSong), _midiData.songDelayInSeconds);
         }
         
         public void StartSong()
@@ -102,7 +107,7 @@ namespace Managers
         /// <returns></returns>
         public double GetAudioSourceTimeAdjusted()
         {
-            return (double) (GetAudioSourceTimeRaw() - (midiData.inputDelayInMilliseconds / 1000.0));
+            return (double) (GetAudioSourceTimeRaw() - (_gameModeData.InputDelayInMS / 1000.0));
         }
 
         public static void PauseSong()

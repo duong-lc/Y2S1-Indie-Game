@@ -10,12 +10,13 @@ public class MainMenuController : MonoBehaviour
 {
     private void Start()
     {
-        GameModeManager.SetGameState(GameModeManager.GameState.MainMenu);
+        // GameModeManager.SetGameState(GameModeManager.GameState.MainMenu);
+        GameModeManager.Instance.CurrentGameState = GameState.MainMenu;
     }
 
     public void LoadLevelSelection()
     {
-        SceneManager.LoadScene(GameModeManager.Instance.gameModeData.levelSelectionSceneName);
+        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.levelSelectionSceneName);
     }
 
     public void LoadOptions()

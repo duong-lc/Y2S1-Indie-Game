@@ -7,11 +7,12 @@ using EventType = Core.Events.EventType;
 
 namespace NoteClasses
 {
+    [RequireComponent(typeof(Collider))]
     public abstract class NoteBase : MonoBehaviour
     {
         [Header("Base Note Attributes")] 
         protected bool CanMove = true;
-        protected double MarginOfError;
+        //protected double MarginOfError;
         protected static double CurrentSongTimeAdjusted => SongManager.Instance.GetAudioSourceTimeAdjusted();
         protected static double CurrentSongTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
         
@@ -30,7 +31,7 @@ namespace NoteClasses
 
         protected void Awake()
         {
-            MarginOfError = midiData.marginOfError;
+            //MarginOfError = midiData.marginOfError;
         }
 
         protected virtual void SetLookDir(Vector3 startPos, Vector3 endPos)

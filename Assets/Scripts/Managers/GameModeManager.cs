@@ -9,34 +9,45 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using EventType = Core.Events.EventType;
 
+public enum GameState
+{
+    Undefined,
+    MainMenu,
+    LevelSelection,
+    PlayMode,
+    PauseMode,
+}
 
 public class GameModeManager : Singleton<GameModeManager>
 {
-    public enum GameState
-    {
-        MainMenu,
-        LevelSelection,
-        PlayMode,
-        PauseMode,
-    }
     
     //Main Menu 
-    public GameModeData gameModeData;
-    private GameState _gameState;
+    [SerializeField] private GameModeData gameModeData;
+    [SerializeField] private MidiData currentMidiData;
 
-    private void Awake()
-    {
+    public MidiData CurrentMidiData => currentMidiData;
+    public GameModeData GameModeData => gameModeData;
+    
+    private GameState _gameState;
+    public GameState CurrentGameState {
+        get
+        {
+            if (_gameState == GameState.Undefined) {
+                NCLogger.Log($"game state is {_gameState}", LogLevel.ERROR);
+            }
+            return _gameState;
+        }
+        
+        set => Instance._gameState = value;
+    }
+    
+    private void Awake() {
+        base.Awake();
         if(Instance != null && Instance != this) Destroy(gameObject);
+    
+        if(!CurrentMidiData) NCLogger.Log($"midiData is {CurrentMidiData}", LogLevel.ERROR);
+        if(!GameModeData) NCLogger.Log($"midiData is {GameModeData}", LogLevel.ERROR);
         
         DontDestroyOnLoad(gameObject);
     }
-
-    public static void SetGameState(GameState newGameState) {
-        Instance._gameState = newGameState;
-    }
-
-    public GameState GetGameState() {
-        return _gameState;
-    }
-
 }

@@ -12,17 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949400a2b1ce4a6d8ced8f558bad6ee0, type: 3}
   m_Name: GameModeData
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: noteHitCondDict
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[HitCondition, Assembly-CSharp],[MarginOfError,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[HitCondition, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   mainMenuSceneName: MainMenu
   levelSelectionSceneName: LevelSelection
   gamePlaySceneName: SampleScene
   optionSceneName: 
-  earlyMOEBegin: -1.62
-  earlyMOEEnd: 0
-  perfectMOEBegin: 0
-  perfectMOEEnd: 0
-  lateMOEBegin: 0
-  lateMOEEnd: 0
-  inputLane1: 0
-  inputLane2: 0
-  inputLane3: 0
-  inputLane4: 0
+  songDelayInSeconds: 0
+  noteTime: 0
+  noteSpawnZ: 0
+  noteTapZ: 0

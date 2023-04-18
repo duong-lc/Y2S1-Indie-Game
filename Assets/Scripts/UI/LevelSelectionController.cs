@@ -9,19 +9,19 @@ public class LevelSelectionController : MonoBehaviour
 {
     private void Start()
     {
-        GameModeManager.SetGameState(GameModeManager.GameState.LevelSelection);
+        GameModeManager.Instance.CurrentGameState = GameState.LevelSelection;
     }
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SceneManager.LoadScene(GameModeManager.Instance.gameModeData.gamePlaySceneName);
+            SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName);
         }
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(GameModeManager.Instance.gameModeData.mainMenuSceneName);
+        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.mainMenuSceneName);
     }
 }

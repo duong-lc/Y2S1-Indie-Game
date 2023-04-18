@@ -10,10 +10,9 @@ using NoteClasses;
 
 public class Lane : MonoBehaviour
 {
-    [SerializeField] private MidiData _midiData;
+    private MidiData _midiData;
     public List<BaseNoteType> allNotesList = new List<BaseNoteType>();
     
-    private KeyCode _input;
     private bool _isSpawn = true;
     private int _spawnIndex = 0;//index spawn to loop through the timestamp array to spawn notes based on timestamp
     private int _inputIndex;//input index to loop through the timestamp array to form note input queue 
@@ -32,6 +31,7 @@ public class Lane : MonoBehaviour
     
     private void Awake()
     {
+        _midiData = GameModeManager.Instance.CurrentMidiData;
         _laneHitPoint = gameObject.tag switch
         {
             "Lane1" => _midiData.hitPoint1,

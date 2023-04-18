@@ -60,7 +60,10 @@ namespace NoteClasses
         private void Update()
         {
             //UpdateStartNoteHoldStatus();
-            if (GameModeManager.Instance.GetGameState() != GameModeManager.GameState.PlayMode) return;
+            if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) {
+                NCLogger.Log($"GameState should be PlayMode when it's {GameModeManager.Instance.CurrentGameState}", LogLevel.ERROR);
+                return;
+            }
             if (_canMoveStartNote ) {
                 InterpolateStartNotePos();
             }

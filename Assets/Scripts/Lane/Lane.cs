@@ -17,7 +17,8 @@ public class Lane : MonoBehaviour
     private int _spawnIndex = 0;//index spawn to loop through the timestamp array to spawn notes based on timestamp
     private int _inputIndex;//input index to loop through the timestamp array to form note input queue 
     private DataClass.NoteData.LaneOrientation _orientation;
-    
+
+    public DataClass.NoteData.LaneOrientation LaneOrientation => _orientation;
     //Variables for caching
     private Vector3 _laneHitPoint;
     private GameObject _normalNotePrefab;

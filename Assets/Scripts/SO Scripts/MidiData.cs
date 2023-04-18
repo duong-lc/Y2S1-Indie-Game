@@ -51,6 +51,8 @@ public class MidiData : SerializedScriptableObject
    public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestrictionSliderNote;
 
    [SerializeField] private Dictionary<NoteData.LaneOrientation, LaneMidiData> _laneMidiData;
+
+   public Dictionary<NoteData.LaneOrientation, LaneMidiData> LaneMidiData => _laneMidiData;
    // [Header("Lane 1")]
    // public KeyCode input1;//key input for that lane
    // //note on midi file to spawn and note object prefab to spawn

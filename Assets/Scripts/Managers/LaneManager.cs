@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Logging;
 using Core.Patterns;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Managers
 {
     public class LaneManager : MonoBehaviour
     {
-        [SerializeField] private MidiData midiData;
+        private MidiData _midiData;
         private Note[] _rawNoteArray;
         private List<int> _ignoreIndexList = new List<int>();
 
@@ -24,6 +25,8 @@ namespace Managers
         {
             Core.Events.EventDispatcher.Instance.AddListener(EventType.CompileDataFromMidiEvent,
                 param => CompileDataFromMidi((MidiFile) param));
+
+            _midiData = GameModeManager.Instance.CurrentMidiData;
         }
 
         private void Start()
@@ -44,51 +47,52 @@ namespace Managers
 
         private void SetTimeStampsAllLanes()
         {
-            if (!midiData.AllNoteOnLaneList1.IsNullOrEmpty() ||
-                !midiData.AllNoteOnLaneList2.IsNullOrEmpty() ||
-                !midiData.AllNoteOnLaneList3.IsNullOrEmpty() ||
-                !midiData.AllNoteOnLaneList4.IsNullOrEmpty())
-            {
+            if (_midiData.LaneMidiData.Values.Any(midiData => !midiData.allNoteOnLaneList.IsNullOrEmpty())) {
                 NCLogger.Log($"something is NOT empty");
                 return;
             }
-            
+
 
             for (int index = 0; index < _rawNoteArray.Length; index++) //for every note in the note array
             {
                 if (_ignoreIndexList.Contains(index)) continue;
 
-                if (_rawNoteArray[index].Octave == midiData.laneOctave1)
-                {
-                    AddNoteToLane(ref index, midiData.AllNoteOnLaneList1, DataClass.NoteData.LaneOrientation.One,
-                        midiData.laneOctave1);
+                foreach (var kvp in _midiData.LaneMidiData) {
+                    if (_rawNoteArray[index].Octave == kvp.Value.LaneOctave) {
+                        AddNoteToLane(ref index, kvp.Value.allNoteOnLaneList, kvp.Key, kvp.Value.LaneOctave);
+                    }
                 }
-                else if (_rawNoteArray[index].Octave == midiData.laneOctave2)
-                {
-                    AddNoteToLane(ref index, midiData.AllNoteOnLaneList2, DataClass.NoteData.LaneOrientation.Two,
-                        midiData.laneOctave2);
-                }
-                else if (_rawNoteArray[index].Octave == midiData.laneOctave3)
-                {
-                    AddNoteToLane(ref index, midiData.AllNoteOnLaneList3, DataClass.NoteData.LaneOrientation.Three,
-                        midiData.laneOctave3);
-                }
-                else if (_rawNoteArray[index].Octave == midiData.laneOctave4)
-                {
-                    AddNoteToLane(ref index, midiData.AllNoteOnLaneList4, DataClass.NoteData.LaneOrientation.Four,
-                        midiData.laneOctave4);
-                }
+                // if (_rawNoteArray[index].Octave == midiData.laneOctave1)
+                // {
+                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList1, DataClass.NoteData.LaneOrientation.One,
+                //         midiData.laneOctave1);
+                // }
+                // else if (_rawNoteArray[index].Octave == midiData.laneOctave2)
+                // {
+                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList2, DataClass.NoteData.LaneOrientation.Two,
+                //         midiData.laneOctave2);
+                // }
+                // else if (_rawNoteArray[index].Octave == midiData.laneOctave3)
+                // {
+                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList3, DataClass.NoteData.LaneOrientation.Three,
+                //         midiData.laneOctave3);
+                // }
+                // else if (_rawNoteArray[index].Octave == midiData.laneOctave4)
+                // {
+                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList4, DataClass.NoteData.LaneOrientation.Four,
+                //         midiData.laneOctave4);
+                // }
             }
         }
 
         private void AddNoteToLane(ref int index, List<DataClass.BaseNoteType> laneToAdd,
             DataClass.NoteData.LaneOrientation orientation, int octaveIndex)
         {
-            if (_rawNoteArray[index].NoteName == midiData.noteRestrictionNormalNote)
+            if (_rawNoteArray[index].NoteName == _midiData.noteRestrictionNormalNote)
             {
                 AddNormalNoteToList(ref index, laneToAdd, orientation, octaveIndex);
             }
-            else if (_rawNoteArray[index].NoteName == midiData.noteRestrictionSliderNote)
+            else if (_rawNoteArray[index].NoteName == _midiData.noteRestrictionSliderNote)
             {
                 AddSliderNoteToList(ref index, laneToAdd, orientation, octaveIndex);
             }
@@ -136,7 +140,7 @@ namespace Managers
             {
                 //Check for next note on the same octave and on same line
                 if (_rawNoteArray[j].Octave != octaveIndex ||
-                    _rawNoteArray[j].NoteName != midiData.noteRestrictionSliderNote) continue;
+                    _rawNoteArray[j].NoteName != _midiData.noteRestrictionSliderNote) continue;
                 var metricTimeSpan2 =
                     TimeConverter.ConvertTo<MetricTimeSpan>(_rawNoteArray[j].Time, SongManager.MidiFile.GetTempoMap());
                 sliderNoteData.timeStampKeyUp = (double) metricTimeSpan2.Minutes * 60f + metricTimeSpan2.Seconds +
@@ -157,25 +161,28 @@ namespace Managers
 
         public void DistributeNoteToLanes()
         {
-            Lane[] laneArray = GetComponentsInChildren<Lane>();
+            var laneArray = GetComponentsInChildren<Lane>();
             foreach (Lane lane in laneArray)
             {
-                if (lane.CompareTag("Lane1"))
-                {
-                    lane.SetLocalListOnLane(midiData.AllNoteOnLaneList1);
-                }
-                else if (lane.CompareTag("Lane2"))
-                {
-                    lane.SetLocalListOnLane(midiData.AllNoteOnLaneList2);
-                }
-                else if (lane.CompareTag("Lane3"))
-                {
-                    lane.SetLocalListOnLane(midiData.AllNoteOnLaneList3);
-                }
-                else if (lane.CompareTag("Lane4"))
-                {
-                    lane.SetLocalListOnLane(midiData.AllNoteOnLaneList4);
-                }
+                lane.SetLocalListOnLane(_midiData.LaneMidiData[lane.LaneOrientation].allNoteOnLaneList);
+                
+                // if (lane.LaneOrientation == DataClass.NoteData.LaneOrientation.One)
+                // {
+                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList1);
+                // }
+                // else if (lane.CompareTag("Lane2"))
+                // {
+                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList2);
+                // }
+                // else if (lane.CompareTag("Lane3"))
+                // {
+                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList3);
+                // }
+                // else if (lane.CompareTag("Lane4"))
+                // {
+                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList4);
+                // }
+                //
             }
         }
     }

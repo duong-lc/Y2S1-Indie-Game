@@ -16,8 +16,8 @@ namespace Managers
 {
     public class ControlManager : MonoBehaviour
     {
-        [SerializeField] private MidiData midiData;
-        [SerializeField] private GameModeData gameModeData;
+        private MidiData _midiData;
+        private GameModeData _gameModeData;
         [Space]
         // [SerializeField] private List<Transform> anchorPoints = new List<Transform>();
         [Space]
@@ -48,18 +48,16 @@ namespace Managers
             EventDispatcher.Instance.AddListener(EventType.OnUnPauseEvent, param => CheckHoldStatus());
             EventDispatcher.Instance.AddListener(EventType.OnRemoveSliderFromHoldList, param => RemoveSliderFromList((NoteSlider) param));
             
+            _midiData = GameModeManager.Instance.CurrentMidiData;
+            _gameModeData = GameModeManager.Instance.GameModeData;
+            
             if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
         }
 
         private void Start()
         {
-            // _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>()
-            // {
-            //     { NoteData.LaneOrientation.One, GetAnchorPoint("Lane1").position},
-            //     { NoteData.LaneOrientation.Two, GetAnchorPoint("Lane2").position},
-            //     { NoteData.LaneOrientation.Three, GetAnchorPoint("Lane3").position},
-            //     { NoteData.LaneOrientation.Four, GetAnchorPoint("Lane4").position}
-            // };
+            if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
+            if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
             
             multiTouchInputActions.Add(playerInput.actions["Touch0"]);
             multiTouchInputActions.Add(playerInput.actions["Touch1"]);
@@ -70,16 +68,16 @@ namespace Managers
         // Update is called once per frame
         private void Update()
         {
-            foreach (var entry in midiData.InputDict)
+            foreach (var kvp in _gameModeData.LaneControllerData)
             {
-                if (GameModeManager.Instance.CurrentGameState != GameModeManager.GameState.PlayMode) return;
+                if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) return;
                 
-                if (Input.GetKeyDown(entry.Key)) {
-                    if (!NoteInteractInputDown(entry)) continue;
+                if (Input.GetKeyDown(kvp.Value.Input)) {
+                    if (!NoteInteractInputDown(kvp.Value.collider)) continue;
                 }
 
-                if (Input.GetKeyUp(entry.Key)) {
-                    if (!NoteInteractInputUp(entry)) continue;
+                if (Input.GetKeyUp(kvp.Value.Input)) {
+                    if (!NoteInteractInputUp(kvp.Value.collider)) continue;
                 }
 
             }
@@ -97,42 +95,41 @@ namespace Managers
             // }
         }
 
-        private bool NoteInteractInputDown(KeyValuePair<KeyCode, Data_Classes.NoteData.LaneOrientation> entry )
+        private bool NoteInteractInputDown(LaneCollider laneCollider)
         {
-            NCLogger.Log($"{midiData.NoteDespawnZ}");
-             _castOriginDict.TryGetValue(entry.Value, out var castOrigin);
-             if (!Physics.BoxCast(castOrigin,
-                     boxSize,
-                     Vector3.forward,
-                     out var hit,
-                     Quaternion.identity,
-                     castDist,
-                     noteLayer)) return false;
-                    
+            // _castOriginDict.TryGetValue(entry.Value, out var castOrigin);
+            //  if (!Physics.BoxCast(castOrigin,
+            //          boxSize,
+            //          Vector3.forward,
+            //          out var hit,
+            //          Quaternion.identity,
+            //          castDist,
+            //          noteLayer)) return false;
+            //         
             //TODO: Instead of getting component, get the lane based on the keyEntry.
             //In said lane, there will be a List that store all Active Notes in scene  -List<NoteBase>
             //use linq to compare hit.object with notebase.object in list. If matches, return notebase with
             //game object tag, then use switch to cast to normal or slider. 
             //the purpose is to have less performance intensive code but haven't really measured - just a theory.
-            var note = hit.collider.gameObject.GetComponent<NoteBase>();
-            if (note.CompareTag("NoteNormal"))
+            var note = laneCollider.GetApproachingNote();
+            switch (note.Type)
             {
-                var filteredNote = (NoteNormal)note;
-                filteredNote.OnNoteHitNormalNote();
+                case NoteType.NormalNote:
+                    ((note as NoteNormal)!).OnNoteHitNormalNote();
+                    break;
+                case NoteType.SliderNote:
+                    ((note as NoteSlider)!).OnNoteHitStartNote();
+                    _currentHoldSliders.Add(note as NoteSlider);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            else if (note.CompareTag("NoteSlider"))
-            {
-                var filteredNote = (NoteSlider)note;
-                filteredNote.OnNoteHitStartNote();
-                _currentHoldSliders.Add(filteredNote);
-            }
-
             return true;
         }
 
-        private bool NoteInteractInputUp(KeyValuePair<KeyCode, Data_Classes.NoteData.LaneOrientation> entry)
+        private bool NoteInteractInputUp(LaneCollider laneCollider)
         {
-            var slider = _currentHoldSliders.Find(x => x.noteOrientation == entry.Value);
+            var slider = _currentHoldSliders.Find(x => x.noteOrientation == laneCollider.LaneOrientation);
             if (!slider) {
                 _currentHoldSliders.Remove(slider);
                 return false;

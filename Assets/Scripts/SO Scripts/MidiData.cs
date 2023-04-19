@@ -102,18 +102,6 @@ public class MidiData : SerializedScriptableObject
 
    }
 
-   public Tuple<Vector3, Vector3, Vector3> GetHitPoint(Data_Classes.NoteData.LaneOrientation noteOrientation, Vector3 dir)
-   {
-       var vectorZero = new Vector3(0, 0, 0);
-       var failReturn = new Tuple<Vector3, Vector3, Vector3>(vectorZero, vectorZero, vectorZero);
-       
-       if(!HitPointDict.TryGetValue(noteOrientation, out var hitPoint)) return failReturn;
-       
-       //Vector3 startPos = hitPoint + (dir * noteSpawnZ); 
-       Vector3 startPos = new Vector3(hitPoint.x, hitPoint.y, noteSpawnZ);
-       //Vector3 endPos = hitPoint + (dir * NoteDespawnZ);
-       Vector3 endPos = new Vector3(hitPoint.x, hitPoint.y, NoteDespawnZ);
-       return new Tuple<Vector3, Vector3, Vector3>(startPos, endPos, hitPoint);
-   }
+  
 }
 

@@ -19,7 +19,7 @@ namespace NoteClasses
         private Vector3 _endPos;
 
         private double TimeSinceInstantiated => CurrentSongTimeRaw - _timeInstantiated;
-        private float Alpha => ((float)(TimeSinceInstantiated / (midiData.noteTime * 2)));
+        private float Alpha => ((float)(TimeSinceInstantiated / (NoteTime * 2)));
         protected override void Start()
         {
             base.Start();
@@ -54,8 +54,7 @@ namespace NoteClasses
 
         public void OnNoteHitNormalNote()
         {
-            //NCLogger.Log($"current: {CurrentSongTimeAdjusted} assigned: {assignedTime}\n{Math.Abs(CurrentSongTimeAdjusted - assignedTime)} startPos: {_startPos} endPos: {_endPos}");
-            //double currAudioTime = SongManager.GetAudioSourceTime() - (midiData.inputDelayInMilliseconds / 1000.0);
+            
             if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
             {
                 //Hit
@@ -87,10 +86,7 @@ namespace NoteClasses
         private void SetUpVariables()
         {
             _timeInstantiated = SongManager.Instance.GetAudioSourceTimeRaw();
-
-            var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
-            _startPos = tuple.Item1;
-            _endPos = tuple.Item2;
+            GameModeManager.Instance.GameModeData.GetLerpPoints(noteOrientation, ref _startPos, ref _endPos);
         }
     }
 }

@@ -11,6 +11,8 @@ using NoteClasses;
 public class Lane : MonoBehaviour
 {
     private MidiData _midiData;
+    private GameModeData _gameModeData;
+    
     public List<BaseNoteType> allNotesList = new List<BaseNoteType>();
     
     private bool _isSpawn = true;
@@ -20,39 +22,48 @@ public class Lane : MonoBehaviour
 
     public DataClass.NoteData.LaneOrientation LaneOrientation => _orientation;
     //Variables for caching
-    private Vector3 _laneHitPoint;
+    //private Vector3 _laneHitPoint;
     private GameObject _normalNotePrefab;
     private GameObject _sliderNotePrefab;
-    private float _travelTime;
-    private double _marginOfError;
-    private float _inputDelay;
+    //private float _travelTime;
     private Vector3 _spawnLocation;
-
     private double AudioTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
     
+    private LaneCollider _laneCol;
+    public LaneCollider LaneCollider {
+        get {
+            if (!_laneCol) _laneCol = GetComponent<LaneCollider>();
+            return _laneCol;
+        }
+    }
+     
     private void Awake()
     {
         _midiData = GameModeManager.Instance.CurrentMidiData;
-        _laneHitPoint = gameObject.tag switch
-        {
-            "Lane1" => _midiData.hitPoint1,
-            "Lane2" => _midiData.hitPoint2,
-            "Lane3" => _midiData.hitPoint3,
-            "Lane4" => _midiData.hitPoint4,
-            _ => new Vector3(0,0,0)
-        };
+        _gameModeData = GameModeManager.Instance.GameModeData;
+
+        // _laneHitPoint = _gameModeData.GetHitPoint(LaneOrientation);
+        
+        // _laneHitPoint = gameObject.tag switch
+        // {
+        //     "Lane1" => _midiData.hitPoint1,
+        //     "Lane2" => _midiData.hitPoint2,
+        //     "Lane3" => _midiData.hitPoint3,
+        //     "Lane4" => _midiData.hitPoint4,
+        //     _ => new Vector3(0,0,0)
+        // };
 
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;
-        _travelTime = _midiData.noteTime;
-        _marginOfError = _midiData.marginOfError;
-        _inputDelay = _midiData.inputDelayInMilliseconds;
-        _spawnLocation = new Vector3(_laneHitPoint.x, 0, _midiData.noteSpawnZ);
+       // _travelTime = _gameModeData.NoteTime;
+       // _marginOfError = _midiData.marginOfError;
+      //  _inputDelay = _midiData.inputDelayInMilliseconds;
+        _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     }
 
     private void Start()
     {
-        //
+        
     }
 
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)
@@ -60,31 +71,6 @@ public class Lane : MonoBehaviour
         allNotesList.Clear();
         //NCLogger.Log($"{listToSet.Count}");
         allNotesList = listToSet;
-        SetKeyInput();
-    }
-    
-    private void SetKeyInput()
-    {
-        if (gameObject.CompareTag("Lane1"))
-        {
-            _orientation = DataClass.NoteData.LaneOrientation.One;
-            _input = _midiData.input1;
-        }
-        else if (gameObject.CompareTag("Lane2"))
-        {
-            _orientation = DataClass.NoteData.LaneOrientation.Two;
-            _input = _midiData.input2;
-        }
-        else if (gameObject.CompareTag("Lane3"))
-        {
-            _orientation = DataClass.NoteData.LaneOrientation.Three;
-            _input = _midiData.input3;
-        }
-        else if (gameObject.CompareTag("Lane4"))
-        {
-            _orientation = DataClass.NoteData.LaneOrientation.Four;
-            _input = _midiData.input4;
-        }
     }
 
     private void Update()
@@ -111,7 +97,7 @@ public class Lane : MonoBehaviour
                 NoteNormalType noteNormalCast = (NoteNormalType) allNotesList[_spawnIndex];
 
                 //if current song time reaches point to spawn a note
-                if (AudioTimeRaw >= noteNormalCast.timeStamp - _travelTime)
+                if (AudioTimeRaw >= noteNormalCast.timeStamp - _gameModeData.NoteTime)
                 {
                     //Spawn a note
                     var noteObj = Instantiate(_normalNotePrefab, _spawnLocation , Quaternion.identity, transform);
@@ -138,7 +124,7 @@ public class Lane : MonoBehaviour
             case DataClass.NoteData.NoteID.SliderNote:
                 NoteSliderType noteSliderCast = (NoteSliderType) allNotesList[_spawnIndex];
 
-                if (AudioTimeRaw >= noteSliderCast.sliderData.timeStampKeyDown - _travelTime)
+                if (AudioTimeRaw >= noteSliderCast.sliderData.timeStampKeyDown - _gameModeData.NoteTime)
                 {
                     //print($"{gameObject.name}");
                     //Spawn a slider prefab

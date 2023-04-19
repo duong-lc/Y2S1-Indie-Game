@@ -12,8 +12,8 @@ using NoteData = Data_Classes.NoteData;
 [Serializable]
 public enum HitCondition {
     Undefined,
-    Perfect,
     Early,
+    Perfect,
     Late,
     Miss,
 }

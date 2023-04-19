@@ -6,6 +6,7 @@ using NoteClasses;
 using StaticClass;
 using UnityEngine;
 
+[RequireComponent(typeof(Lane))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class LaneCollider : MonoBehaviour
@@ -14,16 +15,19 @@ public class LaneCollider : MonoBehaviour
     private Collider _col;
     private List<NoteBase> noteList = new ();
     private LayerMask _noteLayerMask;
+    private Lane _lane;
 
-    private NoteData.LaneOrientation _laneOrientation
+    public Lane Lane
     {
         get
         {
-            
-
-            return NoteData.LaneOrientation.Undefined;
+            if (!_lane) _lane = GetComponent<Lane>();
+            return _lane;
         }
     }
+    
+    public NoteData.LaneOrientation LaneOrientation => Lane.LaneOrientation;
+
     public Rigidbody Rigidbody {
         get {
             if (!_rb) {
@@ -60,5 +64,13 @@ public class LaneCollider : MonoBehaviour
     private NoteBase GetNote(Collider col) {
         var note = col.GetComponent<NoteBase>();
         return !note || noteList.Contains(note) ? null : note;
+    }
+
+    public NoteBase GetApproachingNote() {
+        return noteList[0];
+    }
+
+    public void RemoveNote(NoteBase note) {
+        noteList.Remove(note);
     }
 }

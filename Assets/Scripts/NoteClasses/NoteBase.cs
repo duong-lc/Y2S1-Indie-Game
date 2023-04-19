@@ -5,6 +5,12 @@ using Core.Events;
 using Managers;
 using EventType = Core.Events.EventType;
 
+public enum NoteType
+{
+    Undefined,
+    NormalNote,
+    SliderNote,
+}
 namespace NoteClasses
 {
     [RequireComponent(typeof(Collider))]
@@ -12,16 +18,19 @@ namespace NoteClasses
     {
         [Header("Base Note Attributes")] 
         protected bool CanMove = true;
-        //protected double MarginOfError;
+
+        [SerializeField] protected NoteType type;
+        
         protected static double CurrentSongTimeAdjusted => SongManager.Instance.GetAudioSourceTimeAdjusted();
         protected static double CurrentSongTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
         
-        [SerializeField] protected MidiData midiData;
+        // [SerializeField] protected MidiData midiData;
         [SerializeField] protected SO_Scripts.NoteData noteData;
         public int octaveNum;
         public Data_Classes.NoteData.LaneOrientation noteOrientation;
 
         private Collider _collider;
+        protected static float NoteTime => GameModeManager.Instance.GameModeData.NoteTime;
         public Collider Collider {
             get {
                 if (!_collider) _collider = GetComponent<Collider>();
@@ -29,6 +38,8 @@ namespace NoteClasses
             }
         }
 
+        public NoteType Type => type;
+        
         protected void Awake()
         {
             //MarginOfError = midiData.marginOfError;

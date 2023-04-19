@@ -18,20 +18,26 @@ namespace Managers
     public class LaneManager : MonoBehaviour
     {
         private MidiData _midiData;
+        private GameModeData _gameModeData;
         private Note[] _rawNoteArray;
-        private List<int> _ignoreIndexList = new List<int>();
-
+        private readonly List<int> _ignoreIndexList = new ();
+        
+        [SerializeField] private Lane[] LaneArray = { }; 
+        
         private void Awake()
         {
             Core.Events.EventDispatcher.Instance.AddListener(EventType.CompileDataFromMidiEvent,
                 param => CompileDataFromMidi((MidiFile) param));
 
             _midiData = GameModeManager.Instance.CurrentMidiData;
+            _gameModeData = GameModeManager.Instance.GameModeData;
         }
 
-        private void Start()
-        {
-            //_ignoreIndexList.Clear();
+        private void Start() {
+            if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
+            if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
+
+            AssignColliderData();
         }
 
         private void CompileDataFromMidi(MidiFile midiFile)
@@ -62,29 +68,11 @@ namespace Managers
                         AddNoteToLane(ref index, kvp.Value.allNoteOnLaneList, kvp.Key, kvp.Value.LaneOctave);
                     }
                 }
-                // if (_rawNoteArray[index].Octave == midiData.laneOctave1)
-                // {
-                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList1, DataClass.NoteData.LaneOrientation.One,
-                //         midiData.laneOctave1);
-                // }
-                // else if (_rawNoteArray[index].Octave == midiData.laneOctave2)
-                // {
-                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList2, DataClass.NoteData.LaneOrientation.Two,
-                //         midiData.laneOctave2);
-                // }
-                // else if (_rawNoteArray[index].Octave == midiData.laneOctave3)
-                // {
-                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList3, DataClass.NoteData.LaneOrientation.Three,
-                //         midiData.laneOctave3);
-                // }
-                // else if (_rawNoteArray[index].Octave == midiData.laneOctave4)
-                // {
-                //     AddNoteToLane(ref index, midiData.AllNoteOnLaneList4, DataClass.NoteData.LaneOrientation.Four,
-                //         midiData.laneOctave4);
-                // }
             }
         }
 
+
+        #region Adding Notes To List
         private void AddNoteToLane(ref int index, List<DataClass.BaseNoteType> laneToAdd,
             DataClass.NoteData.LaneOrientation orientation, int octaveIndex)
         {
@@ -97,7 +85,7 @@ namespace Managers
                 AddSliderNoteToList(ref index, laneToAdd, orientation, octaveIndex);
             }
         }
-
+        
         private void AddNormalNoteToList(ref int index, List<DataClass.BaseNoteType> laneToAdd,
             DataClass.NoteData.LaneOrientation orientation, int octaveIndex)
         {
@@ -158,31 +146,23 @@ namespace Managers
                 break;
             }
         }
-
+        #endregion
+        
         public void DistributeNoteToLanes()
         {
-            var laneArray = GetComponentsInChildren<Lane>();
-            foreach (Lane lane in laneArray)
-            {
+            foreach (Lane lane in LaneArray) {
                 lane.SetLocalListOnLane(_midiData.LaneMidiData[lane.LaneOrientation].allNoteOnLaneList);
-                
-                // if (lane.LaneOrientation == DataClass.NoteData.LaneOrientation.One)
-                // {
-                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList1);
-                // }
-                // else if (lane.CompareTag("Lane2"))
-                // {
-                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList2);
-                // }
-                // else if (lane.CompareTag("Lane3"))
-                // {
-                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList3);
-                // }
-                // else if (lane.CompareTag("Lane4"))
-                // {
-                //     lane.SetLocalListOnLane(midiData.AllNoteOnLaneList4);
-                // }
-                //
+            }
+        }
+
+        private void AssignColliderData() {
+            foreach (var lane in LaneArray)
+            {
+                if (!_gameModeData.LaneControllerData.TryGetValue(lane.LaneOrientation, out var data)) {
+                    NCLogger.Log($"Lane Orientation {lane.LaneOrientation} not found in LaneControllerData", LogLevel.ERROR);
+                    return;
+                }
+                data.collider = lane.LaneCollider;
             }
         }
     }

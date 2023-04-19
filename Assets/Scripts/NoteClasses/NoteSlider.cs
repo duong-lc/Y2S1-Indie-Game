@@ -42,8 +42,8 @@ namespace NoteClasses
         //caching to lighten garbage collectors
         private double TimeSinceStartNoteSpawned => CurrentSongTimeRaw - _startNoteSpawnTime;
         private double TimeSinceEndNoteSpawned => CurrentSongTimeRaw - _endNoteSpawnTime;
-        private float AlphaStart => (float)(TimeSinceStartNoteSpawned / (midiData.noteTime * 2));
-        private float  AlphaEnd => (float)(TimeSinceEndNoteSpawned / (midiData.noteTime * 2));
+        private float AlphaStart => (float)(TimeSinceStartNoteSpawned / (NoteTime * 2));
+        private float  AlphaEnd => (float)(TimeSinceEndNoteSpawned / (NoteTime * 2));
         private bool _runOnce = true;
         private bool _runOnce1 = true;
         private KeyCode _holdKey;
@@ -240,23 +240,16 @@ namespace NoteClasses
         {
             _lineControllers = GetComponentsInChildren<LineRendererController>();
             //setting up spawn time stamps
-            _startNoteSpawnTime = _sliderData.timeStampKeyDown - midiData.noteTime;
-            _endNoteSpawnTime = _sliderData.timeStampKeyUp - midiData.noteTime;
+            _startNoteSpawnTime = _sliderData.timeStampKeyDown - NoteTime;
+            _endNoteSpawnTime = _sliderData.timeStampKeyUp - NoteTime;
 
-            var tuple = midiData.GetHitPoint(noteOrientation, Vector3.forward);
+            GameModeManager.Instance.GameModeData.GetLerpPoints(noteOrientation, ref _startPosStartNote, ref _endPosStartNote);
+            _sliderLockPoint = GameModeManager.Instance.GameModeData.GetHitPoint(noteOrientation);
             
-            _startPosStartNote = tuple.Item1;
-            _startPosEndNote = tuple.Item1;
-            _endPosStartNote = tuple.Item2;
-            _endPosEndNote = tuple.Item2;
-            
-            _sliderLockPoint = tuple.Item3;
-
+            _startPosEndNote = _startPosStartNote;
+            _endPosEndNote = _endPosStartNote;
             _runOnce = _runOnce1 = true;
-
-            foreach (var entry in midiData.InputDict) {
-                if (entry.Value == noteOrientation) _holdKey = entry.Key;
-            } 
+            _holdKey = GameModeManager.Instance.GameModeData.GetKeyCode(noteOrientation);
         }
 
         public void InitializeDataOnSpawn(ref int octave, ref DataClasses.NoteData.LaneOrientation orientation, ref DataClasses.NoteData.SliderData sliderData)

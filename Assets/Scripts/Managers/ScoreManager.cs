@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private AudioSource missAudioSource;
     [SerializeField] private TMP_Text comboText;
     [Space] 
-    [SerializeField] private MidiData midiData;
+   private MidiData _midiData;
     
     private int _currentCombo;
     private int _maxCombo;
@@ -50,11 +50,13 @@ public class ScoreManager : MonoBehaviour
     {
         EventDispatcher.Instance.AddListener(EventType.OnNoteHitEvent, param => OnHit((NoteData.LaneOrientation) param));
         EventDispatcher.Instance.AddListener(EventType.OnNoteMissEvent, param => OnMiss((NoteData.LaneOrientation) param));
+        
     }
 
     // Start is called before the first frame update
     private void Start()
     {
+        _midiData = GameModeManager.Instance.CurrentMidiData;
         _mainCam = Camera.main;
     }
 

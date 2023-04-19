@@ -64,6 +64,12 @@ public class GameModeData : SerializedScriptableObject
         return Vector3.zero;
     }
     
+    public KeyCode GetKeyCode(NoteData.LaneOrientation orientation) {
+        if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data.Input;
+        NCLogger.Log($"Orientation: {orientation} not found");
+        return KeyCode.None;
+    }
+    
     public HitCondition GetHitCondition(float hitOffset)
     {
         //hitOffset = CurrentSongTimeAdjusted - AssignedTime

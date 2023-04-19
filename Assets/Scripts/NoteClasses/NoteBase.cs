@@ -44,6 +44,7 @@ namespace NoteClasses
         {
             //MarginOfError = midiData.marginOfError;
         }
+        
 
         protected virtual void SetLookDir(Vector3 startPos, Vector3 endPos)
         {

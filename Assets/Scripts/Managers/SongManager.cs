@@ -21,12 +21,12 @@ namespace Managers
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
 
         private void Awake() {
-            _midiData = GameModeManager.Instance.CurrentMidiData;
-            _gameModeData = GameModeManager.Instance.GameModeData;
         }
 
         private void Start()
         {
+            _midiData = GameModeManager.Instance.CurrentMidiData;
+            _gameModeData = GameModeManager.Instance.GameModeData;
             if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
             

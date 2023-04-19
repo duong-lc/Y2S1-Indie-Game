@@ -48,14 +48,14 @@ namespace Managers
             EventDispatcher.Instance.AddListener(EventType.OnUnPauseEvent, param => CheckHoldStatus());
             EventDispatcher.Instance.AddListener(EventType.OnRemoveSliderFromHoldList, param => RemoveSliderFromList((NoteSlider) param));
             
-            _midiData = GameModeManager.Instance.CurrentMidiData;
-            _gameModeData = GameModeManager.Instance.GameModeData;
             
             if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
         }
 
         private void Start()
         {
+            _midiData = GameModeManager.Instance.CurrentMidiData;
+            _gameModeData = GameModeManager.Instance.GameModeData;
             if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
             

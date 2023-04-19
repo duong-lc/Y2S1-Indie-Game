@@ -39,8 +39,6 @@ public class Lane : MonoBehaviour
      
     private void Awake()
     {
-        _midiData = GameModeManager.Instance.CurrentMidiData;
-        _gameModeData = GameModeManager.Instance.GameModeData;
 
         // _laneHitPoint = _gameModeData.GetHitPoint(LaneOrientation);
         
@@ -63,6 +61,8 @@ public class Lane : MonoBehaviour
 
     private void Start()
     {
+        _midiData = GameModeManager.Instance.CurrentMidiData;
+        _gameModeData = GameModeManager.Instance.GameModeData;
         
     }
 

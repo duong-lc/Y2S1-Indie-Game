@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5710c558b1374d76b80ebf502405cc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  type: 2
   noteData: {fileID: 11400000, guid: 99d2ce9d39b302d4e91cf7d2c9cae742, type: 2}
   octaveNum: 0
   noteOrientation: 0

@@ -53,9 +53,14 @@ namespace Managers
 
         private void SetTimeStampsAllLanes()
         {
-            if (_midiData.LaneMidiData.Values.Any(laneMidiData => !laneMidiData.allNoteOnLaneList.IsNullOrEmpty())) {
-                NCLogger.Log($"something is NOT empty");
-                return;
+            if(_midiData == null)  _midiData = GameModeManager.Instance.CurrentMidiData;
+            foreach (var laneMidiData in _midiData.laneMidiData.Values) {
+                if (!laneMidiData.allNoteOnLaneList.IsNullOrEmpty())
+                {
+                    //laneMidiData.allNoteOnLaneList.Clear();
+                    NCLogger.Log($"something is NOT empty");
+                    return;
+                }
             }
 
 
@@ -63,7 +68,7 @@ namespace Managers
             {
                 if (_ignoreIndexList.Contains(index)) continue;
 
-                foreach (var kvp in _midiData.LaneMidiData) {
+                foreach (var kvp in _midiData.laneMidiData) {
                     if (_rawNoteArray[index].Octave == kvp.Value.LaneOctave) {
                         AddNoteToLane(ref index, kvp.Value.allNoteOnLaneList, kvp.Key, kvp.Value.LaneOctave);
                     }
@@ -151,7 +156,7 @@ namespace Managers
         public void DistributeNoteToLanes()
         {
             foreach (Lane lane in LaneArray) {
-                lane.SetLocalListOnLane(_midiData.LaneMidiData[lane.LaneOrientation].allNoteOnLaneList);
+                lane.SetLocalListOnLane(_midiData.laneMidiData[lane.LaneOrientation].allNoteOnLaneList);
             }
         }
 

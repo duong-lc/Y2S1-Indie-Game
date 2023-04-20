@@ -77,28 +77,33 @@ public class GameModeData : SerializedScriptableObject
                             }
                             break;
                         case HitCondition.EarlyPerfect | HitCondition.Early:
-                            if (offset >= Mathf.Abs(margin.BeginMOE) && hitOffset < Mathf.Abs(margin.EndMOE)) {
+                            if (offset >= Mathf.Abs(margin.BeginMOE) && offset < Mathf.Abs(margin.EndMOE)) {
                                 return kvp.Key;
                             }
                             break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                        // default:
+                        //     NCLogger.Log($"{kvp.Key}");
+                        //     break;
+                            //throw new ArgumentOutOfRangeException();
                     }
                     break;
                 case > 0:
                     switch (kvp.Key) {
                         case HitCondition.LatePerfect | HitCondition.Late:
-                            if (offset >= Mathf.Abs(margin.BeginMOE) && hitOffset < Mathf.Abs(margin.EndMOE)) {
+                            if (offset >= Mathf.Abs(margin.BeginMOE) && offset < Mathf.Abs(margin.EndMOE)) {
                                 return kvp.Key;
                             }
                             break;
                         case HitCondition.Miss:
                             if (offset > Mathf.Abs(GetMOE(HitCondition.Late).EndMOE)) {
+                                NCLogger.Log($"offset {hitOffset} > {Mathf.Abs(GetMOE(HitCondition.Late).EndMOE)} is {offset > Mathf.Abs(GetMOE(HitCondition.Late).EndMOE)}");
                                 return HitCondition.Miss;
                             }
                             break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                        // default:
+                        //     NCLogger.Log($"{kvp.Key}");
+                        //     break;
+                            // throw new ArgumentOutOfRangeException();
                     }
                     break;
                 case 0:

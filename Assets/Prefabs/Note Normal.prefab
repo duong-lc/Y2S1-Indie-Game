@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02002bdedd6244d9b3d0d5321faaa2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  type: 1
   noteData: {fileID: 11400000, guid: b1d56ccf6614e524a84f0400e172f77b, type: 2}
   octaveNum: 0
   noteOrientation: 0

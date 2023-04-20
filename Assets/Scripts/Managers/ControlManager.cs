@@ -19,15 +19,15 @@ namespace Managers
         private MidiData _midiData;
         private GameModeData _gameModeData;
         [Space]
-        // [SerializeField] private List<Transform> anchorPoints = new List<Transform>();
-        [Space]
-        [SerializeField] private float castDist;
-        [SerializeField] private Vector3 boxSize;
-        [SerializeField] private LayerMask noteLayer;
+        // // [SerializeField] private List<Transform> anchorPoints = new List<Transform>();
+        // [Space]
+        // [SerializeField] private float castDist;
+        // [SerializeField] private Vector3 boxSize;
+        // [SerializeField] private LayerMask noteLayer;
 
-        [TitleGroup("Touch Input Properties")] 
-        [SerializeField] private PlayerInput playerInput;
-        [ReadOnly] public List<InputAction> multiTouchInputActions;
+        // [TitleGroup("Touch Input Properties")] 
+        // [SerializeField] private PlayerInput playerInput;
+        // [ReadOnly] public List<InputAction> multiTouchInputActions;
         
         // private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>();
         private List<NoteSlider> _currentHoldSliders = new List<NoteSlider>();
@@ -49,7 +49,7 @@ namespace Managers
             EventDispatcher.Instance.AddListener(EventType.OnRemoveSliderFromHoldList, param => RemoveSliderFromList((NoteSlider) param));
             
             
-            if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
+            // if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
         }
 
         private void Start()
@@ -59,10 +59,10 @@ namespace Managers
             if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
             
-            multiTouchInputActions.Add(playerInput.actions["Touch0"]);
-            multiTouchInputActions.Add(playerInput.actions["Touch1"]);
-            multiTouchInputActions.Add(playerInput.actions["Touch2"]);
-            multiTouchInputActions.Add(playerInput.actions["Touch3"]);
+            // multiTouchInputActions.Add(playerInput.actions["Touch0"]);
+            // multiTouchInputActions.Add(playerInput.actions["Touch1"]);
+            // multiTouchInputActions.Add(playerInput.actions["Touch2"]);
+            // multiTouchInputActions.Add(playerInput.actions["Touch3"]);
         }
 
         // Update is called once per frame

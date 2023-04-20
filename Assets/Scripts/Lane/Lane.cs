@@ -18,9 +18,9 @@ public class Lane : MonoBehaviour
     private bool _isSpawn = true;
     private int _spawnIndex = 0;//index spawn to loop through the timestamp array to spawn notes based on timestamp
     private int _inputIndex;//input index to loop through the timestamp array to form note input queue 
-    private DataClass.NoteData.LaneOrientation _orientation;
+    [SerializeField] private DataClass.NoteData.LaneOrientation orientation;
 
-    public DataClass.NoteData.LaneOrientation LaneOrientation => _orientation;
+    public DataClass.NoteData.LaneOrientation LaneOrientation => orientation;
     //Variables for caching
     //private Vector3 _laneHitPoint;
     private GameObject _normalNotePrefab;
@@ -39,24 +39,6 @@ public class Lane : MonoBehaviour
      
     private void Awake()
     {
-
-        // _laneHitPoint = _gameModeData.GetHitPoint(LaneOrientation);
-        
-        // _laneHitPoint = gameObject.tag switch
-        // {
-        //     "Lane1" => _midiData.hitPoint1,
-        //     "Lane2" => _midiData.hitPoint2,
-        //     "Lane3" => _midiData.hitPoint3,
-        //     "Lane4" => _midiData.hitPoint4,
-        //     _ => new Vector3(0,0,0)
-        // };
-
-        _normalNotePrefab = _midiData.noteNormalPrefab;
-        _sliderNotePrefab = _midiData.noteSliderPrefab;
-       // _travelTime = _gameModeData.NoteTime;
-       // _marginOfError = _midiData.marginOfError;
-      //  _inputDelay = _midiData.inputDelayInMilliseconds;
-        _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     }
 
     private void Start()
@@ -64,6 +46,12 @@ public class Lane : MonoBehaviour
         _midiData = GameModeManager.Instance.CurrentMidiData;
         _gameModeData = GameModeManager.Instance.GameModeData;
         
+        if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
+        if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
+        
+        _normalNotePrefab = _midiData.noteNormalPrefab;
+        _sliderNotePrefab = _midiData.noteSliderPrefab;
+        _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     }
 
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)

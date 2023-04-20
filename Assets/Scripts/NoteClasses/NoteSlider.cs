@@ -117,10 +117,11 @@ namespace NoteClasses
         /// </summary>
         public void OnNoteHitStartNote()
         {
-            if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
+            var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
+            if (cond != HitCondition.None && cond != HitCondition.Miss)
             {
                 //Hit
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(cond, noteOrientation));
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
@@ -129,17 +130,35 @@ namespace NoteClasses
                 _canMoveStartNote = false;
                 startNote.transform.position = _sliderLockPoint;
             }
+            //
+            // if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
+            // {
+            //     //Hit
+            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+            //     
+            //     //Setting condition for endNote evaluation
+            //     _isStartNoteHitCorrect = true;
+            //     _isHolding = true;
+            //     
+            //     _canMoveStartNote = false;
+            //     startNote.transform.position = _sliderLockPoint;
+            // }
         }
 
         private void UpdateStartNoteFail()//put in update
         {
             //Doesn't press, let start note passes
-            if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
-            {
-                //Miss
-                Destroy(gameObject);
+            var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
+            if (cond == HitCondition.Miss && !_isStartNoteHitCorrect) {
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+                Destroy(gameObject);
             }
+            // if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
+            // {
+            //     //Miss
+            //     Destroy(gameObject);
+            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+            // }
         }
 
         private void UpdateStartNoteHoldStatus()//put in update
@@ -168,16 +187,17 @@ namespace NoteClasses
             bool isDestroy = false;
             if (_isStartNoteHitCorrect && _isHolding)
             {
-                if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) < MarginOfError)
+                var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp);
+                if (cond != HitCondition.None && cond != HitCondition.Miss)
                 {
                     //Hit
                     _isEndNoteHitCorrect = true;
 
                     isDestroy = true;
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(cond, noteOrientation));
                    
                 }
-                else if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp) >= MarginOfError)
+                else if (cond == HitCondition.Miss)
                 {
                     isDestroy = true;
                     //release too early
@@ -194,10 +214,9 @@ namespace NoteClasses
             if (_isStartNoteHitCorrect && _isHolding)
             {
                 //release too late <- will probably throw away as this game mode does not account for late releases.
-                if (_sliderData.timeStampKeyUp + MarginOfError/2 <= CurrentSongTimeAdjusted)
-                {
+                if (_sliderData.timeStampKeyUp + _gameModeData.SliderHoldStickyTime <= CurrentSongTimeAdjusted) {
                     //hit - since passes the end note, auto hit
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(HitCondition.Late, noteOrientation));
                     Destroy(gameObject);
                 }
             }

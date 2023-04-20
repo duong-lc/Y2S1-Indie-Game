@@ -52,27 +52,34 @@ namespace NoteClasses
         }
 
 
-        public void OnNoteHitNormalNote()
-        {
+        public void OnNoteHitNormalNote() {
+            // if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
+            // {
+            //     //Hit
+            //     //NCLogger.Log($"hit normal good");
+            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+            //     Destroy(gameObject);
+            // }
             
-            if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
-            {
-                //Hit
-                //NCLogger.Log($"hit normal good");
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
+            var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - assignedTime);
+            if (cond != HitCondition.None && cond != HitCondition.Miss) {
+                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, new NoteRegisterParam(cond, noteOrientation));
                 Destroy(gameObject);
             }
-            
         }
 
-        public void OnNoteMissNormalNote()
-        {
-            if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
-            {
-                //Miss
+        public void OnNoteMissNormalNote() {
+            // if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
+            // {
+            //     //Miss
+            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+            //     Destroy(gameObject);
+            // }
+            if (_gameModeData.GetHitCondition(CurrentSongTimeAdjusted - assignedTime) == HitCondition.Miss) {
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
                 Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
         
         

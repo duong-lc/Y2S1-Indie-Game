@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModeData: {fileID: 11400000, guid: f8654c302f29d6845aaad2c9c0124499, type: 2}
+  currentMidiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}

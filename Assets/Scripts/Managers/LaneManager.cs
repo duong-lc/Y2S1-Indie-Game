@@ -53,7 +53,7 @@ namespace Managers
 
         private void SetTimeStampsAllLanes()
         {
-            if (_midiData.LaneMidiData.Values.Any(midiData => !midiData.allNoteOnLaneList.IsNullOrEmpty())) {
+            if (_midiData.LaneMidiData.Values.Any(laneMidiData => !laneMidiData.allNoteOnLaneList.IsNullOrEmpty())) {
                 NCLogger.Log($"something is NOT empty");
                 return;
             }

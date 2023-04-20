@@ -4,28 +4,48 @@ using System.Collections.Generic;
 using Core.Events;
 using Core.Logging;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using SO_Scripts;
 using TMPro;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
 [Serializable]
+[Flags]
 public enum HitCondition {
-    Undefined,
+    None,
     Early,
-    Perfect,
+    EarlyPerfect,
+    LatePerfect,
     Late,
     Miss,
+}
+
+public class NoteRegisterParam
+{
+    private HitCondition _cond;
+    private NoteData.LaneOrientation _orientation;
+
+    public HitCondition Cond => _cond;
+    public NoteData.LaneOrientation Orientation => _orientation;
+    
+    public NoteRegisterParam(HitCondition cond, NoteData.LaneOrientation orientation) {
+        _cond = cond;
+        _orientation = orientation;
+    }
 }
 
 [Serializable]
 public class MarginOfError
 {
-    [SerializeField] private int beginMOE;
-    [SerializeField] private int endMOE;
+    [HorizontalGroup]
+    [SerializeField] private float beginMOE;
+    
+    [HorizontalGroup]
+    [SerializeField] private float endMOE;
 
-    public int BeginMOE => beginMOE;
-    public int EndMOE => endMOE;
+    public float BeginMOE => beginMOE;
+    public float EndMOE => endMOE;
 }
 
 public class ScoreManager : MonoBehaviour
@@ -34,8 +54,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private AudioSource missAudioSource;
     [SerializeField] private TMP_Text comboText;
     [Space] 
-   private MidiData _midiData;
-    
+    private MidiData _midiData;
+    private GameModeData _gameModeData;
+        
     private int _currentCombo;
     private int _maxCombo;
     private int _missCount;
@@ -46,17 +67,15 @@ public class ScoreManager : MonoBehaviour
     public int MaxCombo => _maxCombo;
     
     
-    private void Awake()
-    {
-        EventDispatcher.Instance.AddListener(EventType.OnNoteHitEvent, param => OnHit((NoteData.LaneOrientation) param));
+    private void Awake() {
+        EventDispatcher.Instance.AddListener(EventType.OnNoteHitEvent, param => OnHit((NoteRegisterParam) param));
         EventDispatcher.Instance.AddListener(EventType.OnNoteMissEvent, param => OnMiss((NoteData.LaneOrientation) param));
-        
     }
 
     // Start is called before the first frame update
-    private void Start()
-    {
+    private void Start() {
         _midiData = GameModeManager.Instance.CurrentMidiData;
+        _gameModeData = GameModeManager.Instance.GameModeData;
         _mainCam = Camera.main;
     }
 
@@ -66,14 +85,14 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    private void OnHit(NoteData.LaneOrientation laneOrientation)
+    private void OnHit(NoteRegisterParam param)
     {
         hitAudioSource.Play();
 
         _currentCombo++;
         
         UpdateComboText();
-        SpawnHitText(true, laneOrientation);
+        SpawnHitText(param.Cond, param.Orientation);
     }
 
     private void OnMiss(NoteData.LaneOrientation laneOrientation)
@@ -85,7 +104,7 @@ public class ScoreManager : MonoBehaviour
         _currentCombo = 0;
         
         UpdateComboText();
-        SpawnHitText(false, laneOrientation);
+        SpawnHitText(HitCondition.Miss, laneOrientation);
     }
 
     private void UpdateComboText()
@@ -93,16 +112,11 @@ public class ScoreManager : MonoBehaviour
         comboText.text = _currentCombo.ToString();
     }
 
-    private void SpawnHitText(bool hitStatus, NoteData.LaneOrientation laneOrientation)
+    private void SpawnHitText(HitCondition hitCond, NoteData.LaneOrientation laneOrientation)
     {
-        Vector3 hitPoint = Vector3.zero;
-        foreach (var entry in midiData.HitPointDict) {
-            if (laneOrientation == entry.Key) hitPoint = entry.Value;
-        }
+        var hitPoint = _gameModeData.GetHitPoint(laneOrientation);
 
-        TweenHitText(hitStatus
-            ? Instantiate(midiData.hitTextPrefab, hitPoint, _mainCam.transform.rotation, transform)
-            : Instantiate(midiData.missTextPrefab, hitPoint, _mainCam.transform.rotation, transform));
+        TweenHitText(Instantiate(_gameModeData.GetHitCondPrefab(hitCond), hitPoint, _mainCam.transform.rotation, transform));
     }
 
     private void TweenHitText(GameObject obj)

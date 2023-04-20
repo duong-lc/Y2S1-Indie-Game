@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5164803d46f146f29db0b6774a46b286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  orientation: 3
 --- !u!114 &369856478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5164803d46f146f29db0b6774a46b286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  orientation: 4
 --- !u!114 &697029911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2189,7 +2189,6 @@ MonoBehaviour:
   hitAudioSource: {fileID: 1360212362}
   missAudioSource: {fileID: 1527407046}
   comboText: {fileID: 1024321227}
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
 --- !u!4 &814374333
 Transform:
   m_ObjectHideFlags: 0
@@ -2206,6 +2205,37 @@ Transform:
   - {fileID: 224114597}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &827265431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827265432}
+  m_Layer: 0
+  m_Name: SpawnZ
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &827265432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827265431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &874310777
 PrefabInstance:
@@ -2737,7 +2767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5164803d46f146f29db0b6774a46b286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  orientation: 1
 --- !u!114 &1375691688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3758,7 +3788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0ef3955e122f244bf490a6f4a7f4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
   audioSource: {fileID: 1849268961}
 --- !u!1 &1849268959
 GameObject:
@@ -3917,7 +3946,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cf083c290e0aa43aff4d1df74b1c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  LaneArray:
+  - {fileID: 1375691687}
+  - {fileID: 2009001323}
+  - {fileID: 369856477}
+  - {fileID: 697029910}
 --- !u!4 &1851328478
 Transform:
   m_ObjectHideFlags: 0
@@ -4291,7 +4324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5164803d46f146f29db0b6774a46b286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
+  orientation: 2
 --- !u!114 &2009001324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4575,15 +4608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb524db68390f34bafe1f6d1aae8649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiData: {fileID: 11400000, guid: 04321d10205bbaa4a8e5f17dfa827fd5, type: 2}
-  gameModeData: {fileID: 0}
-  castDist: 15
-  boxSize: {x: 2, y: 1, z: 1}
-  noteLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerInput: {fileID: 0}
-  multiTouchInputActions: []
 --- !u!4 &2085640286
 Transform:
   m_ObjectHideFlags: 0

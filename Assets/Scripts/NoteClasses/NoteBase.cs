@@ -30,6 +30,7 @@ namespace NoteClasses
         public Data_Classes.NoteData.LaneOrientation noteOrientation;
 
         private Collider _collider;
+        protected GameModeData _gameModeData;
         protected static float NoteTime => GameModeManager.Instance.GameModeData.NoteTime;
         public Collider Collider {
             get {
@@ -42,7 +43,6 @@ namespace NoteClasses
         
         protected void Awake()
         {
-            //MarginOfError = midiData.marginOfError;
         }
         
 
@@ -53,7 +53,7 @@ namespace NoteClasses
 
         protected virtual void Start()
         {
-            
+            _gameModeData = GameModeManager.Instance.GameModeData;
         }
         
         

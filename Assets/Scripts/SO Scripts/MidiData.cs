@@ -3,6 +3,7 @@ using UnityEngine;
 using Data_Classes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Melanchall.DryWetMidi.MusicTheory;
 using Sirenix.OdinInspector;
 
@@ -50,9 +51,9 @@ public class MidiData : SerializedScriptableObject
    public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestrictionNormalNote;
    public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestrictionSliderNote;
 
-   [SerializeField] private Dictionary<NoteData.LaneOrientation, LaneMidiData> _laneMidiData;
+   [ReadOnly] private Dictionary<NoteData.LaneOrientation, LaneMidiData> _laneMidiData;
 
-   public Dictionary<NoteData.LaneOrientation, LaneMidiData> LaneMidiData => _laneMidiData;
+   public ReadOnlyDictionary<NoteData.LaneOrientation, LaneMidiData> LaneMidiData => new (_laneMidiData);
    // [Header("Lane 1")]
    // public KeyCode input1;//key input for that lane
    // //note on midi file to spawn and note object prefab to spawn
@@ -77,10 +78,10 @@ public class MidiData : SerializedScriptableObject
    // public Dictionary<KeyCode, Data_Classes.NoteData.LaneOrientation> InputDict;
    // public Dictionary<Data_Classes.NoteData.LaneOrientation, Vector3> HitPointDict;
 
-   [Space]
-   [Header("Visuals")]
-   public GameObject hitTextPrefab;
-   public GameObject missTextPrefab;
+   // [Space]
+   // [Header("Visuals")]
+   // public GameObject hitTextPrefab;
+   // public GameObject missTextPrefab;
    
    private void OnEnable()
    {

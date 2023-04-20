@@ -10,12 +10,10 @@ using UnityEngine;
 [Serializable]
 public class LaneControllerData
 {
-    [SerializeField] private string laneTag;
     [SerializeField] private KeyCode input;
     [SerializeField] private Vector3 hitPoint;
     [ReadOnly] [SerializeField] public LaneCollider collider;
-
-    public string LaneTag => laneTag;
+    
     public KeyCode Input => input;
     public Vector3 HitPoint => hitPoint;
 }
@@ -36,12 +34,17 @@ public class GameModeData : SerializedScriptableObject
     [SerializeField] private float noteSpawnZ; //the Z position for the note to be spawned at
     [SerializeField] private float noteTapZ; //the Z position where the player should press the note
     public float NoteDespawnZ => noteTapZ - (noteSpawnZ - noteTapZ); //De-spawn position for notes
-    
-    [Header("Margin Of Error")]
-    [SerializeField] private Dictionary<HitCondition, MarginOfError> noteHitCondDict = new();
 
+    [Header("Margin Of Error")]
+    [SerializeField] private float _sliderHoldStickyTime;
+    [SerializeField] private Dictionary<HitCondition, MarginOfError> noteHitCondDict = new();
+    public float SliderHoldStickyTime => _sliderHoldStickyTime;
+    
     [Header("Lane Controller Data")] 
     [SerializeField] private Dictionary<NoteData.LaneOrientation, LaneControllerData> laneControllerData = new();
+
+    [Header("Hit Condition Visuals")]
+    [SerializeField] private Dictionary<HitCondition, GameObject> hitCondToPrefab = new();
 
     public float InputDelayInMS => inputDelayInMS;
     public float SongDelayInSeconds => songDelayInSeconds;
@@ -49,15 +52,62 @@ public class GameModeData : SerializedScriptableObject
     public float NoteSpawnZ => noteSpawnZ;
     public float NoteTapZ => noteTapZ;
 
-    public ReadOnlyDictionary<HitCondition, MarginOfError> NoteHitCondDict => new(noteHitCondDict);
+    public ReadOnlyDictionary<HitCondition, MarginOfError> NoteHitCondDict => new (noteHitCondDict);
     public ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData> LaneControllerData => new (laneControllerData);
-    
+    public ReadOnlyDictionary<HitCondition, GameObject> HitCondToPrefab => new (hitCondToPrefab);
+
     public MarginOfError GetMOE (HitCondition cond) {
         if (noteHitCondDict.TryGetValue(cond, out MarginOfError MOE)) return MOE;
         NCLogger.Log($"Hit Condition: {cond} not found");
         return null;
     }
 
+    public HitCondition GetHitCondition(double hitOffset)
+    {
+        //hitOffset = CurrentSongTimeAdjusted - AssignedTime
+        foreach (var kvp in noteHitCondDict) {
+            var margin = kvp.Value;
+            var offset = Mathf.Abs((float)hitOffset);
+            switch (hitOffset) {
+                case < 0:
+                    switch (kvp.Key) {
+                        case HitCondition.None:
+                            if (offset > Mathf.Abs(GetMOE(HitCondition.Early).EndMOE)) {
+                                return HitCondition.None;
+                            }
+                            break;
+                        case HitCondition.EarlyPerfect | HitCondition.Early:
+                            if (offset >= Mathf.Abs(margin.BeginMOE) && hitOffset < Mathf.Abs(margin.EndMOE)) {
+                                return kvp.Key;
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                case > 0:
+                    switch (kvp.Key) {
+                        case HitCondition.LatePerfect | HitCondition.Late:
+                            if (offset >= Mathf.Abs(margin.BeginMOE) && hitOffset < Mathf.Abs(margin.EndMOE)) {
+                                return kvp.Key;
+                            }
+                            break;
+                        case HitCondition.Miss:
+                            if (offset > Mathf.Abs(GetMOE(HitCondition.Late).EndMOE)) {
+                                return HitCondition.Miss;
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                case 0:
+                    return HitCondition.EarlyPerfect;
+            }
+        }
+        return HitCondition.Miss;
+    }
+    
     public Vector3 GetHitPoint(NoteData.LaneOrientation orientation) {
         if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data.HitPoint;
         NCLogger.Log($"Orientation: {orientation} not found");
@@ -69,11 +119,15 @@ public class GameModeData : SerializedScriptableObject
         NCLogger.Log($"Orientation: {orientation} not found");
         return KeyCode.None;
     }
-    
-    public HitCondition GetHitCondition(float hitOffset)
+
+    public GameObject GetHitCondPrefab(HitCondition hitCond)
     {
-        //hitOffset = CurrentSongTimeAdjusted - AssignedTime
+        if (HitCondToPrefab.TryGetValue(hitCond, out GameObject prefab)) return prefab;
+        NCLogger.Log($"HitCondition: {hitCond} not found");
+        return new GameObject();
     }
+    
+ 
     
     public LaneControllerData GetControlData (NoteData.LaneOrientation orientation) {
         if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data;
@@ -91,10 +145,5 @@ public class GameModeData : SerializedScriptableObject
         startPos = new Vector3(data.HitPoint.x, data.HitPoint.y, noteSpawnZ);
         //Vector3 endPos = hitPoint + (dir * NoteDespawnZ);
         endPos = new Vector3(data.HitPoint.x, data.HitPoint.y, NoteDespawnZ);
-    }
-
-    public HitCondition CalculateHitCondition(float regOffset)
-    {
-        
     }
 }

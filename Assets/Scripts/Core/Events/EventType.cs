@@ -6,6 +6,8 @@ namespace Core.Events {
         OnNoteHitEvent,
         OnNoteMissEvent,
         OnUnPauseEvent,
-        OnRemoveSliderFromHoldList
+        OnRemoveSliderFromHoldList,
+        SpawnNoteNormal,
+        SpawnNoteSlider
     }
 }

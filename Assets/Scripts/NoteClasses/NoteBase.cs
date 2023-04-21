@@ -14,7 +14,7 @@ public enum NoteType
 namespace NoteClasses
 {
     [RequireComponent(typeof(Collider))]
-    public abstract class NoteBase : MonoBehaviour
+    public abstract class NoteBase : PooledObjectBase
     {
         [Header("Base Note Attributes")] 
         protected bool CanMove = true;

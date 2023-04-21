@@ -10,7 +10,7 @@ namespace Data_Classes
     public abstract class BaseNoteType
     {
         public NoteData.NoteID noteID;//ID of current note
-        public GameObject noteObj;//the game object it's possessing
+        //public GameObject noteObj;//the game object it's possessing
         public NoteData.LaneOrientation laneOrientation = NoteData.LaneOrientation.Undefined;
         //Debug
         public int octaveNum;

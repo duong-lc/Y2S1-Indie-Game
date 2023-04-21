@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Events;
 using Core.Patterns;
+using Data_Classes;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 
@@ -21,34 +22,25 @@ public class PoolingManager : Singleton<PoolingManager>
             .ToList();
 
         foreach(var pooledObject in _pooledObjectList){
-            this.AddListener(pooledObject.eventType, param => SpawnPooledObject());
+            this.AddListener(pooledObject.eventType, param => SpawnPooledObject(pooledObject.eventType, (PooledObjectCallbackData) param));
         }
     }
 
-    public void ActivateObjectFromPool(RaycastHit hit, EventType type)
+    public void ActivateObjectFromPool(EventType type, NoteData.LaneOrientation orientation)
     {
-        ParticleInitData data = new ParticleInitData() {
-            normal = hit.normal,
-            position = hit.point
-        };
-            
-        ParticlePool particlePool = new ParticlePool();
-        foreach (var pool in _poolList.Where(pool => pool.ParticleEventType == type)) {
-            particlePool = pool;
-        }
-
-        if (!particlePool) return;
-            
-        ParticleType particleType = new ParticleType() {
-            InitData = data,
-            pool = particlePool
-        };
-            
-        EventDispatcher.Instance.FireEvent(type, particleType);
+        EventDispatcher.Instance.FireEvent(type, orientation);
     }
     
-    private void SpawnPooledObject()
+    private void SpawnPooledObject(EventType eventType, PooledObjectCallbackData data)
     {
-        throw new NotImplementedException();
+        switch (eventType)
+        {
+            case EventType.SpawnNoteNormal:
+                break;
+            case EventType.SpawnNoteSlider:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

@@ -393,6 +393,56 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: typeToTag
+      Entry: 7
+      Data: 14|System.Collections.Generic.Dictionary`2[[NoteType, Assembly-CSharp],[System.String,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 15|System.Collections.Generic.EnumEqualityComparer`1[[NoteType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 1
+      Data: NoteNormal
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 1
+      Data: NoteSlider
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   mainMenuSceneName: MainMenu
   levelSelectionSceneName: LevelSelection
   gamePlaySceneName: SampleScene
@@ -402,4 +452,7 @@ MonoBehaviour:
   noteTime: 5
   noteSpawnZ: 150
   noteTapZ: -10.5
+  noteLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   _sliderHoldStickyTime: 0.15

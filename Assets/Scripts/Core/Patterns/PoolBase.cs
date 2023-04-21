@@ -13,7 +13,8 @@ namespace Core
     {
         private T _prefab;
         private ObjectPool<T> _pool;
-
+        private Transform _parent;
+        
         private ObjectPool<T> Pool {
             get {
                 if (_pool == null) throw new InvalidOperationException("You need to call InitPool before using it.");
@@ -22,7 +23,8 @@ namespace Core
             set => _pool = value;
         }
 
-        protected void InitPool(T prefab, int initial = 10, int max = 20, bool collectionChecks = false) {
+        protected void InitPool(T prefab, Transform parent, int initial = 10, int max = 20, bool collectionChecks = false) {
+            _parent = !parent ? parent : transform.parent;
             _prefab = prefab;
             Pool = new ObjectPool<T>(
                 CreateSetup,
@@ -35,7 +37,7 @@ namespace Core
         }
 
         #region Overrides
-        protected virtual T CreateSetup() => Instantiate(_prefab);
+        public virtual T CreateSetup() => Instantiate(_prefab, _parent);
         protected virtual void GetSetup(T obj) => obj.gameObject.SetActive(true);
         protected virtual void ReleaseSetup(T obj) => obj.gameObject.SetActive(false);
         protected virtual void DestroySetup(T obj) => Destroy(obj);

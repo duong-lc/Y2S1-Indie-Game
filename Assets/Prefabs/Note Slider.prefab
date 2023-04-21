@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 2580888399268996798}
   - component: {fileID: 2580888399268996793}
   - component: {fileID: 6224276929495668633}
+  - component: {fileID: -3970293978290244080}
   m_Layer: 6
   m_Name: Note Slider
   m_TagString: NoteSlider
@@ -246,6 +247,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: -0.5}
+--- !u!54 &-3970293978290244080
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2580888399268996792}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2580888399867781867
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class GameModeData : SerializedScriptableObject
     [SerializeField] private float noteSpawnZ; //the Z position for the note to be spawned at
     [SerializeField] private float noteTapZ; //the Z position where the player should press the note
     public float NoteDespawnZ => noteTapZ - (noteSpawnZ - noteTapZ); //De-spawn position for notes
-
+    public LayerMask noteLayerMask;
     [Header("Margin Of Error")]
     [SerializeField] private float _sliderHoldStickyTime;
     [SerializeField] private Dictionary<HitCondition, MarginOfError> noteHitCondDict = new();
@@ -46,6 +46,9 @@ public class GameModeData : SerializedScriptableObject
     [Header("Hit Condition Visuals")]
     [SerializeField] private Dictionary<HitCondition, GameObject> hitCondToPrefab = new();
 
+    [Header("Note Data")]
+    [SerializeField] private Dictionary<NoteType, string> typeToTag = new();
+
     public float InputDelayInMS => inputDelayInMS;
     public float SongDelayInSeconds => songDelayInSeconds;
     public float NoteTime => noteTime;
@@ -55,6 +58,7 @@ public class GameModeData : SerializedScriptableObject
     public ReadOnlyDictionary<HitCondition, MarginOfError> NoteHitCondDict => new (noteHitCondDict);
     public ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData> LaneControllerData => new (laneControllerData);
     public ReadOnlyDictionary<HitCondition, GameObject> HitCondToPrefab => new (hitCondToPrefab);
+    public ReadOnlyDictionary<NoteType, string> TypeToTag => new (typeToTag);
 
     public MarginOfError GetMOE (HitCondition cond) {
         if (noteHitCondDict.TryGetValue(cond, out MarginOfError MOE)) return MOE;

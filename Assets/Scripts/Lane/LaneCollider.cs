@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Logging;
 using Data_Classes;
 using NoteClasses;
 using StaticClass;
@@ -46,11 +47,19 @@ public class LaneCollider : MonoBehaviour
         }
     }
 
+    public LayerMask NoteLayerMask {
+        get {
+            _noteLayerMask = GameModeManager.Instance.GameModeData.noteLayerMask;
+            return _noteLayerMask;
+        }
+    }
+
     private void Awake() {
         Collider.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider col) {
+        NCLogger.Log($"hit collider {col.name} ");
         var note = GetNote(col);
         
         if (note) noteList.Add(note);
@@ -58,12 +67,34 @@ public class LaneCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider col) {
         var note = GetNote(col);
-        if (note) noteList.Remove(note);
+        if (note && noteList.Contains(note)) noteList.Remove(note);
     }
 
     private NoteBase GetNote(Collider col) {
-        var note = col.GetComponent<NoteBase>();
-        return !note || noteList.Contains(note) ? null : note;
+        if (!CheckLayerMask.IsInLayerMask(col.gameObject, NoteLayerMask)) {
+            NCLogger.Log($"Not a Note");
+            return null;
+        }
+
+        NoteBase note = null;
+        foreach (var kvp in GameModeManager.Instance.GameModeData.TypeToTag)
+        {
+            if (col.CompareTag(kvp.Value))
+            {
+                switch (kvp.Key)
+                {
+                    case NoteType.NormalNote:
+                        note = col.GetComponent<NoteNormal>();
+                        break;
+                    case NoteType.SliderNote:
+                        note = col.GetComponent<NoteSlider>();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+        return !note ? null : note;
     }
 
     public NoteBase GetApproachingNote() {

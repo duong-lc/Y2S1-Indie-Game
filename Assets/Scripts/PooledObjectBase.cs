@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Core.Logging;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 
@@ -31,6 +32,7 @@ public class PooledObjectBase : MonoBehaviour, IPooledCore<PooledObjectBase>
         while (!canRelease) {
             yield return null;
         }
+        NCLogger.Log($"kill {gameObject.name}");
         KillAction(this);
         yield return null;
     }

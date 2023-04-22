@@ -129,7 +129,7 @@ namespace NoteClasses
         /// </summary>
         public void OnNoteHitStartNote()
         {
-            var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
+            var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
             if (cond != HitCondition.None && cond != HitCondition.Miss)
             {
                 //Hit
@@ -160,7 +160,7 @@ namespace NoteClasses
         private void UpdateStartNoteFail()//put in update
         {
             //Doesn't press, let start note passes
-            var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
+            var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
             if (cond == HitCondition.Miss && !_isStartNoteHitCorrect) {
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
                 // Destroy(gameObject);
@@ -200,7 +200,7 @@ namespace NoteClasses
             bool isDestroy = false;
             if (_isStartNoteHitCorrect && _isHolding)
             {
-                var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp);
+                var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp);
                 if (cond != HitCondition.None && cond != HitCondition.Miss)
                 {
                     //Hit

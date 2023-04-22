@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee58c6b8832543b38f6eaa9d46623b33, type: 3}
   m_Name: PoolManagerData_Notes
   m_EditorClassIdentifier: 
-  pooledDataList: []
+  pooledDataList:
+  - prefab: {fileID: 7503693863679007525, guid: 8de00af407265554183b8e33f17111b0, type: 3}
+    initialPoolSize: 10
+    maxPoolSize: 50
+    eventType: 7
+  - prefab: {fileID: 2580888399268996793, guid: fb6a6acc262e8204cbe7f65ad8194cb1, type: 3}
+    initialPoolSize: 10
+    maxPoolSize: 50
+    eventType: 8

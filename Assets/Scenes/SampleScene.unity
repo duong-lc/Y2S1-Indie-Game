@@ -979,6 +979,7 @@ GameObject:
   - component: {fileID: 369856480}
   - component: {fileID: 369856479}
   - component: {fileID: 369856478}
+  - component: {fileID: 369856481}
   m_Layer: 0
   m_Name: Lane 3
   m_TagString: Lane3
@@ -1055,6 +1056,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 33.72}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &369856481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369856475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3f1f2d5303496599c6d3637941e4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &377162007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,6 +1661,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &567717112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567717114}
+  - component: {fileID: 567717113}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &567717113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567717112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46682bd5df1c42bfbec6fb20fbbddd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysLoadedParticleData: {fileID: 11400000, guid: a05a637ec8786b5459b9a8fee2321d18, type: 2}
+  sceneBasedParticleData: {fileID: 11400000, guid: 1b6c8d89be3117045be5c91189b18b78, type: 2}
+  _notePoolList:
+  - {fileID: 1375691691}
+  - {fileID: 2009001327}
+  - {fileID: 369856481}
+  - {fileID: 697029914}
+--- !u!4 &567717114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567717112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3057013, y: 7.622013, z: -20.82016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614153924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,6 +2011,7 @@ GameObject:
   - component: {fileID: 697029913}
   - component: {fileID: 697029912}
   - component: {fileID: 697029911}
+  - component: {fileID: 697029914}
   m_Layer: 0
   m_Name: Lane 4
   m_TagString: Lane4
@@ -2023,6 +2088,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 33.72}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &697029914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697029908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3f1f2d5303496599c6d3637941e4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &761841894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2810,7 @@ GameObject:
   - component: {fileID: 1375691690}
   - component: {fileID: 1375691689}
   - component: {fileID: 1375691688}
+  - component: {fileID: 1375691691}
   m_Layer: 0
   m_Name: Lane 1
   m_TagString: Lane1
@@ -2809,6 +2887,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 33.72}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1375691691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375691685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3f1f2d5303496599c6d3637941e4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1419285291
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,6 +4380,7 @@ GameObject:
   - component: {fileID: 2009001326}
   - component: {fileID: 2009001325}
   - component: {fileID: 2009001324}
+  - component: {fileID: 2009001327}
   m_Layer: 0
   m_Name: Lane 2
   m_TagString: Lane2
@@ -4366,6 +4457,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 33.72}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2009001327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009001321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3f1f2d5303496599c6d3637941e4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2025852263
 GameObject:
   m_ObjectHideFlags: 0

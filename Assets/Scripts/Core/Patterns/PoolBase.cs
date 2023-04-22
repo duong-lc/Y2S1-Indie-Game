@@ -23,7 +23,7 @@ namespace Core
             set => _pool = value;
         }
 
-        protected void InitPool(T prefab, Transform parent, int initial = 10, int max = 20, bool collectionChecks = false) {
+        public void InitPool(T prefab, Transform parent, int initial = 10, int max = 20, bool collectionChecks = false) {
             _parent = !parent ? parent : transform.parent;
             _prefab = prefab;
             Pool = new ObjectPool<T>(

@@ -4,6 +4,6 @@ using System.Collections.Generic;
 
 public interface IPooledCore<out T>
 {
-    void Init(Action<T> killAction);
+    void Init(PooledObjectCallbackData data, Action<T> killAction);
     IEnumerator RunRoutine();
 }

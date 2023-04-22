@@ -21,7 +21,7 @@ public class PooledObjectBase : MonoBehaviour, IPooledCore<PooledObjectBase>
         canRelease = false;
     }
 
-    public virtual void Init(Action<PooledObjectBase> killAction)
+    public virtual void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
     {
         throw new NotImplementedException();
     }

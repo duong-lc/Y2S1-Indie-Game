@@ -3,11 +3,13 @@ using UnityEngine;
 using SO_Scripts;
 using Data_Classes;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Events;
 using Core.Logging;
 using Managers;
 using DataClass = Data_Classes;
 using NoteClasses;
+using Sirenix.Utilities;
 using EventType = Core.Events.EventType;
 
 public class NoteInitData : PooledObjectCallbackData
@@ -43,12 +45,12 @@ public class NoteInitData : PooledObjectCallbackData
         // this.spawnIndex = spawnIndex;
     }
 }
-[RequireComponent(typeof(ObjectPool))]
+
 public class Lane : MonoBehaviour
 {
     private MidiData _midiData;
     private GameModeData _gameModeData;
-    
+
     public List<BaseNoteType> allNotesList = new List<BaseNoteType>();
     
     private bool _isSpawn = true;
@@ -73,25 +75,28 @@ public class Lane : MonoBehaviour
         }
     }
 
-    private ObjectPool _notePool;
-
-    public ObjectPool NotePool {
+    private ObjectPool[] _notePoolArray;
+    
+    public ObjectPool[] NotePools {
         get {
-            if (!_notePool) _notePool = GetComponent<ObjectPool>();
-            return _notePool;
+            if (_notePoolArray.IsNullOrEmpty()) _notePoolArray = GetComponentsInChildren<ObjectPool>();
+            return _notePoolArray;
         }
     }
-     
     private void Awake()
     {
+     
     }
 
     private void Start() {
         _midiData = GameModeManager.Instance.CurrentMidiData;
         _gameModeData = GameModeManager.Instance.GameModeData;
+        // _poolData = GameModeManager.Instance.PoolData;
         
         if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
-        if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
+        if(!_gameModeData) NCLogger.Log($"gameModeData is {_gameModeData}", LogLevel.ERROR);
+        // if(!_poolData) NCLogger.Log($"poolData is {_poolData}", LogLevel.ERROR);
+        
         
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;

@@ -47,7 +47,6 @@ namespace NoteClasses
         private bool _runOnce = true;
         private bool _runOnce1 = true;
         private KeyCode _holdKey;
-
         protected override void Start()
         {
             base.Start();
@@ -57,6 +56,18 @@ namespace NoteClasses
             SetLookDir(_startPosStartNote, _endPosStartNote);
         }
 
+        public override void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
+        {
+            var noteData = (NoteInitData)data;
+            octaveNum = noteData.octave;
+            noteOrientation = noteData.orientation;
+            _sliderData = noteData.SliderData;
+
+            KillAction = killAction;
+            canRelease = false;
+            StartCoroutine(RunRoutine());
+        }
+        
         private void Update()
         {
             //UpdateStartNoteHoldStatus();
@@ -79,7 +90,8 @@ namespace NoteClasses
         {
             if (AlphaStart > 1) 
             {
-                Destroy(startNote);
+                //Destroy(startNote);
+                canRelease = true;
             }
             else if (startNote)
             {
@@ -151,7 +163,8 @@ namespace NoteClasses
             var cond = _gameModeData.GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
             if (cond == HitCondition.Miss && !_isStartNoteHitCorrect) {
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                canRelease = true;
             }
             // if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
             // {
@@ -217,11 +230,16 @@ namespace NoteClasses
                 if (_sliderData.timeStampKeyUp + _gameModeData.SliderHoldStickyTime <= CurrentSongTimeAdjusted) {
                     //hit - since passes the end note, auto hit
                     EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(HitCondition.Late, noteOrientation));
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
+                    canRelease = true;
                 }
             }
         }
 
+        public void KillSlider()
+        {
+            canRelease = true;
+        }
 
         #region Initializer Methods
         private void ActivateStartNote()

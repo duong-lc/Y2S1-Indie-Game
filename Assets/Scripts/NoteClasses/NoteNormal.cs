@@ -27,6 +27,18 @@ namespace NoteClasses
             SetLookDir(_startPos, _endPos);
         }
 
+        public override void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
+        {
+            var noteData = (NoteInitData)data;
+            octaveNum = noteData.octave;
+            noteOrientation = noteData.orientation;
+            assignedTime = noteData.timeStamp;
+
+            KillAction = killAction;
+            canRelease = false;
+            StartCoroutine(RunRoutine());
+        }
+        
         private void Update()
         {
             if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) {
@@ -48,7 +60,8 @@ namespace NoteClasses
             else
             {
                 NCLogger.Log($"go pass earth bound");
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                canRelease = true;
             }
         }
 
@@ -66,7 +79,8 @@ namespace NoteClasses
             if (cond != HitCondition.None && cond != HitCondition.Miss) {
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, new NoteRegisterParam(cond, noteOrientation));
                 NCLogger.Log($"hit the mf wall");
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                canRelease = true;
             }
         }
 
@@ -83,7 +97,8 @@ namespace NoteClasses
                 Debug.Break();
                 var exm = GetHitCondition(CurrentSongTimeAdjusted - assignedTime);
                 EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                canRelease = true;
             }
         }
         

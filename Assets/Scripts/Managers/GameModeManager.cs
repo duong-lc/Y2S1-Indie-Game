@@ -24,7 +24,9 @@ public class GameModeManager : Singleton<GameModeManager>
     //Main Menu 
     [SerializeField] private GameModeData gameModeData;
     [SerializeField] private MidiData currentMidiData;
+    // [SerializeField] private PoolData poolData;
 
+    // public PoolData PoolData => poolData;
     public MidiData CurrentMidiData => currentMidiData;
     public GameModeData GameModeData => gameModeData;
     

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 
@@ -9,11 +10,10 @@ public class PooledData
     public PooledObjectBase prefab;
     public int initialPoolSize = 10;
     public int maxPoolSize = 50;
-    public EventType eventType;
 }
 
 [CreateAssetMenu(fileName = "PoolManagerData_ObjectType", menuName = "Pool Manager Data", order = 0)]
-public class PoolManagerData : ScriptableObject
+public class PoolManagerData : SerializedScriptableObject
 {
-    public List<PooledData> pooledDataList = new();
+    public Dictionary<EventType, PooledData> eventToPooledData = new();
 }

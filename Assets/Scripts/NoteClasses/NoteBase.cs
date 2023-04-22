@@ -53,6 +53,7 @@ namespace NoteClasses
 
         protected virtual void Start()
         {
+            base.Start();
             _gameModeData = GameModeManager.Instance.GameModeData;
         }
         

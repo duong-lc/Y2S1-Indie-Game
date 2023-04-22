@@ -1,5 +1,6 @@
 ﻿using Core;
 using UnityEngine;
+using EventType = Core.Events.EventType;
 
 
 public class ObjectPool : PoolBase<PooledObjectBase>

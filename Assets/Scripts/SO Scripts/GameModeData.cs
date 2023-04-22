@@ -119,20 +119,20 @@ public class GameModeData : SerializedScriptableObject
     
     public Vector3 GetHitPoint(NoteData.LaneOrientation orientation) {
         if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data.HitPoint;
-        NCLogger.Log($"Orientation: {orientation} not found");
+        NCLogger.Log($"Orientation: {orientation} not found", LogLevel.ERROR);
         return Vector3.zero;
     }
     
     public KeyCode GetKeyCode(NoteData.LaneOrientation orientation) {
         if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data.Input;
-        NCLogger.Log($"Orientation: {orientation} not found");
+        NCLogger.Log($"Orientation: {orientation} not found", LogLevel.ERROR);
         return KeyCode.None;
     }
 
     public GameObject GetHitCondPrefab(HitCondition hitCond)
     {
         if (HitCondToPrefab.TryGetValue(hitCond, out GameObject prefab)) return prefab;
-        NCLogger.Log($"HitCondition: {hitCond} not found");
+        NCLogger.Log($"HitCondition: {hitCond} not found", LogLevel.ERROR);
         return new GameObject();
     }
     
@@ -140,7 +140,7 @@ public class GameModeData : SerializedScriptableObject
     
     public LaneControllerData GetControlData (NoteData.LaneOrientation orientation) {
         if (laneControllerData.TryGetValue(orientation, out LaneControllerData data)) return data;
-        NCLogger.Log($"Controller Data: {data} not found");
+        NCLogger.Log($"Controller Data: {data} not found", LogLevel.ERROR);
         return null;
     }
     

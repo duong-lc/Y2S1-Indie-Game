@@ -139,7 +139,8 @@ namespace Managers
 
             _currentHoldSliders.Remove(slider);
             //TODO: replace with object pooling
-            if(status) Destroy(slider.gameObject);
+            if(status) 
+                Destroy(slider.gameObject);
             return true;
         }
         

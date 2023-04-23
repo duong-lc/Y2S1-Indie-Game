@@ -494,7 +494,7 @@ MonoBehaviour:
   inputDelayInMS: 0
   songDelayInSeconds: 0
   noteTime: 5
-  noteSpawnZ: 150
+  noteSpawnZ: 50
   noteTapZ: -10.5
   noteLayerMask:
     serializedVersion: 2

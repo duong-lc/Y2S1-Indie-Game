@@ -64,7 +64,7 @@ public class Lane : MonoBehaviour
     private GameObject _normalNotePrefab;
     private GameObject _sliderNotePrefab;
 
-    private Vector3 _spawnLocation;
+    private Vector3 _spawnLocation => new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     private double AudioTimeRaw => SongManager.Instance.GetAudioSourceTimeRaw();
     
     private LaneCollider _laneCol;
@@ -84,7 +84,7 @@ public class Lane : MonoBehaviour
     }
     private void Awake()
     {
-     
+       // _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     }
 
     private void Start() {
@@ -99,7 +99,6 @@ public class Lane : MonoBehaviour
         
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;
-        _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
     }
 
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)

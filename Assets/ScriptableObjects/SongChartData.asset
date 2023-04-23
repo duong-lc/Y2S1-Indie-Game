@@ -46,13 +46,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: $v
       Entry: 7
       Data: 2|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
-      Data: 3
+      Data: 0
     - Name: allNoteOnLaneList
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
@@ -77,13 +77,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 3
+      Data: 2
     - Name: $v
       Entry: 7
       Data: 4|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: allNoteOnLaneList
       Entry: 7
       Data: 5|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
@@ -108,13 +108,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 2
+      Data: 3
     - Name: $v
       Entry: 7
       Data: 6|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: allNoteOnLaneList
       Entry: 7
       Data: 7|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
@@ -139,47 +139,20 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 4
     - Name: $v
       Entry: 7
       Data: 8|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: allNoteOnLaneList
       Entry: 7
       Data: 9|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 10|Data_Classes.NoteSliderType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 2
-    - Name: laneOrientation
-      Entry: 3
-      Data: 1
-    - Name: octaveNum
-      Entry: 3
       Data: 0
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
-      Entry: 4
-      Data: 11.785
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 14.464
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -200,7 +173,7 @@ MonoBehaviour:
       Data: 
   songClip: {fileID: 8300000, guid: 130259b4fa72a8546ab9c968b2de6812, type: 3}
   songDelayInSeconds: 0
-  fileLocation: slider.mid
+  fileLocation: HSOTD.mid
   noteNormalPrefab: {fileID: 7503693863679007523, guid: 8de00af407265554183b8e33f17111b0, type: 3}
   noteSliderPrefab: {fileID: 2580888399268996792, guid: fb6a6acc262e8204cbe7f65ad8194cb1, type: 3}
   noteRestrictionNormalNote: 0

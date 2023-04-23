@@ -136,7 +136,7 @@ namespace NoteClasses
             var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyDown, ref noteHitEvent);
             if (cond != HitCondition.None && cond != HitCondition.Miss) {
                 //Hit
-                this.FireEvent(noteHitEvent,  new HitMarkInitData(cond, noteOrientation));
+                this.FireEvent(noteHitEvent,  new HitMarkInitData(this, cond, noteOrientation));
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
@@ -157,7 +157,7 @@ namespace NoteClasses
             //Doesn't press, let start note passes
             var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyDown, ref noteHitEvent);
             if (cond == HitCondition.Miss && !_isStartNoteHitCorrect) {
-                EventDispatcher.Instance.FireEvent(noteHitEvent, new HitMarkInitData(cond, noteOrientation));
+                EventDispatcher.Instance.FireEvent(noteHitEvent, new HitMarkInitData(this, cond, noteOrientation));
                 // Destroy(gameObject);
                 canRelease = true;
             }
@@ -188,7 +188,7 @@ namespace NoteClasses
 
                     isDestroy = true;
                     EventDispatcher.Instance.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
-                    EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(cond, noteOrientation));
+                    EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(this, cond, noteOrientation));
                     denyInput = true;
                     canRelease = true;
                 }
@@ -199,7 +199,7 @@ namespace NoteClasses
                     //release too early
                     //miss
                     EventDispatcher.Instance.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
-                    EventDispatcher.Instance.FireEvent(EventType.NoteMissEvent, new HitMarkInitData(cond, noteOrientation));
+                    EventDispatcher.Instance.FireEvent(EventType.NoteMissEvent, new HitMarkInitData(this, cond, noteOrientation));
                     denyInput = true;
                     canRelease = true;
                 }
@@ -216,7 +216,8 @@ namespace NoteClasses
                 //release too late <- will probably throw away as this game mode does not account for late releases.
                 if (_sliderData.timeStampKeyUp + _gameModeData.SliderHoldStickyTime <= CurrentSongTimeAdjusted) {
                     //hit - since passes the end note, auto hit
-                    EventDispatcher.Instance.FireEvent(EventType.NoteHitLateEvent,  new HitMarkInitData(HitCondition.Late, noteOrientation));
+                    this.FireEvent(EventType.NoteHitLateEvent,  new HitMarkInitData(this, HitCondition.Late, noteOrientation));
+                    this.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
                     //Destroy(gameObject);
                     canRelease = true;
                 }

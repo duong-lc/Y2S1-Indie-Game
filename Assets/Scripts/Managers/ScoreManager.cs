@@ -5,6 +5,7 @@ using Core.Events;
 using Core.Logging;
 using Core.Patterns;
 using DG.Tweening;
+using NoteClasses;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using SO_Scripts;
@@ -42,10 +43,12 @@ public class HitMarkInitData : PooledObjectCallbackData
 {
     public NoteData.LaneOrientation orientation { get; private set; }
     public HitCondition cond { get; private set; }
+    public NoteBase noteRef { get; private set; }
     
-    public HitMarkInitData (HitCondition cond, NoteData.LaneOrientation orientation) {
+    public HitMarkInitData (NoteBase noteRef, HitCondition cond, NoteData.LaneOrientation orientation) {
         this.cond = cond;
         this.orientation = orientation;
+        this.noteRef = noteRef;
     }
 }
 

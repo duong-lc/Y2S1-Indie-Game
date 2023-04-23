@@ -47,8 +47,7 @@ namespace Managers
         {
             EventDispatcher.Instance.AddListener(EventType.UnPauseEvent, param => CheckHoldStatus());
             EventDispatcher.Instance.AddListener(EventType.RemoveSliderFromHoldListEvent, param => RemoveSliderFromList((NoteSlider) param));
-            
-            
+
             // if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
         }
 

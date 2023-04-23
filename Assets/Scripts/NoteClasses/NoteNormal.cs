@@ -80,7 +80,7 @@ namespace NoteClasses
             
             hitCond = GetHitCondition(CurrentSongTimeAdjusted , assignedTime, ref noteHitEvent);
             if (hitCond != HitCondition.None && hitCond != HitCondition.Miss) {
-                this.FireEvent(noteHitEvent, new HitMarkInitData(hitCond, noteOrientation));
+                this.FireEvent(noteHitEvent, new HitMarkInitData(this, hitCond, noteOrientation));
                 NCLogger.Log($"hit the mf wall");
                 // Destroy(gameObject);
                 canRelease = true;
@@ -95,7 +95,7 @@ namespace NoteClasses
             
             hitCond = GetHitCondition(CurrentSongTimeAdjusted , assignedTime, ref noteHitEvent);
             if (hitCond == HitCondition.Miss) {
-                EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(hitCond, noteOrientation));
+                EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(this, hitCond, noteOrientation));
                 canRelease = true;
             }
         }

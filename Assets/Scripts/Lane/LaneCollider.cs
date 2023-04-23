@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Events;
 using Core.Logging;
 using Data_Classes;
 using NoteClasses;
 using StaticClass;
 using UnityEngine;
+using EventType = Core.Events.EventType;
 
 [RequireComponent(typeof(Lane))]
 [RequireComponent(typeof(Rigidbody))]
@@ -55,17 +57,23 @@ public class LaneCollider : MonoBehaviour
     }
 
     private void Awake() {
+        this.AddListener(EventType.NoteHitEarlyEvent,param => RemoveNote(((HitMarkInitData)param).noteRef));
+        this.AddListener(EventType.NoteHitPerfectEvent, param => RemoveNote(((HitMarkInitData)param).noteRef));
+        this.AddListener(EventType.NoteHitLateEvent, param => RemoveNote(((HitMarkInitData)param).noteRef));
+        this.AddListener(EventType.NoteMissEvent, param => RemoveNote(((HitMarkInitData)param).noteRef));
+        
+        
         Collider.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider col) {
-        // NCLogger.Log($"hit collider {col.name} ");
+        if (!col.gameObject.activeSelf) return;
         var note = GetNote(col);
-        
         if (note) noteList.Add(note);
     }
 
     private void OnTriggerExit(Collider col) {
+       // if (!col.gameObject.activeSelf) return;
         var note = GetNote(col);
         if (note && noteList.Contains(note)) noteList.Remove(note);
     }
@@ -102,6 +110,9 @@ public class LaneCollider : MonoBehaviour
     }
 
     public void RemoveNote(NoteBase note) {
-        noteList.Remove(note);
+        if (note.noteOrientation == LaneOrientation) {
+            noteList.Remove(note);
+            note.transform.position = new Vector3(999, 999, 999);
+        }
     }
 }

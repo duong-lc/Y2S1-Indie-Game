@@ -59,7 +59,7 @@ public class LaneCollider : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider col) {
-        NCLogger.Log($"hit collider {col.name} ");
+        // NCLogger.Log($"hit collider {col.name} ");
         var note = GetNote(col);
         
         if (note) noteList.Add(note);
@@ -72,7 +72,7 @@ public class LaneCollider : MonoBehaviour
 
     private NoteBase GetNote(Collider col) {
         if (!CheckLayerMask.IsInLayerMask(col.gameObject, NoteLayerMask)) {
-            NCLogger.Log($"Not a Note");
+            // NCLogger.Log($"Not a Note");
             return null;
         }
 
@@ -98,7 +98,7 @@ public class LaneCollider : MonoBehaviour
     }
 
     public NoteBase GetApproachingNote() {
-        return noteList[0];
+        return noteList.Count == 0 ? null : noteList[0];
     }
 
     public void RemoveNote(NoteBase note) {

@@ -46,9 +46,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: WorldUI
-    uniqueID: 2249812111
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -61,9 +58,12 @@ TagManager:
   - name: Note
     uniqueID: 2198639645
     locked: 0
+  - name: MainLR
+    uniqueID: 581000347
+    locked: 0
   - name: SubLR
     uniqueID: 208803465
     locked: 0
-  - name: MainLR
-    uniqueID: 581000347
+  - name: WorldUI
+    uniqueID: 2249812111
     locked: 0

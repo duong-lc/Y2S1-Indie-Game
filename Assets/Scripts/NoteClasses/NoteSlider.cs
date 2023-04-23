@@ -47,6 +47,7 @@ namespace NoteClasses
         private bool _runOnce = true;
         private bool _runOnce1 = true;
         private KeyCode _holdKey;
+        private bool denyInput = false;
         protected override void Start()
         {
             base.Start();
@@ -127,13 +128,15 @@ namespace NoteClasses
         /// <summary>
         /// Called when pressing hit button or smt
         /// </summary>
-        public void OnNoteHitStartNote()
+        public bool OnNoteHitStartNote()
         {
-            var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
-            if (cond != HitCondition.None && cond != HitCondition.Miss)
-            {
+            if (denyInput) return false;
+            if (_isStartNoteHitCorrect && _isHolding) return false;
+            
+            var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyDown, ref noteHitEvent);
+            if (cond != HitCondition.None && cond != HitCondition.Miss) {
                 //Hit
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(cond, noteOrientation));
+                this.FireEvent(noteHitEvent,  new HitMarkInitData(cond, noteOrientation));
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
@@ -141,37 +144,23 @@ namespace NoteClasses
                 
                 _canMoveStartNote = false;
                 startNote.transform.position = _sliderLockPoint;
+                return true;
             }
-            //
-            // if (Math.Abs(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown) < MarginOfError)
-            // {
-            //     //Hit
-            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, noteOrientation);
-            //     
-            //     //Setting condition for endNote evaluation
-            //     _isStartNoteHitCorrect = true;
-            //     _isHolding = true;
-            //     
-            //     _canMoveStartNote = false;
-            //     startNote.transform.position = _sliderLockPoint;
-            // }
+
+            return false;
         }
 
         private void UpdateStartNoteFail()//put in update
         {
+            if (canRelease) return;
+            if (_isHolding && _isStartNoteHitCorrect) return;
             //Doesn't press, let start note passes
-            var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyDown);
+            var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyDown, ref noteHitEvent);
             if (cond == HitCondition.Miss && !_isStartNoteHitCorrect) {
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+                EventDispatcher.Instance.FireEvent(noteHitEvent, new HitMarkInitData(cond, noteOrientation));
                 // Destroy(gameObject);
                 canRelease = true;
             }
-            // if (_sliderData.timeStampKeyDown + MarginOfError <= CurrentSongTimeAdjusted && !_isStartNoteHitCorrect)
-            // {
-            //     //Miss
-            //     Destroy(gameObject);
-            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-            // }
         }
 
         private void UpdateStartNoteHoldStatus()//put in update
@@ -183,39 +172,36 @@ namespace NoteClasses
             }
         }
 
-        public void CheckHoldingStatus()
-        {
-            NCLogger.Log($"{gameObject.name}");
-            if (!Input.GetKey(_holdKey) && _isStartNoteHitCorrect && _isHolding)
-            {
-                NCLogger.Log($"slider break!!");
-                _isHolding = false;
-                EventDispatcher.Instance.FireEvent(EventType.OnRemoveSliderFromHoldList, this);
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-            }
-        }
-        
         public bool OnNoteHitEndNote()//when release key
         {
+            if (denyInput) return false;
             bool isDestroy = false;
-            if (_isStartNoteHitCorrect && _isHolding)
+            if (!Input.GetKey(_holdKey) && _isStartNoteHitCorrect && _isHolding)
             {
-                var cond = GetHitCondition(CurrentSongTimeAdjusted - _sliderData.timeStampKeyUp);
+                _isHolding = false;
+                var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyUp, ref noteHitEvent);
                 if (cond != HitCondition.None && cond != HitCondition.Miss)
                 {
+                    NCLogger.Log($"release the slider NOT miss");
                     //Hit
                     _isEndNoteHitCorrect = true;
 
                     isDestroy = true;
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(cond, noteOrientation));
-                   
+                    EventDispatcher.Instance.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
+                    EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(cond, noteOrientation));
+                    denyInput = true;
+                    canRelease = true;
                 }
-                else if (cond == HitCondition.Miss)
+                else if (cond == HitCondition.Miss || cond == HitCondition.None)
                 {
+                    NCLogger.Log($"release the slider MISS");
                     isDestroy = true;
                     //release too early
                     //miss
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
+                    EventDispatcher.Instance.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
+                    EventDispatcher.Instance.FireEvent(EventType.NoteMissEvent, new HitMarkInitData(cond, noteOrientation));
+                    denyInput = true;
+                    canRelease = true;
                 }
             }
 
@@ -224,12 +210,13 @@ namespace NoteClasses
 
         private void UpdateEndNoteHoldStatus()
         {
+            if (canRelease) return;
             if (_isStartNoteHitCorrect && _isHolding)
             {
                 //release too late <- will probably throw away as this game mode does not account for late releases.
                 if (_sliderData.timeStampKeyUp + _gameModeData.SliderHoldStickyTime <= CurrentSongTimeAdjusted) {
                     //hit - since passes the end note, auto hit
-                    EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent,  new NoteRegisterParam(HitCondition.Late, noteOrientation));
+                    EventDispatcher.Instance.FireEvent(EventType.NoteHitLateEvent,  new HitMarkInitData(HitCondition.Late, noteOrientation));
                     //Destroy(gameObject);
                     canRelease = true;
                 }

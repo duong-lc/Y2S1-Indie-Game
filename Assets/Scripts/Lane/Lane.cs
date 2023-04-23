@@ -76,7 +76,6 @@ public class Lane : MonoBehaviour
     }
 
     private ObjectPool[] _notePoolArray;
-    
     public ObjectPool[] NotePools {
         get {
             if (_notePoolArray.IsNullOrEmpty()) _notePoolArray = GetComponentsInChildren<ObjectPool>();

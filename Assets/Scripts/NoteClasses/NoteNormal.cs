@@ -20,6 +20,7 @@ namespace NoteClasses
 
         private double TimeSinceInstantiated => CurrentSongTimeRaw - _timeInstantiated;
         private float Alpha => ((float)(TimeSinceInstantiated / (NoteTime * 2)));
+        private HitCondition hitCond;
         protected override void Start()
         {
             base.Start();
@@ -41,6 +42,8 @@ namespace NoteClasses
         
         private void Update()
         {
+            // NCLogger.Log($"current note hit cond {hitCond} ");
+            
             if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) {
                 NCLogger.Log($"GameState should be PlayMode when it's {GameModeManager.Instance.CurrentGameState}", LogLevel.ERROR);
                 return;
@@ -66,7 +69,7 @@ namespace NoteClasses
         }
 
 
-        public void OnNoteHitNormalNote() {
+        public bool OnNoteHitNormalNote() {
             // if (Math.Abs(CurrentSongTimeAdjusted - assignedTime) < MarginOfError) //hitting the note within the margin of error
             // {
             //     //Hit
@@ -75,29 +78,24 @@ namespace NoteClasses
             //     Destroy(gameObject);
             // }
             
-            var cond = GetHitCondition(CurrentSongTimeAdjusted - assignedTime);
-            if (cond != HitCondition.None && cond != HitCondition.Miss) {
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteHitEvent, new NoteRegisterParam(cond, noteOrientation));
+            hitCond = GetHitCondition(CurrentSongTimeAdjusted , assignedTime, ref noteHitEvent);
+            if (hitCond != HitCondition.None && hitCond != HitCondition.Miss) {
+                this.FireEvent(noteHitEvent, new HitMarkInitData(hitCond, noteOrientation));
                 NCLogger.Log($"hit the mf wall");
                 // Destroy(gameObject);
                 canRelease = true;
+                return true;
             }
+
+            return false;
         }
 
         public void OnNoteMissNormalNote() {
-            // if (assignedTime + MarginOfError <= CurrentSongTimeAdjusted)
-            // {
-            //     //Miss
-            //     EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-            //     Destroy(gameObject);
-            // }
-            if (CurrentSongTimeAdjusted >= assignedTime) return;
-            if (GetHitCondition(CurrentSongTimeAdjusted - assignedTime) == HitCondition.Miss) {
-                NCLogger.Log($"current {CurrentSongTimeAdjusted} assigned {assignedTime} hit cond {_gameModeData.GetHitCondition(CurrentSongTimeAdjusted - assignedTime)}");
-                Debug.Break();
-                var exm = GetHitCondition(CurrentSongTimeAdjusted - assignedTime);
-                EventDispatcher.Instance.FireEvent(EventType.OnNoteMissEvent, noteOrientation);
-                // Destroy(gameObject);
+            if (canRelease) return;
+            
+            hitCond = GetHitCondition(CurrentSongTimeAdjusted , assignedTime, ref noteHitEvent);
+            if (hitCond == HitCondition.Miss) {
+                EventDispatcher.Instance.FireEvent(noteHitEvent,  new HitMarkInitData(hitCond, noteOrientation));
                 canRelease = true;
             }
         }

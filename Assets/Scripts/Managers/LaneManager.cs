@@ -15,14 +15,14 @@ using EventType = Core.Events.EventType;
 
 namespace Managers
 {
-    public class LaneManager : MonoBehaviour
+    public class LaneManager : Singleton<LaneManager>
     {
         private MidiData _midiData;
         private GameModeData _gameModeData;
         private Note[] _rawNoteArray;
         private readonly List<int> _ignoreIndexList = new ();
         
-        [SerializeField] private Lane[] LaneArray = { }; 
+        public Lane[] LaneArray = { }; 
         
         private void Awake()
         {

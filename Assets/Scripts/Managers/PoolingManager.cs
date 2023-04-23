@@ -4,6 +4,7 @@ using System.Linq;
 using Core.Events;
 using Core.Patterns;
 using Data_Classes;
+using Managers;
 using StaticClass;
 using UnityEngine;
 using EventType = Core.Events.EventType;
@@ -11,16 +12,16 @@ using EventType = Core.Events.EventType;
 
 public class PoolingManager : Singleton<PoolingManager>
 {
-    [SerializeField] private PoolManagerData alwaysLoadedParticleData;
-    [SerializeField] private PoolManagerData sceneBasedParticleData;
+    [SerializeField] private PoolManagerData alwaysLoaded_PoolData;
+    [SerializeField] private PoolManagerData sceneBased_NotesData;
+    [SerializeField] private PoolManagerData sceneBased_HitMarksData;
 
     //private Dictionary<EventType, ObjectPool> _eventToPool = new();
     private Dictionary<EventType, PooledData> _eventToPooledData = new();
-    [SerializeField] private List<Lane> laneList = new();
-    private void Awake()
-    {
-        _eventToPooledData = _eventToPooledData.AddRange(alwaysLoadedParticleData.eventToPooledData)
-            .AddRange(sceneBasedParticleData.eventToPooledData);
+    
+    private void Awake() {
+        _eventToPooledData = _eventToPooledData.AddRange(alwaysLoaded_PoolData.eventToPooledData)
+            .AddRange(sceneBased_NotesData.eventToPooledData).AddRange(sceneBased_HitMarksData.eventToPooledData);
         
         
         foreach(var kvp in _eventToPooledData){
@@ -31,26 +32,14 @@ public class PoolingManager : Singleton<PoolingManager>
     private void Start()
     {
         //Init For all note types in lane
-        foreach (var kvp in _eventToPooledData)
-        {
-            foreach (var lane in laneList)
-            {
-                GameObject poolGO = new GameObject();
-                poolGO.transform.parent = lane.transform;
-                poolGO.name = $"Pool {kvp.Value.prefab.name}";
-                
-                var pool = poolGO.AddComponent<ObjectPool>();
-                
-                pool.Init(kvp.Value.prefab, kvp.Key);
-                //_eventToPool.Add(kvp.Key, pool);
-                
-                pool.InitPool(kvp.Value.prefab, poolGO.transform, kvp.Value.initialPoolSize, kvp.Value.maxPoolSize);
-                for (var i = 0; i < kvp.Value.initialPoolSize; i++) {
-                    var obj = pool.CreateSetup();
-                    obj.transform.parent = poolGO.transform;
-                    pool.Release(obj);
-                }
+        foreach (var kvp in sceneBased_NotesData.eventToPooledData) {
+            foreach (var lane in LaneManager.Instance.LaneArray) {
+                SetUpPool(kvp, lane.transform);
             }
+        }
+
+        foreach (var kvp in sceneBased_HitMarksData.eventToPooledData) {
+            SetUpPool(kvp, ScoreManager.Instance.transform);
         }
     }
 
@@ -59,27 +48,64 @@ public class PoolingManager : Singleton<PoolingManager>
         switch (eventType)
         {
             case EventType.SpawnNoteNormal:
-                var normalData = (NoteInitData)data;
+                var normalData = (NoteInitData) data;
                 SpawnNote(eventType, normalData.orientation, data);
                 break;
             case EventType.SpawnNoteSlider:
-                var sliderData = (NoteInitData)data;
+                var sliderData = (NoteInitData) data;
                 SpawnNote(eventType, sliderData.orientation, data);
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            case EventType.NoteMissEvent:
+                SpawnHitMark(eventType, data);
+                break;
+            case EventType.NoteHitEarlyEvent:
+                SpawnHitMark(eventType, data);
+                break;
+            case EventType.NoteHitPerfectEvent:
+                SpawnHitMark(eventType, data);
+                break;
+            case EventType.NoteHitLateEvent:
+                SpawnHitMark(eventType, data);
+                break;
+            // default:
+            //     throw new ArgumentOutOfRangeException();
         }
     }
 
     private void SpawnNote(EventType eventType, NoteData.LaneOrientation orientation, PooledObjectCallbackData data)
     {
-        foreach (var lane in laneList) {
+        foreach (var lane in LaneManager.Instance.LaneArray) {
             if (lane.LaneOrientation != orientation) continue;
             foreach (var pool in lane.NotePools) {
                 if (pool.PooledObjectEventType != eventType) continue;
                 var obj = pool.Get();
                 obj.Init(data, pool.Release);
             }
+        }
+    }
+
+    private void SpawnHitMark(EventType eventType, PooledObjectCallbackData data)
+    {
+        foreach (var pool in ScoreManager.Instance.NotePools) {
+            if (pool.PooledObjectEventType != eventType) continue;
+            var obj = pool.Get();
+            obj.Init(data, pool.Release);
+        }
+    }
+
+    private void SetUpPool(KeyValuePair<EventType, PooledData> kvp, Transform parent)
+    {
+        GameObject poolGO = new GameObject();
+        poolGO.transform.parent = parent;
+        poolGO.name = $"Pool {kvp.Value.prefab.name}";
+        
+        var pool = poolGO.AddComponent<ObjectPool>();
+        pool.InitPool(kvp.Value.prefab, parent, kvp.Value.initialPoolSize, kvp.Value.maxPoolSize);
+        pool.Init(kvp.Value.prefab, kvp.Key);
+        for (var i = 0; i < kvp.Value.initialPoolSize; i++) {
+            var obj = pool.CreateSetup();
+            obj.transform.SetParent(poolGO.transform, false);
+            pool.Release(obj);
         }
     }
 }

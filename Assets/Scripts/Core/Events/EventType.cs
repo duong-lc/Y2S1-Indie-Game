@@ -1,12 +1,19 @@
+using System;
+
 namespace Core.Events {
     public enum EventType {
         TestEvent = 0,
         LogEvent,
         CompileDataFromMidiEvent,
-        OnNoteHitEvent,
-        OnNoteMissEvent,
-        OnUnPauseEvent,
-        OnRemoveSliderFromHoldList,
+        //OnNoteHit
+        NoteHitNoneEvent, //to fill in param
+        NoteHitEarlyEvent,
+        NoteHitPerfectEvent,
+        NoteHitLateEvent,
+        NoteMissEvent,
+        
+        UnPauseEvent,
+        RemoveSliderFromHoldListEvent,
         SpawnNoteNormal,
         SpawnNoteSlider
     }

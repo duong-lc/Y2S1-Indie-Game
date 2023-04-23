@@ -10,16 +10,16 @@ public class ObjectPool : PoolBase<PooledObjectBase>
         get => _pooledObjectEventType;
     }
         
-    private PooledObjectBase _prefab;
+    private PooledObjectBase _prefabRef;
     
     public void Init(PooledObjectBase prefab, EventType eventType)
     {
-        _prefab = prefab;
+        _prefabRef = prefab;
         _pooledObjectEventType = eventType;
     }
 
     public override PooledObjectBase CreateSetup()
     {
-        return Instantiate(_prefab, transform);
+        return Instantiate(_prefabRef, transform);
     }
 }

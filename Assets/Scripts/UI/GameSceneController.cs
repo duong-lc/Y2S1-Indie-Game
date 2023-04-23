@@ -45,7 +45,7 @@ public class GameSceneController : MonoBehaviour
         inGameHUD.SetActive(true);
         pauseOverlay.SetActive(false);
         
-        EventDispatcher.Instance.FireEvent(EventType.OnUnPauseEvent);
+        EventDispatcher.Instance.FireEvent(EventType.UnPauseEvent);
     }
 
     public void LoadRestartLevel()

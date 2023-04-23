@@ -1677,13 +1677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46682bd5df1c42bfbec6fb20fbbddd6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alwaysLoadedParticleData: {fileID: 11400000, guid: a05a637ec8786b5459b9a8fee2321d18, type: 2}
-  sceneBasedParticleData: {fileID: 11400000, guid: 1b6c8d89be3117045be5c91189b18b78, type: 2}
-  laneList:
-  - {fileID: 1375691687}
-  - {fileID: 2009001323}
-  - {fileID: 369856477}
-  - {fileID: 697029910}
+  alwaysLoaded_PoolData: {fileID: 11400000, guid: a05a637ec8786b5459b9a8fee2321d18, type: 2}
+  sceneBased_NotesData: {fileID: 11400000, guid: 1b6c8d89be3117045be5c91189b18b78, type: 2}
+  sceneBased_HitMarksData: {fileID: 11400000, guid: 782d06a45b65c2443a2a03b54269a673, type: 2}
 --- !u!4 &567717114
 Transform:
   m_ObjectHideFlags: 0
@@ -1697,7 +1693,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614153924
 GameObject:
@@ -2286,7 +2282,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &874310777
 PrefabInstance:

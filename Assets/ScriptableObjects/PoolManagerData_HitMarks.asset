@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee58c6b8832543b38f6eaa9d46623b33, type: 3}
-  m_Name: PoolManagerData_Notes
+  m_Name: PoolManagerData_HitMarks
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7503693863679007525, guid: 8de00af407265554183b8e33f17111b0, type: 3}
-    - {fileID: 2580888399268996793, guid: fb6a6acc262e8204cbe7f65ad8194cb1, type: 3}
+    - {fileID: -4751959031694970388, guid: 5f04a5968a0e1624cb711f1f7339f201, type: 3}
+    - {fileID: -3621564515206207338, guid: ac6f9984350cb304385b8bdae2e50b10, type: 3}
+    - {fileID: -5192086389675005089, guid: fccfe18f61e0e7f48ba96d439a3c599a, type: 3}
+    - {fileID: -3053322281426521499, guid: cfdae89814ec9624aba4d76224f84682, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -42,13 +44,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 10
+      Data: 4
     - Name: $v
       Entry: 7
       Data: 2|PooledData, Assembly-CSharp
@@ -60,7 +62,7 @@ MonoBehaviour:
       Data: 10
     - Name: maxPoolSize
       Entry: 3
-      Data: 100
+      Data: 50
     - Name: 
       Entry: 8
       Data: 
@@ -72,13 +74,61 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 11
+      Data: 5
     - Name: $v
       Entry: 7
       Data: 3|PooledData, Assembly-CSharp
     - Name: prefab
       Entry: 10
       Data: 1
+    - Name: initialPoolSize
+      Entry: 3
+      Data: 10
+    - Name: maxPoolSize
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 7
+      Data: 4|PooledData, Assembly-CSharp
+    - Name: prefab
+      Entry: 10
+      Data: 2
+    - Name: initialPoolSize
+      Entry: 3
+      Data: 10
+    - Name: maxPoolSize
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 7
+      Data: 5|PooledData, Assembly-CSharp
+    - Name: prefab
+      Entry: 10
+      Data: 3
     - Name: initialPoolSize
       Entry: 3
       Data: 10

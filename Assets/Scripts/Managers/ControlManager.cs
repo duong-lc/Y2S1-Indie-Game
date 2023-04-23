@@ -45,8 +45,8 @@ namespace Managers
 
         private void Awake()
         {
-            EventDispatcher.Instance.AddListener(EventType.OnUnPauseEvent, param => CheckHoldStatus());
-            EventDispatcher.Instance.AddListener(EventType.OnRemoveSliderFromHoldList, param => RemoveSliderFromList((NoteSlider) param));
+            EventDispatcher.Instance.AddListener(EventType.UnPauseEvent, param => CheckHoldStatus());
+            EventDispatcher.Instance.AddListener(EventType.RemoveSliderFromHoldListEvent, param => RemoveSliderFromList((NoteSlider) param));
             
             
             // if(!playerInput) NCLogger.Log($"playerInput is not assigned", LogLevel.ERROR);
@@ -68,16 +68,15 @@ namespace Managers
         // Update is called once per frame
         private void Update()
         {
+            if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) return;
             foreach (var kvp in _gameModeData.LaneControllerData)
             {
-                if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) return;
-                
                 if (Input.GetKeyDown(kvp.Value.Input)) {
-                    if (!NoteInteractInputDown(kvp.Value.collider)) continue;
+                    if(!NoteInteractInputDown(kvp.Value.collider)) continue;
                 }
 
                 if (Input.GetKeyUp(kvp.Value.Input)) {
-                    if (!NoteInteractInputUp(kvp.Value.collider)) continue;
+                    if(!NoteInteractInputUp(kvp.Value.collider)) continue;
                 }
 
             }
@@ -112,14 +111,19 @@ namespace Managers
             //game object tag, then use switch to cast to normal or slider. 
             //the purpose is to have less performance intensive code but haven't really measured - just a theory.
             var note = laneCollider.GetApproachingNote();
+            if (!note) return false;
             switch (note.Type)
             {
                 case NoteType.NormalNote:
-                    ((note as NoteNormal)!).OnNoteHitNormalNote();
+                    var canRemove = ((note as NoteNormal)!).OnNoteHitNormalNote();
+                    if(canRemove) laneCollider.RemoveNote(note);
                     break;
                 case NoteType.SliderNote:
-                    ((note as NoteSlider)!).OnNoteHitStartNote();
-                    _currentHoldSliders.Add(note as NoteSlider);
+                    var slider = note as NoteSlider;
+                    if (_currentHoldSliders.Contains(slider)) break;
+                    if (!(slider!.OnNoteHitStartNote())) break;
+
+                    _currentHoldSliders.Add(slider);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -131,19 +135,12 @@ namespace Managers
         {
             var slider = _currentHoldSliders.Find(x => x.noteOrientation == laneCollider.LaneOrientation);
             if (!slider) {
+                NCLogger.Log($"Slider not found", LogLevel.WARNING);
                 _currentHoldSliders.Remove(slider);
                 return false;
             }
-                    
-            var status = slider.OnNoteHitEndNote();
-
+            slider.OnNoteHitEndNote();
             _currentHoldSliders.Remove(slider);
-            //TODO: replace with object pooling
-            if (status)
-            {
-                slider.KillSlider();
-                // Destroy(slider.gameObject);
-            }
             return true;
         }
         
@@ -162,25 +159,15 @@ namespace Managers
         {
             yield return null;
             _currentHoldSliders.Remove(slider);
-            Destroy((slider.gameObject));
+            // Destroy((slider.gameObject));
+            slider.KillSlider();
         }
 
         private void CheckHoldStatus()
         {
             foreach (var slider in _currentHoldSliders) {
-                slider.CheckHoldingStatus();
+                slider.OnNoteHitEndNote();
             }
         }
-        
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.color = Color.red;
-        //     foreach (var anchor in anchorPoints) {
-        //         Gizmos.DrawWireCube(anchor.position, boxSize*2);
-        //         Gizmos.DrawWireCube(anchor.position + Vector3.forward * castDist, boxSize*2);
-        //     }
-        // }
-
-        // private Transform GetAnchorPoint(string tag) => anchorPoints.Find(t => t.CompareTag(tag));
     }
 }

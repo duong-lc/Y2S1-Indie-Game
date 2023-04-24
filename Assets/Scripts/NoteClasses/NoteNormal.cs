@@ -24,8 +24,8 @@ namespace NoteClasses
         protected override void Start()
         {
             base.Start();
-            SetUpVariables();
-            SetLookDir(_startPos, _endPos);
+            // SetUpVariables();
+            // SetLookDir(_startPos, _endPos);
         }
 
         public override void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
@@ -35,6 +35,9 @@ namespace NoteClasses
             noteOrientation = noteData.orientation;
             assignedTime = noteData.timeStamp;
 
+            SetUpVariables();
+            SetLookDir(_startPos, _endPos);
+            
             KillAction = killAction;
             canRelease = false;
             StartCoroutine(RunRoutine());

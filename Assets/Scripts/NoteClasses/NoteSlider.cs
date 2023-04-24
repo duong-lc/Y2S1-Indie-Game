@@ -48,21 +48,39 @@ namespace NoteClasses
         private bool _runOnce1 = true;
         private KeyCode _holdKey;
         private bool denyInput = false;
+
+        protected void Awake()
+        {
+            base.Awake();
+            _lineControllers = GetComponentsInChildren<LineRendererController>();
+        }
+        
         protected override void Start()
         {
             base.Start();
-            SetUpVariables();
-            ToggleLineRenderers(true);
-            SetUpLineControllers();
-            SetLookDir(_startPosStartNote, _endPosStartNote);
+            // SetUpVariables();
+            // ToggleLineRenderers(true);
+            // SetUpLineControllers();
+            // SetLookDir(_startPosStartNote, _endPosStartNote);
         }
 
         public override void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
         {
+            //Re-arm values for slider
+            denyInput = false;
+            _isStartNoteHitCorrect = false;
+            _canMoveStartNote = true;
+            _canMoveEndNote = true;
+            
             var noteData = (NoteInitData)data;
             octaveNum = noteData.octave;
             noteOrientation = noteData.orientation;
             _sliderData = noteData.SliderData;
+
+            SetUpVariables();
+            ToggleLineRenderers(true);
+            SetUpLineControllers();
+            SetLookDir(_startPosStartNote, _endPosStartNote);
 
             KillAction = killAction;
             canRelease = false;
@@ -263,7 +281,7 @@ namespace NoteClasses
 
         private void SetUpVariables()
         {
-            _lineControllers = GetComponentsInChildren<LineRendererController>();
+            
             //setting up spawn time stamps
             _startNoteSpawnTime = _sliderData.timeStampKeyDown - NoteTime;
             _endNoteSpawnTime = _sliderData.timeStampKeyUp - NoteTime;

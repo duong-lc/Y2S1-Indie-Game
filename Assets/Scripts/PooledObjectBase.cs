@@ -20,7 +20,7 @@ public class PooledObjectBase : MonoBehaviour, IPooledCore<PooledObjectBase>
     protected virtual void Start()
     {
         canRelease = false;
-        transform.position = new Vector3(999, 999, 999);
+        // transform.position = new Vector3(999, 999, 999);
     }
 
     public virtual void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)

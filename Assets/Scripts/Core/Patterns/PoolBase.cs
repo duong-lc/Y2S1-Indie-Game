@@ -44,8 +44,8 @@ namespace Core
         #endregion
 
         #region Getters
-        public T Get() => Pool.Get();
-        public void Release(T obj) => Pool.Release(obj);
+        public virtual T Get() => Pool.Get();
+        public virtual void Release(T obj) => Pool.Release(obj);
         #endregion
     }
 }

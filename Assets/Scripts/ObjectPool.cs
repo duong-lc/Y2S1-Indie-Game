@@ -1,4 +1,6 @@
-﻿using Core;
+﻿using System;
+using Core;
+using NoteClasses;
 using UnityEngine;
 using EventType = Core.Events.EventType;
 
@@ -22,4 +24,21 @@ public class ObjectPool : PoolBase<PooledObjectBase>
     {
         return Instantiate(_prefabRef, transform);
     }
+
+    public override void Release(PooledObjectBase obj) {
+        var note = obj as NoteBase;
+        if(note != null) note.Collider.enabled = false;
+        
+        obj.transform.position = new Vector3(999, 999, 999);
+        base.Release(obj);
+    }
+
+    public override PooledObjectBase Get()
+    {
+        var obj = base.Get();
+        var note = obj as NoteBase;
+        if(note != null) note.Collider.enabled = true;
+        
+        return obj;
+    } 
 }

@@ -25,6 +25,18 @@ public enum HitCondition {
     Miss,
 }
 
+[Serializable]
+public class ScoreData
+{
+    [SerializeField] private int score;
+    [SerializeField] private bool countTowardsCombo;
+    [SerializeField] private bool resetCombo;
+    [SerializeField] private GameObject hitMarkPrefab;
+
+    public int Score => score;
+    public bool CountTowardsCombo => countTowardsCombo;
+    public GameObject Prefab => hitMarkPrefab;
+}
 
 [Serializable]
 public class MarginOfError
@@ -57,11 +69,21 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private AudioSource hitAudioSource;
     [SerializeField] private AudioSource missAudioSource;
     [SerializeField] private TMP_Text comboText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text accuracyText;
     [Space] 
     private MidiData _midiData;
     private GameModeData _gameModeData;
-        
+
+    private float AccuracyFloat => _totalCurrentScore / _totalPerfectScore * 100;
+    private int _currentScore;
+
+    private int _totalCurrentScore = 0;
+    private int _totalPerfectScore => _midiData.TotalRawNoteCount *
+                                     _gameModeData.HitCondToScoreData[HitCondition.EarlyPerfect].Score;
     private int _currentCombo;
+    
+    
     private int _maxCombo;
     private int _missCount;
     private Camera _mainCam;
@@ -84,7 +106,7 @@ public class ScoreManager : Singleton<ScoreManager>
         EventDispatcher.Instance.AddListener(EventType.NoteHitPerfectEvent, param => OnHit((HitMarkInitData) param));
         EventDispatcher.Instance.AddListener(EventType.NoteHitLateEvent, param => OnHit((HitMarkInitData) param));
         
-        EventDispatcher.Instance.AddListener(EventType.NoteMissEvent, param => OnMiss((HitMarkInitData) param));
+        EventDispatcher.Instance.AddListener(EventType.NoteMissEvent, param => OnHit((HitMarkInitData) param));
     }
 
     // Start is called before the first frame update
@@ -94,52 +116,59 @@ public class ScoreManager : Singleton<ScoreManager>
         _mainCam = Camera.main;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
     private void OnHit(HitMarkInitData param)
     {
         hitAudioSource.Play();
+
+        var scoreData = _gameModeData.HitCondToScoreData[param.cond];
         
-        switch (param.cond)
+        _currentCombo += scoreData.CountTowardsCombo ? 1 : 0;
+        _currentScore += scoreData.Score;
+        if (_totalCurrentScore == 0) _totalCurrentScore = _totalPerfectScore;
+        _totalCurrentScore -= _gameModeData.HitCondToScoreData[HitCondition.EarlyPerfect].Score -
+                              _gameModeData.HitCondToScoreData[param.cond].Score;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+        
+        if (param.cond == HitCondition.Miss && param.cond != HitCondition.None)
         {
-            case HitCondition.Early:
-                break;
-            case HitCondition.EarlyPerfect | HitCondition.LatePerfect:
-                break;
-            case HitCondition.Late:
-                break;
+            if (_currentCombo > _maxCombo) _maxCombo = _currentCombo;
+            missAudioSource.Play();
+            _missCount++;
+            _currentCombo = 0;
         }
-        _currentCombo++;
-        
+        else if (param.cond != HitCondition.None)
+        {
+            hitAudioSource.Play();
+            
+        }
+
+        UpdateScoreText();
         UpdateComboText();
+        UpdateAccuracyText();
     }
 
-    private void OnMiss(HitMarkInitData param)
+    // private void OnMiss(HitMarkInitData param)
+    // {
+    //     missAudioSource.Play();
+    //
+    //     _missCount++;
+    //     if (_currentCombo > _maxCombo) _maxCombo = _currentCombo;
+    //     _currentCombo = 0;
+    //     
+    //     UpdateComboText();
+    // }
+
+    private void UpdateScoreText()
     {
-        missAudioSource.Play();
-
-        _missCount++;
-        if (_currentCombo > _maxCombo) _maxCombo = _currentCombo;
-        _currentCombo = 0;
-        
-        UpdateComboText();
+        scoreText.text = _currentScore.ToString();
     }
-
+    
+    private void UpdateAccuracyText()
+    {
+        accuracyText.text = AccuracyFloat.ToString();
+    }
+    
     private void UpdateComboText()
     {
         comboText.text = _currentCombo.ToString();
     }
-
-    // private void SpawnHitText(GameObject obj, NoteData.LaneOrientation laneOrientation)
-    // {
-    //     var hitPoint = _gameModeData.GetHitPoint(laneOrientation);
-    //     var rot = _mainCam.transform.rotation;
-    //     obj.transform.position = hitPoint;
-    //     obj.transform.rotation = rot;
-    //     TweenHitText(obj);
-    // }
 }

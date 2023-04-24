@@ -44,6 +44,7 @@ public class HitMarkPooledObject : PooledObjectBase
         var dest = t.position + t.up * 1.5f;
         var dest2 = dest + t.up * .5f;
         var tmp = t.GetComponent<TMP_Text>();
+        tmp.alpha = 1;
 
         //Sequence hitSequence = DOTween.Sequence();
         // hitSequence.Append(t.DOMove(dest, 2f));

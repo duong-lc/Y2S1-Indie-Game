@@ -110,9 +110,9 @@ public class LaneCollider : MonoBehaviour
     }
 
     public void RemoveNote(NoteBase note) {
-        if (note.noteOrientation == LaneOrientation) {
-            noteList.Remove(note);
-            note.transform.position = new Vector3(999, 999, 999);
-        }
+        //if (note.noteOrientation == LaneOrientation) {
+        if (note && noteList.Contains(note)) noteList.Remove(note);
+        note.transform.position = new Vector3(999, 999, 999);
+        //}
     }
 }

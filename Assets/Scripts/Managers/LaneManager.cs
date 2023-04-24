@@ -24,11 +24,9 @@ namespace Managers
         
         public Lane[] LaneArray = { }; 
         
-        private void Awake()
-        {
+        private void Awake() {
             Core.Events.EventDispatcher.Instance.AddListener(EventType.CompileDataFromMidiEvent,
                 param => CompileDataFromMidi((MidiFile) param));
-
         }
 
         private void Start() {
@@ -40,9 +38,10 @@ namespace Managers
             AssignColliderData();
         }
 
-        private void CompileDataFromMidi(MidiFile midiFile)
-        {
+        private void CompileDataFromMidi(MidiFile midiFile) {
             ICollection<Note> notes = midiFile.GetNotes();
+            GameModeManager.Instance.CurrentMidiData.TotalRawNoteCount = notes.Count;
+            
             _rawNoteArray = new Note[notes.Count];
             notes.CopyTo(_rawNoteArray, 0);
 

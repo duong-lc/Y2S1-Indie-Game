@@ -217,7 +217,7 @@ namespace NoteClasses
                     //release too early
                     //miss
                     EventDispatcher.Instance.FireEvent(EventType.RemoveSliderFromHoldListEvent, this);
-                    EventDispatcher.Instance.FireEvent(EventType.NoteMissEvent, new HitMarkInitData(this, cond, noteOrientation));
+                    EventDispatcher.Instance.FireEvent(EventType.NoteMissEvent, new HitMarkInitData(this, HitCondition.Miss, noteOrientation));
                     denyInput = true;
                     canRelease = true;
                 }

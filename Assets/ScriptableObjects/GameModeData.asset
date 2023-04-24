@@ -351,10 +351,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: hitCondToPrefab
+    - Name: hitCondToScoreData
       Entry: 7
-      Data: 14|System.Collections.Generic.Dictionary`2[[HitCondition, Assembly-CSharp],[UnityEngine.GameObject,
-        UnityEngine.CoreModule]], mscorlib
+      Data: 14|System.Collections.Generic.Dictionary`2[[HitCondition, Assembly-CSharp],[ScoreData,
+        Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 15|System.Collections.Generic.EnumEqualityComparer`1[[HitCondition, Assembly-CSharp]],
@@ -378,20 +378,23 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
+      Entry: 7
+      Data: 16|ScoreData, Assembly-CSharp
+    - Name: score
+      Entry: 3
+      Data: 100
+    - Name: countTowardsCombo
+      Entry: 5
+      Data: true
+    - Name: resetCombo
+      Entry: 5
+      Data: false
+    - Name: hitMarkPrefab
       Entry: 10
       Data: 4
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 10
-      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -402,8 +405,50 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
+      Entry: 7
+      Data: 17|ScoreData, Assembly-CSharp
+    - Name: score
+      Entry: 3
+      Data: 300
+    - Name: countTowardsCombo
+      Entry: 5
+      Data: true
+    - Name: resetCombo
+      Entry: 5
+      Data: false
+    - Name: hitMarkPrefab
       Entry: 10
       Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 7
+      Data: 18|ScoreData, Assembly-CSharp
+    - Name: score
+      Entry: 3
+      Data: 300
+    - Name: countTowardsCombo
+      Entry: 5
+      Data: true
+    - Name: resetCombo
+      Entry: 5
+      Data: false
+    - Name: hitMarkPrefab
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -414,8 +459,23 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: $v
+      Entry: 7
+      Data: 19|ScoreData, Assembly-CSharp
+    - Name: score
+      Entry: 3
+      Data: 50
+    - Name: countTowardsCombo
+      Entry: 5
+      Data: false
+    - Name: resetCombo
+      Entry: 5
+      Data: false
+    - Name: hitMarkPrefab
       Entry: 10
       Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -426,8 +486,23 @@ MonoBehaviour:
       Entry: 3
       Data: 5
     - Name: $v
+      Entry: 7
+      Data: 20|ScoreData, Assembly-CSharp
+    - Name: score
+      Entry: 3
+      Data: 0
+    - Name: countTowardsCombo
+      Entry: 5
+      Data: false
+    - Name: resetCombo
+      Entry: 5
+      Data: true
+    - Name: hitMarkPrefab
       Entry: 10
       Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -439,11 +514,11 @@ MonoBehaviour:
       Data: 
     - Name: typeToTag
       Entry: 7
-      Data: 16|System.Collections.Generic.Dictionary`2[[NoteType, Assembly-CSharp],[System.String,
+      Data: 21|System.Collections.Generic.Dictionary`2[[NoteType, Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 17|System.Collections.Generic.EnumEqualityComparer`1[[NoteType, Assembly-CSharp]],
+      Data: 22|System.Collections.Generic.EnumEqualityComparer`1[[NoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12

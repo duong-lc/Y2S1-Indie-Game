@@ -56,44 +56,23 @@ public class GameModeData : SerializedScriptableObject
     public float NoteTapZ => noteTapZ;
 
     #region Getters
-    private ReadOnlyDictionary<HitCondition, MarginOfError> _noteHitCondDictCache;
-    public ReadOnlyDictionary<HitCondition, MarginOfError> NoteHitCondDict {
-        get {
-            if (_noteHitCondDictCache.Count == 0)
-                _noteHitCondDictCache = new ReadOnlyDictionary<HitCondition, MarginOfError>(noteHitCondDict);
-            return _noteHitCondDictCache;
-        }
-    }
 
-    private ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData> _laneControllerDataCache;
-    public ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData> LaneControllerData {
-        get {
-            if (_laneControllerDataCache.Count == 0 || _laneControllerDataCache == null)
-                _laneControllerDataCache = new ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData>(laneControllerData);
-            return _laneControllerDataCache;
-        }
-    }
-    
-    private ReadOnlyDictionary<HitCondition, ScoreData> _hitCondToScoreDataCache;
-    public ReadOnlyDictionary<HitCondition, ScoreData> HitCondToScoreData {
-        get {
-            if (_hitCondToScoreDataCache.Count == 0)
-                _hitCondToScoreDataCache = new ReadOnlyDictionary<HitCondition, ScoreData>(hitCondToScoreData);
-            return _hitCondToScoreDataCache;
-        }
-    }
-    
-    private ReadOnlyDictionary<NoteType, string> _typeToTagCache;
-    public ReadOnlyDictionary<NoteType, string> TypeToTag {
-        get {
-            if (_typeToTagCache.Count == 0)
-                _typeToTagCache = new ReadOnlyDictionary<NoteType, string>(typeToTag);
-            return _typeToTagCache;
-        }
-    }
+    public ReadOnlyDictionary<HitCondition, MarginOfError> NoteHitCondDict => new(noteHitCondDict);
+
+    public ReadOnlyDictionary<NoteData.LaneOrientation, LaneControllerData> LaneControllerData => new(laneControllerData);
+    public ReadOnlyDictionary<HitCondition, ScoreData> HitCondToScoreData => new(hitCondToScoreData);
+
+    public ReadOnlyDictionary<NoteType, string> TypeToTag => new (typeToTag);
+
 
     #endregion
 
+    public ScoreData GetScoreData(HitCondition cond)
+    {
+        if (hitCondToScoreData.TryGetValue(cond, out ScoreData scoreData)) return scoreData;
+        NCLogger.Log($"Hit Condition: {cond} not found");
+        return null;
+    }
 
     public MarginOfError GetMOE (HitCondition cond) {
         if (noteHitCondDict.TryGetValue(cond, out MarginOfError MOE)) return MOE;

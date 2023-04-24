@@ -281,7 +281,6 @@ namespace NoteClasses
 
         private void SetUpVariables()
         {
-            
             //setting up spawn time stamps
             _startNoteSpawnTime = _sliderData.timeStampKeyDown - NoteTime;
             _endNoteSpawnTime = _sliderData.timeStampKeyUp - NoteTime;

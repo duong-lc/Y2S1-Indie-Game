@@ -120,7 +120,8 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         hitAudioSource.Play();
 
-        var scoreData = _gameModeData.HitCondToScoreData[param.cond];
+        var scoreData = _gameModeData.GetScoreData(param.cond);
+        if(scoreData == null) NCLogger.Log($"null score data", LogLevel.ERROR);
         
         _currentCombo += scoreData.CountTowardsCombo ? 1 : 0;
         _currentScore += scoreData.Score;
@@ -164,7 +165,7 @@ public class ScoreManager : Singleton<ScoreManager>
     
     private void UpdateAccuracyText()
     {
-        accuracyText.text = AccuracyFloat.ToString();
+       accuracyText.text = AccuracyFloat + $"%";
     }
     
     private void UpdateComboText()

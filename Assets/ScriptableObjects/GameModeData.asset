@@ -105,7 +105,7 @@ MonoBehaviour:
       Data: 0
     - Name: endMOE
       Entry: 4
-      Data: 0.06
+      Data: 0.1
     - Name: 
       Entry: 8
       Data: 
@@ -123,10 +123,10 @@ MonoBehaviour:
       Data: 5|MarginOfError, Assembly-CSharp
     - Name: beginMOE
       Entry: 4
-      Data: 0.06
+      Data: 0.1
     - Name: endMOE
       Entry: 4
-      Data: 0.15
+      Data: 0.2
     - Name: 
       Entry: 8
       Data: 
@@ -165,7 +165,7 @@ MonoBehaviour:
       Data: 7|MarginOfError, Assembly-CSharp
     - Name: beginMOE
       Entry: 4
-      Data: 0.15
+      Data: 0.2
     - Name: endMOE
       Entry: 4
       Data: 99999

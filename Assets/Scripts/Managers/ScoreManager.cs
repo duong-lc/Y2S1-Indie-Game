@@ -12,6 +12,7 @@ using SO_Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
 [Serializable]
@@ -71,6 +72,8 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private TMP_Text comboText;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text accuracyText;
+    [SerializeField] private TMP_Text accuracyShadowText;
+    [SerializeField] private Slider slider;
     [Space] 
     private MidiData _midiData;
     private GameModeData _gameModeData;
@@ -166,7 +169,9 @@ public class ScoreManager : Singleton<ScoreManager>
     
     private void UpdateAccuracyText()
     {
-        accuracyText.text = AccuracyFloat.ToString("F1") + $"%";
+        accuracyText.text = Mathf.FloorToInt(AccuracyFloat).ToString();
+        accuracyShadowText.text = Mathf.FloorToInt(AccuracyFloat).ToString();
+        slider.DOValue(AccuracyFloat / 100, 0.1f);
     }
     
     private void UpdateComboText()

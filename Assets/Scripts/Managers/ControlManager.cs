@@ -19,17 +19,6 @@ namespace Managers
         private MidiData _midiData;
         private GameModeData _gameModeData;
         [Space]
-        // // [SerializeField] private List<Transform> anchorPoints = new List<Transform>();
-        // [Space]
-        // [SerializeField] private float castDist;
-        // [SerializeField] private Vector3 boxSize;
-        // [SerializeField] private LayerMask noteLayer;
-
-        // [TitleGroup("Touch Input Properties")] 
-        // [SerializeField] private PlayerInput playerInput;
-        // [ReadOnly] public List<InputAction> multiTouchInputActions;
-        
-        // private Dictionary<NoteData.LaneOrientation, Vector3> _castOriginDict = new Dictionary<NoteData.LaneOrientation, Vector3>();
         private List<NoteSlider> _currentHoldSliders = new List<NoteSlider>();
 
         private Camera _camera;
@@ -71,10 +60,12 @@ namespace Managers
             foreach (var kvp in _gameModeData.LaneControllerData)
             {
                 if (Input.GetKeyDown(kvp.Value.Input)) {
+                    kvp.Value.collider.Lane.HighlightSprite.enabled = true;
                     if(!NoteInteractInputDown(kvp.Value.collider)) continue;
                 }
 
                 if (Input.GetKeyUp(kvp.Value.Input)) {
+                    kvp.Value.collider.Lane.HighlightSprite.enabled = false;
                     if(!NoteInteractInputUp(kvp.Value.collider)) continue;
                 }
 
@@ -95,15 +86,7 @@ namespace Managers
 
         private bool NoteInteractInputDown(LaneCollider laneCollider)
         {
-            // _castOriginDict.TryGetValue(entry.Value, out var castOrigin);
-            //  if (!Physics.BoxCast(castOrigin,
-            //          boxSize,
-            //          Vector3.forward,
-            //          out var hit,
-            //          Quaternion.identity,
-            //          castDist,
-            //          noteLayer)) return false;
-            //         
+     
             //TODO: Instead of getting component, get the lane based on the keyEntry.
             //In said lane, there will be a List that store all Active Notes in scene  -List<NoteBase>
             //use linq to compare hit.object with notebase.object in list. If matches, return notebase with
@@ -111,6 +94,7 @@ namespace Managers
             //the purpose is to have less performance intensive code but haven't really measured - just a theory.
             var note = laneCollider.GetApproachingNote();
             if (!note) return false;
+
             switch (note.Type)
             {
                 case NoteType.NormalNote:
@@ -133,6 +117,7 @@ namespace Managers
         private bool NoteInteractInputUp(LaneCollider laneCollider)
         {
             var slider = _currentHoldSliders.Find(x => x.noteOrientation == laneCollider.LaneOrientation);
+
             if (!slider) {
                 NCLogger.Log($"Slider not found", LogLevel.WARNING);
                 _currentHoldSliders.Remove(slider);

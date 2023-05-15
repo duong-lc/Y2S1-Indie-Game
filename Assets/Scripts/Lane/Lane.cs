@@ -48,6 +48,7 @@ public class NoteInitData : PooledObjectCallbackData
 
 public class Lane : MonoBehaviour
 {
+    private SpriteRenderer _highlightSprite;
     private MidiData _midiData;
     private GameModeData _gameModeData;
 
@@ -82,6 +83,14 @@ public class Lane : MonoBehaviour
             return _notePoolArray;
         }
     }
+
+    public SpriteRenderer HighlightSprite {
+        get {
+            if (!_highlightSprite) _highlightSprite = GetComponentInChildren<SpriteRenderer>();
+            return _highlightSprite;
+        }
+    }
+    
     private void Awake()
     {
        // _spawnLocation = new Vector3(_gameModeData.GetHitPoint(LaneOrientation).x, 0, _gameModeData.NoteSpawnZ);
@@ -99,6 +108,7 @@ public class Lane : MonoBehaviour
         
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;
+        HighlightSprite.enabled = false;
     }
 
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)

@@ -46,8 +46,15 @@ namespace NoteClasses
         protected void Awake()
         {
         }
-        
 
+        protected virtual void ToggleChildren(bool state)
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(state);
+            }
+        }
+        
         protected virtual void SetLookDir(Vector3 startPos, Vector3 endPos)
         {
             transform.forward = (endPos - startPos).normalized;

@@ -119,7 +119,7 @@ namespace Managers
             var slider = _currentHoldSliders.Find(x => x.noteOrientation == laneCollider.LaneOrientation);
 
             if (!slider) {
-                NCLogger.Log($"Slider not found", LogLevel.WARNING);
+//                NCLogger.Log($"Slider not found", LogLevel.WARNING);
                 _currentHoldSliders.Remove(slider);
                 return false;
             }
@@ -130,6 +130,7 @@ namespace Managers
         
         private void RemoveSliderFromList(NoteSlider slider)
         {
+            this.FireEvent(EventType.SliderNoteReleaseEvent, slider.noteOrientation);
             StartCoroutine(DelayedRemoveSliderRoutine(slider));
         }
 

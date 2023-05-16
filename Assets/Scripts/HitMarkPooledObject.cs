@@ -33,7 +33,7 @@ public class HitMarkPooledObject : PooledObjectBase
     {
         yield return new WaitForSeconds(_time);
         
-        NCLogger.Log($"kill {gameObject.name}");
+       // NCLogger.Log($"kill {gameObject.name}");
         KillAction(this);
         yield return null;
     }

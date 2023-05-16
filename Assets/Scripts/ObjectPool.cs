@@ -1,5 +1,6 @@
 ﻿using System;
 using Core;
+using Core.Logging;
 using NoteClasses;
 using UnityEngine;
 using EventType = Core.Events.EventType;
@@ -29,16 +30,25 @@ public class ObjectPool : PoolBase<PooledObjectBase>
         var note = obj as NoteBase;
         if(note != null) note.Collider.enabled = false;
         
-        obj.transform.position = new Vector3(999, 999, 999);
+        obj.transform.position = new Vector3(0, -999, 0);
         base.Release(obj);
     }
 
     public override PooledObjectBase Get()
     {
         var obj = base.Get();
-        var note = obj as NoteBase;
-        if(note != null) note.Collider.enabled = true;
         
+        obj.transform.position = new Vector3(0, -999, 0);
+        // foreach (Transform child in obj.transform) {
+        //    child.position = new Vector3(0, -999, 0);
+        // }
+        // NCLogger.Log($"{obj.name} | {obj.transform.parent.parent} {obj.transform.position}");
+        var note = obj as NoteBase;
+        if (note != null)
+        {
+            // if(note as NoteSlider)Debug.Break();
+            note.Collider.enabled = true;
+        }
         return obj;
     } 
 }

@@ -38,7 +38,15 @@ namespace Core
 
         #region Overrides
         public virtual T CreateSetup() => Instantiate(_prefab, _parent);
-        protected virtual void GetSetup(T obj) => obj.gameObject.SetActive(true);
+        protected virtual void GetSetup(T obj)
+        {
+            obj.gameObject.SetActive(true);
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+
         protected virtual void ReleaseSetup(T obj) => obj.gameObject.SetActive(false);
         protected virtual void DestroySetup(T obj) => Destroy(obj);
         #endregion

@@ -33,7 +33,7 @@ public class PooledObjectBase : MonoBehaviour, IPooledCore<PooledObjectBase>
         while (!canRelease) {
             yield return null;
         }
-        NCLogger.Log($"kill {gameObject.name}");
+        // NCLogger.Log($"kill {gameObject.name}");
         KillAction(this);
         yield return null;
     }

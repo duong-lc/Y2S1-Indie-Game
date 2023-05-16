@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using Core.Events;
 using Core.Logging;
 using Managers;
 using UnityEngine;
 using Data_Classes;
+using DG.Tweening;
 using Melanchall.DryWetMidi.MusicTheory;
 using EventType = Core.Events.EventType;
 
@@ -21,12 +23,22 @@ namespace NoteClasses
         private double TimeSinceInstantiated => CurrentSongTimeRaw - _timeInstantiated;
         private float Alpha => ((float)(TimeSinceInstantiated / (NoteTime * 2)));
         private HitCondition hitCond;
+        
+        [SerializeField] private GameObject outline;
+        private SpriteRenderer _outlineSR;
+        private bool _doOnce;
+        protected void Awake()
+        {
+            _outlineSR = outline.GetComponent<SpriteRenderer>();
+        }
+        
         protected override void Start()
         {
             base.Start();
-            // SetUpVariables();
-            // SetLookDir(_startPos, _endPos);
+           
         }
+
+       
 
         public override void Init(PooledObjectCallbackData data, Action<PooledObjectBase> killAction)
         {
@@ -40,8 +52,32 @@ namespace NoteClasses
             
             KillAction = killAction;
             canRelease = false;
+
+            _outlineSR.color = new Color(_outlineSR.color.r, _outlineSR.color.g, _outlineSR.color.b, 0);
+            outline.transform.localScale = Vector3.one * 5;
+            _doOnce = true;
+
+            ToggleChildren(true);
             StartCoroutine(RunRoutine());
         }
+        
+        public override IEnumerator RunRoutine()
+        {
+            while (!canRelease) {
+                if (NoteTime - TimeSinceInstantiated <= 1 && _doOnce)
+                {
+                    _doOnce = false;
+                    _outlineSR.DOFade(.8f, 1f);
+                    outline.transform.DOScale(1.1f, 1f);
+                }
+                
+                yield return null;
+            }
+            
+            KillAction(this);
+            yield return null;
+        }
+        
         
         private void Update()
         {
@@ -84,7 +120,7 @@ namespace NoteClasses
             hitCond = GetHitCondition(CurrentSongTimeAdjusted , assignedTime, ref noteHitEvent);
             if (hitCond != HitCondition.None && hitCond != HitCondition.Miss) {
                 this.FireEvent(noteHitEvent, new HitMarkInitData(this, hitCond, noteOrientation));
-                NCLogger.Log($"hit the mf wall");
+                // NCLogger.Log($"hit the mf wall");
                 // Destroy(gameObject);
                 canRelease = true;
                 return true;

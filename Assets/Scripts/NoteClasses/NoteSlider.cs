@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Threading.Tasks;
 using Core.Events;
 using Core.Logging;
 using Managers;
@@ -114,7 +116,7 @@ namespace NoteClasses
             }
             else if (startNote)
             {
-                ActivateStartNote();
+                StartCoroutine(ActivateStartNote());
                 startNote.transform.position = Vector3.Lerp(_startPosStartNote, _endPosStartNote, AlphaStart);
             }
         }
@@ -129,7 +131,7 @@ namespace NoteClasses
                 if (Math.Abs(endNote.transform.position.z - _sliderLockPoint.z) > 0 && AlphaEnd < 0.5f)
                 {
                     endNote.transform.position = Vector3.Lerp(_startPosEndNote, _endPosEndNote, AlphaEnd);
-                    ActivateEndNote();
+                    StartCoroutine(ActivateEndNote());
                 }
                 else
                 {
@@ -155,6 +157,7 @@ namespace NoteClasses
             if (cond != HitCondition.None && cond != HitCondition.Miss) {
                 //Hit
                 this.FireEvent(noteHitEvent,  new HitMarkInitData(this, cond, noteOrientation));
+                this.FireEvent(EventType.SliderNoteHoldingEvent, noteOrientation);
                 
                 //Setting condition for endNote evaluation
                 _isStartNoteHitCorrect = true;
@@ -200,7 +203,7 @@ namespace NoteClasses
                 var cond = GetHitCondition(CurrentSongTimeAdjusted , _sliderData.timeStampKeyUp, ref noteHitEvent);
                 if (cond != HitCondition.None && cond != HitCondition.Miss)
                 {
-                    NCLogger.Log($"release the slider NOT miss");
+                    // NCLogger.Log($"release the slider NOT miss");
                     //Hit
                     _isEndNoteHitCorrect = true;
 
@@ -212,7 +215,7 @@ namespace NoteClasses
                 }
                 else if (cond == HitCondition.Miss || cond == HitCondition.None)
                 {
-                    NCLogger.Log($"release the slider MISS");
+                    // NCLogger.Log($"release the slider MISS");
                     isDestroy = true;
                     //release too early
                     //miss
@@ -248,18 +251,20 @@ namespace NoteClasses
         }
 
         #region Initializer Methods
-        private void ActivateStartNote()
+        private IEnumerator ActivateStartNote()
         {
-            if (!_runOnce) return;
+            if (!_runOnce) yield break;
+            yield return null;
             startNote.SetActive(true);
             foreach (var line in _lineControllers)
                 line.gameObject.SetActive(true);
             _runOnce = false;
         }
 
-        private void ActivateEndNote()
+        private IEnumerator ActivateEndNote()
         {
-            if (!_runOnce1) return;
+            if (!_runOnce1)  yield break;
+            yield return null;
             endNote.SetActive(false);
             _runOnce1 = false;
         }

@@ -15,6 +15,9 @@ namespace Core.Events {
         UnPauseEvent,
         RemoveSliderFromHoldListEvent,
         SpawnNoteNormal,
-        SpawnNoteSlider
+        SpawnNoteSlider,
+        
+        SliderNoteHoldingEvent,
+        SliderNoteReleaseEvent,
     }
 }

@@ -93,6 +93,8 @@ public class ScoreManager : Singleton<ScoreManager>
     private int _maxCombo;
     private int _missCount;
     private Camera _mainCam;
+    private Transform _comboTCache;
+    private Tweener _scaleComboTweener;
     
     public int MissCount => _missCount;
     public int CurrentCombo => _currentCombo;
@@ -120,6 +122,8 @@ public class ScoreManager : Singleton<ScoreManager>
         _midiData = GameModeManager.Instance.CurrentMidiData;
         _gameModeData = GameModeManager.Instance.GameModeData;
         _mainCam = Camera.main;
+
+        _comboTCache = comboText.transform;
     }
 
     private void OnHit(HitMarkInitData param)
@@ -176,6 +180,26 @@ public class ScoreManager : Singleton<ScoreManager>
     
     private void UpdateComboText()
     {
+        ResetTransform();
+        if (_scaleComboTweener == null)
+        {
+            _scaleComboTweener = comboText.transform.DOPunchScale(Vector3.one * .5f, .2f, 1, 1).OnComplete(() => _scaleComboTweener = null);
+        } else {
+            if (_scaleComboTweener.IsActive())
+            {
+                _scaleComboTweener.Kill();
+                _scaleComboTweener.OnKill(ResetTransform);
+                _scaleComboTweener = comboText.transform.DOPunchScale(Vector3.one * .5f, .2f, 1, 1).OnComplete(() => _scaleComboTweener = null);
+            }
+        }
+           
         comboText.text = _currentCombo.ToString();
+    }
+
+    private void ResetTransform()
+    {
+        comboText.transform.position = _comboTCache.position;
+        comboText.transform.localScale = Vector3.one;
+        // NCLogger.Log($" reset scale {comboText.transform.localScale}");
     }
 }

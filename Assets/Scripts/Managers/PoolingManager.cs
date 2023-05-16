@@ -96,7 +96,7 @@ public class PoolingManager : Singleton<PoolingManager>
     private void SetUpPool(KeyValuePair<EventType, PooledData> kvp, Transform parent) 
     {
         GameObject poolGO = new GameObject();
-        poolGO.transform.position = new Vector3(999, 999, 999);
+        poolGO.transform.position = new Vector3(0, -999, 0);
         poolGO.transform.parent = parent;
         poolGO.name = $"Pool {kvp.Value.prefab.name}";
         

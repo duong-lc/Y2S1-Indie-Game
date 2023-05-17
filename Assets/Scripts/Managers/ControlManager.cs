@@ -54,6 +54,14 @@ namespace Managers
             // multiTouchInputActions.Add(playerInput.actions["Touch3"]);
         }
 
+        public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z) {
+            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+            float distance;
+            xy.Raycast(ray, out distance);
+            return ray.GetPoint(distance);
+        }
+        
         // Update is called once per frame
         private void Update()
         {
@@ -83,9 +91,11 @@ namespace Managers
             {
                 foreach (Touch t in Input.touches)
                 {
-                    var position = camera.ScreenToWorldPoint(Input.GetTouch(t.fingerId).position);
+                    var TEMPposition = camera.ScreenToWorldPoint(Input.GetTouch(t.fingerId).position);
+                    var position = GetWorldPositionOnPlane(TEMPposition, 0);
                     if (Input.GetTouch(t.fingerId).phase == TouchPhase.Began)
                     {
+                        Debug.DrawLine(position, camera.transform.position, Color.green);
                         NCLogger.Log($"print out touching");
                         var hits = Physics.RaycastAll(camera.transform.position,
                             (position - camera.transform.position).normalized,
@@ -105,6 +115,8 @@ namespace Managers
                     }
                     if (Input.GetTouch(t.fingerId).phase == TouchPhase.Ended)
                     {
+                        //(camera.transform.position + camera.transform.forward *4)
+                        NCLogger.Log($"print out releasing");
                         var hits = Physics.RaycastAll(camera.transform.position,
                             (position - camera.transform.position).normalized,
                             Mathf.Infinity);
@@ -114,7 +126,7 @@ namespace Managers
                             {
                                 if (data.collider.Collider == hit.collider)
                                 {
-                                    data.collider.Lane.HighlightSprite.enabled = true;
+                                    data.collider.Lane.HighlightSprite.enabled = false;
                                     if(!NoteInteractInputUp(data.collider)) continue;
                                 }
                             }

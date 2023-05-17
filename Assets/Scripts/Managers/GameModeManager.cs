@@ -52,4 +52,9 @@ public class GameModeManager : Singleton<GameModeManager>
         
         DontDestroyOnLoad(gameObject);
     }
+
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
 }

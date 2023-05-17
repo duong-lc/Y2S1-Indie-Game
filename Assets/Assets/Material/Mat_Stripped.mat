@@ -24,10 +24,10 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 87a70d9b0b7eedb4083023ad5cb25dd4, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3050
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -103,7 +103,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Frequency: 17.22
+    - _Frequency: 4.01
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -112,17 +112,17 @@ Material:
     - _Offset: 0.74
     - _Parallax: 0.005
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: 50
     - _ReceiveShadows: 1
-    - _Rotation: 1.2
+    - _Rotation: 4
     - _ScrollSpeed: -0.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Threshold: 0.1
-    - _Tightening: 37.99
+    - _Threshold: 0.11
+    - _Tightening: 185.12
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

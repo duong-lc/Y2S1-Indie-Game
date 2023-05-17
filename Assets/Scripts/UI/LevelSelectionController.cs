@@ -24,4 +24,9 @@ public class LevelSelectionController : MonoBehaviour
     {
         SceneManager.LoadScene(GameModeManager.Instance.GameModeData.mainMenuSceneName);
     }
+
+    public void PlayTest()
+    {
+        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName);
+    }
 }

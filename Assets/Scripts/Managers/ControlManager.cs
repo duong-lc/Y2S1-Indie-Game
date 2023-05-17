@@ -11,6 +11,7 @@ using SO_Scripts;
 using UnityEngine.InputSystem;
 using EventType = Core.Events.EventType;
 using NoteData = Data_Classes.NoteData;
+using TouchPhase = UnityEngine.TouchPhase;
 
 namespace Managers
 {
@@ -68,20 +69,59 @@ namespace Managers
                     kvp.Value.collider.Lane.HighlightSprite.enabled = false;
                     if(!NoteInteractInputUp(kvp.Value.collider)) continue;
                 }
-
             }
-            // if(Input.touchCount > 0 && Input.touches[0].phase.Equals(UnityEngine.InputSystem.TouchPhase.Began))
-            // {
-            //     Ray ray = camera.ScreenPointToRay(Input.touches[0].position);
-            //     RaycastHit hit;
-            //     if(Physics.Raycast(ray, out hit))
-            //     {
-            //         if(hit.collider != null)
-            //         {
-            //             if (!NoteInteractInputDown(entry)) continue;
-            //         }
-            //     }
-            // }
+
+            // NCLogger.Log($"print out touching");
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                var touchPos = camera.ScreenToWorldPoint(touch.position);
+                NCLogger.Log($"{touchPos}");
+            }
+
+            if (Input.touchCount > 0)
+            {
+                foreach (Touch t in Input.touches)
+                {
+                    var position = camera.ScreenToWorldPoint(Input.GetTouch(t.fingerId).position);
+                    if (Input.GetTouch(t.fingerId).phase == TouchPhase.Began)
+                    {
+                        NCLogger.Log($"print out touching");
+                        var hits = Physics.RaycastAll(camera.transform.position,
+                            (position - camera.transform.position).normalized,
+                            Mathf.Infinity);
+                        foreach (var hit in hits)
+                        {
+                            foreach (var data in _gameModeData.LaneControllerData.Values)
+                            {
+                                if (data.collider.Collider == hit.collider)
+                                {
+                                    NCLogger.Log($"print out touching");
+                                    data.collider.Lane.HighlightSprite.enabled = true;
+                                    if(!NoteInteractInputDown(data.collider)) continue;
+                                }
+                            }
+                        }
+                    }
+                    if (Input.GetTouch(t.fingerId).phase == TouchPhase.Ended)
+                    {
+                        var hits = Physics.RaycastAll(camera.transform.position,
+                            (position - camera.transform.position).normalized,
+                            Mathf.Infinity);
+                        foreach (var hit in hits)
+                        {
+                            foreach (var data in _gameModeData.LaneControllerData.Values)
+                            {
+                                if (data.collider.Collider == hit.collider)
+                                {
+                                    data.collider.Lane.HighlightSprite.enabled = true;
+                                    if(!NoteInteractInputUp(data.collider)) continue;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private bool NoteInteractInputDown(LaneCollider laneCollider)

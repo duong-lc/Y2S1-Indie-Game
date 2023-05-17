@@ -35,19 +35,54 @@ namespace Managers
                     for example, windows, mac, linux = file location where as webgl = website
             if not look in local folder
             */ 
-            if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://")){
-                StartCoroutine(ReadFromWebsite());//start coroutine to wait to load
-            }else{
-                ReadFromFile();
-            }
+            // if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://")){
+            //     StartCoroutine(ReadFromWebsite());//start coroutine to wait to load
+            // }else{
+            //     ReadFromFile();
+            // }
+            StartCoroutine(GetRequest("https://www.dropbox.com/s/ibrp3ki2z69sjbm/HSOTD.mid?dl=1"));
         }
 
+        private IEnumerator GetRequest(string url)
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+            {
+                // Request and wait for the desired page.
+                yield return webRequest.SendWebRequest();
+
+                string[] pages = url.Split('/');
+                int page = pages.Length - 1;
+
+                switch (webRequest.result)
+                {
+                    case UnityWebRequest.Result.ConnectionError:
+                    case UnityWebRequest.Result.DataProcessingError:
+                        Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                        break;
+                    case UnityWebRequest.Result.ProtocolError:
+                        Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                        break;
+                    case UnityWebRequest.Result.Success:
+                        Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                        var results = webRequest.downloadHandler.data;
+                        using (var stream = new MemoryStream(results))
+                        {
+                            MidiFile = MidiFile.Read(stream);
+                            Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
+                            Invoke(nameof(StartSong), _midiData.songDelayInSeconds);
+                        }
+                        break;
+                }
+            }
+        }
+        
         /// <summary>
         /// Read Midi file from website, auto request through coroutine.
         /// </summary>
         private IEnumerator ReadFromWebsite()
         {
             //requesting unity web request the midi file
+            // using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + _midiData.fileLocation)){
             using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + _midiData.fileLocation)){
                 yield return www.SendWebRequest();
                 
@@ -79,8 +114,10 @@ namespace Managers
         /// </summary>
         private void ReadFromFile()
         {
-            MidiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + _midiData.fileLocation);
-            //convert midi data to necessary data for rhythm game, append them all to list
+             MidiFile = MidiFile.Read(Application.dataPath +"/"+ _midiData.fileLocation);
+             // var obj = Resources.Load(Application.streamingAssetsPath + "/" + _midiData.fileLocation);
+             
+           //convert midi data to necessary data for rhythm game, append them all to list
             //LaneManager.Instance.CompileDataFromMidi(MidiFile);
             Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
             Invoke(nameof(StartSong), _midiData.songDelayInSeconds);

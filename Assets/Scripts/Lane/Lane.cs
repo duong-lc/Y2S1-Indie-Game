@@ -109,13 +109,15 @@ public class Lane : MonoBehaviour
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;
         HighlightSprite.enabled = false;
+
+        allNotesList = _midiData.laneMidiData[LaneOrientation].allNoteOnLaneList;
     }
 
     public void SetLocalListOnLane(List<BaseNoteType> listToSet)
     {
-        allNotesList.Clear();
+        // allNotesList.Clear();
         //NCLogger.Log($"{listToSet.Count}");
-        allNotesList = listToSet;
+        // allNotesList = listToSet;
     }
 
     private void Update()
@@ -128,7 +130,7 @@ public class Lane : MonoBehaviour
         if (!_isSpawn) return;
         if (allNotesList.Count <= 0)
         {
-            //print($"no notes");
+            NCLogger.Log($"NO NOTES TO SPAWN {allNotesList.Count}", LogLevel.ERROR);
             return;
         }
         else

@@ -19,5 +19,8 @@ namespace Core.Events {
         
         SliderNoteHoldingEvent,
         SliderNoteReleaseEvent,
+        
+        StartSongEvent,
+        LaneFinishSpawningEvent,
     }
 }

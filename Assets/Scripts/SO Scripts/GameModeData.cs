@@ -21,6 +21,10 @@ public class LaneControllerData
 [CreateAssetMenu(fileName = "GameModeData", menuName = "ScriptableObjects/GameModeData", order = 0)]
 public class GameModeData : SerializedScriptableObject
 {
+    [TitleGroup("Settings")]
+    [Range(0,1)]
+    public float volume;
+    
     [TitleGroup("Scene Data")]
     public string mainMenuSceneName;
     public string levelSelectionSceneName;

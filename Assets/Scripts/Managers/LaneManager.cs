@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Events;
 using Core.Logging;
 using Core.Patterns;
+using DG.Tweening;
 using UnityEngine;
 using SO_Scripts;
 using Melanchall.DryWetMidi.Core;
@@ -27,6 +29,7 @@ namespace Managers
         private void Awake() {
             Core.Events.EventDispatcher.Instance.AddListener(EventType.CompileDataFromMidiEvent,
                 param => CompileDataFromMidi((MidiFile) param));
+            this.AddListener(EventType.LaneFinishSpawningEvent, param => StartCoroutine(CheckSongEnd()));
         }
 
         private void Start() {
@@ -36,8 +39,42 @@ namespace Managers
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
 
             AssignColliderData();
+
+            StartCoroutine(LaneValidationRoutine());
         }
 
+        private IEnumerator LaneValidationRoutine()
+        {
+            for (var i = 0; i < LaneArray.Length; i++)
+            {
+                var laneEmpty = LaneArray[i].allNotesList.Count == 0;
+                if (laneEmpty) {
+                    i = i == 0 ? 0 : i - 1;
+                    yield return null;
+                }
+            }
+
+            //Validation complete
+            foreach (var lane in LaneArray) {
+                lane.canSpawn = true;
+            }
+            this.FireEvent(EventType.StartSongEvent);
+        }
+
+        private IEnumerator CheckSongEnd()
+        {
+            var canEnd = true;
+            foreach (var lane in LaneArray) {
+                if (lane.canSpawn) canEnd = false;
+            }
+
+            if (canEnd)
+            {
+                yield return new WaitForSeconds(3f + _gameModeData.NoteTime);
+                SongManager.Instance.audioSource.DOFade(0, 3f);
+            }
+        }
+        
         private void CompileDataFromMidi(MidiFile midiFile) {
             ICollection<Note> notes = midiFile.GetNotes();
             GameModeManager.Instance.CurrentMidiData.TotalRawNoteCount = notes.Count;

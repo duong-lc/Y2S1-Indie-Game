@@ -8,6 +8,7 @@ using System.IO;
 using Core.Events;
 using Core.Logging;
 using Core.Patterns;
+using Sirenix.OdinInspector;
 using UnityEngine.Networking;
 using EventType = Core.Events.EventType;
 
@@ -20,7 +21,10 @@ namespace Managers
         public AudioSource audioSource; //audio source to play the song
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
 
+        
+
         private void Awake() {
+            this.AddListener(EventType.StartSongEvent, param => Invoke(nameof(StartSong), _midiData.songDelayInSeconds));
         }
 
         private void Start()
@@ -29,18 +33,20 @@ namespace Managers
             _gameModeData = GameModeManager.Instance.GameModeData;
             if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
-            
+
+            audioSource.volume = _gameModeData.volume;
+
             /*
             checking if the "StreamingAssets" path is a website or not, depending on the platform that loads the midi file
                     for example, windows, mac, linux = file location where as webgl = website
             if not look in local folder
-            */ 
+            */
             // if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://")){
             //     StartCoroutine(ReadFromWebsite());//start coroutine to wait to load
             // }else{
             //     ReadFromFile();
             // }
-            StartCoroutine(GetRequest("https://www.dropbox.com/s/ibrp3ki2z69sjbm/HSOTD.mid?dl=1"));
+            //StartCoroutine(GetRequest("https://www.dropbox.com/s/ibrp3ki2z69sjbm/HSOTD.mid?dl=1"));
         }
 
         private IEnumerator GetRequest(string url)
@@ -112,6 +118,8 @@ namespace Managers
         /// <summary>
         /// Read Midi file from local file dir.
         /// </summary>
+        
+        [Button("Compile Current Midi Data")]
         private void ReadFromFile()
         {
              MidiFile = MidiFile.Read(Application.dataPath +"/"+ _midiData.fileLocation);
@@ -120,8 +128,8 @@ namespace Managers
            //convert midi data to necessary data for rhythm game, append them all to list
             //LaneManager.Instance.CompileDataFromMidi(MidiFile);
             Core.Events.EventDispatcher.Instance.FireEvent(EventType.CompileDataFromMidiEvent,MidiFile);
-            Invoke(nameof(StartSong), _midiData.songDelayInSeconds);
         }
+            
         
         public void StartSong()
         {

@@ -95,6 +95,7 @@ public class ScoreManager : Singleton<ScoreManager>
     private Camera _mainCam;
     private Transform _comboTCache;
     private Tweener _scaleComboTweener;
+    private Ratings _ratings;
     
     public int MissCount => _missCount;
     public int CurrentCombo => _currentCombo;
@@ -155,16 +156,24 @@ public class ScoreManager : Singleton<ScoreManager>
         UpdateAccuracyText();
     }
 
-    // private void OnMiss(HitMarkInitData param)
-    // {
-    //     missAudioSource.Play();
-    //
-    //     _missCount++;
-    //     if (_currentCombo > _maxCombo) _maxCombo = _currentCombo;
-    //     _currentCombo = 0;
-    //     
-    //     UpdateComboText();
-    // }
+    private void GetRatings()
+    {
+        _ratings = AccuracyFloat switch
+        {
+            < 50 => Ratings.Fail,
+            <= 60 => Ratings.D,
+            <= 70 => Ratings.C,
+            <= 80 => Ratings.B,
+            <= 90 => Ratings.A,
+            <= 100 => Ratings.S,
+            _ => _ratings
+        };
+    }
+
+    private void CacheHighScore()
+    {
+        
+    }
 
     private void UpdateScoreText()
     {

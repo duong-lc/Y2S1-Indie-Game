@@ -8,6 +8,16 @@ using Melanchall.DryWetMidi.MusicTheory;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
+public enum Ratings
+{
+    S,
+    A,
+    B,
+    C,
+    D,
+    Fail
+}
+
 
 [Serializable]
 public class LaneMidiData
@@ -41,5 +51,15 @@ public class MidiData : SerializedScriptableObject
    public NoteName noteRestrictionSliderNote;
 
    public Dictionary<NoteData.LaneOrientation, LaneMidiData> laneMidiData = new ();
+
+   [Header("Song High Score")] 
+   public Ratings ratings;
+   public float accuracy;
+   public int maxCombo;
+   public int score;
+   public int perfectHits;
+   public int earlyHits;
+   public int lateHits;
+   public int missHits;
 }
 

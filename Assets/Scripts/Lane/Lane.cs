@@ -53,8 +53,9 @@ public class Lane : MonoBehaviour
     private GameModeData _gameModeData;
 
     public List<BaseNoteType> allNotesList = new List<BaseNoteType>();
-    
-    private bool _isSpawn = true;
+
+    public bool canSpawn = false;
+
     private int _spawnIndex = 0;//index spawn to loop through the timestamp array to spawn notes based on timestamp
     private int _inputIndex;//input index to loop through the timestamp array to form note input queue 
     [SerializeField] private DataClass.NoteData.LaneOrientation orientation;
@@ -99,12 +100,11 @@ public class Lane : MonoBehaviour
     private void Start() {
         _midiData = GameModeManager.Instance.CurrentMidiData;
         _gameModeData = GameModeManager.Instance.GameModeData;
-        // _poolData = GameModeManager.Instance.PoolData;
-        
+
         if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
         if(!_gameModeData) NCLogger.Log($"gameModeData is {_gameModeData}", LogLevel.ERROR);
-        // if(!_poolData) NCLogger.Log($"poolData is {_poolData}", LogLevel.ERROR);
-        
+
+        canSpawn = false;
         
         _normalNotePrefab = _midiData.noteNormalPrefab;
         _sliderNotePrefab = _midiData.noteSliderPrefab;
@@ -127,7 +127,7 @@ public class Lane : MonoBehaviour
     
     private void SpawningNotesFromList()
     {
-        if (!_isSpawn) return;
+        if (!canSpawn) return;
         if (allNotesList.Count <= 0)
         {
             NCLogger.Log($"NO NOTES TO SPAWN {allNotesList.Count}", LogLevel.ERROR);
@@ -146,17 +146,6 @@ public class Lane : MonoBehaviour
                 //if current song time reaches point to spawn a note
                 if (AudioTimeRaw >= noteNormalCast.timeStamp - _gameModeData.NoteTime)
                 {
-                    //Spawn a note
-                    // var noteObj = Instantiate(_normalNotePrefab, _spawnLocation , Quaternion.identity, transform);
-                    //updating the game object ref in the note
-                    // allNotesList[_spawnIndex].noteObj = noteObj;
-                    // var normalComp = noteObj.GetComponent<NoteNormal>();
-                    //
-                    // normalComp.InitializeDataOnSpawn(
-                    //     ref noteNormalCast.octaveNum,
-                    //     ref noteNormalCast.laneOrientation,
-                    //     ref noteNormalCast.timeStamp);
-
                     this.FireEvent(EventType.SpawnNoteNormal, new NoteInitData(this, _spawnLocation,
                         transform, noteNormalCast.octaveNum,noteNormalCast.laneOrientation,noteNormalCast.timeStamp));
                     
@@ -169,23 +158,6 @@ public class Lane : MonoBehaviour
 
                 if (AudioTimeRaw >= noteSliderCast.sliderData.timeStampKeyDown - _gameModeData.NoteTime)
                 {
-                    //print($"{gameObject.name}");
-                    //Spawn a slider prefab
-                    // var NoteSliderObj = Instantiate(_sliderNotePrefab, _spawnLocation , Quaternion.identity, transform);
-                    //updating the game object ref in the note
-                    //allNotesList[_spawnIndex].noteObj = NoteSliderObj;
-                    // var sliderComp = NoteSliderObj.GetComponent<NoteSlider>();
-                    //
-                    // sliderComp.InitializeDataOnSpawn(
-                    //     ref noteSliderCast.octaveNum,
-                    //     ref noteSliderCast.laneOrientation,
-                    //     ref noteSliderCast.sliderData);
-                    
-                    // sliderComp.octaveNum = allNotesList[_spawnIndex].octaveNum;
-                    // //pass the orientation property
-                    // sliderComp.noteOrientation = allNotesList[_spawnIndex].laneOrientation;
-                    // //Passing data to the newly spawned slider 
-                    // sliderComp.data = noteSliderCast.sliderData;
 
                     this.FireEvent(EventType.SpawnNoteSlider, new NoteInitData( this, _spawnLocation, 
                         transform, noteSliderCast.octaveNum,noteSliderCast.laneOrientation,noteSliderCast.sliderData));
@@ -203,7 +175,10 @@ public class Lane : MonoBehaviour
         if(_spawnIndex + 1 <= allNotesList.Count - 1)
             _spawnIndex++;
         else
-            _isSpawn = false;
+        {
+            canSpawn = false;
+            this.FireEvent(EventType.LaneFinishSpawningEvent);
+        }
     }
     
 }

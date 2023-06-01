@@ -223,6 +223,14 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         endScreen_HighScoreNotice.SetActive(false);
         endScreen_FCNotice.SetActive(false);
+        endScreen_Accuracy.gameObject.SetActive(false);
+        endScreen_MaxCombo.gameObject.SetActive(false);
+        endScreen_Ratings.gameObject.SetActive(false);
+        endScreen_Score.gameObject.SetActive(false);
+        endScreen_Perfect.gameObject.SetActive(false);
+        endScreen_Early.gameObject.SetActive(false);
+        endScreen_Late.gameObject.SetActive(false);
+        endScreen_Miss.gameObject.SetActive(false);
         
         if (_currentScore > _midiData.score)
         {
@@ -243,7 +251,7 @@ public class ScoreManager : Singleton<ScoreManager>
             endScreen_FCNotice.SetActive(true);
         }
         
-        endScreen_Accuracy.text = $"Accuracy: " + AccuracyFloat.ToString("#.##");
+        endScreen_Accuracy.text = $"Accuracy: " + AccuracyFloat.ToString("#.##") + "%";
         endScreen_MaxCombo.text = $"Max Combo: {_maxCombo}";
         endScreen_Ratings.text = $"{GetRatings()}";
         endScreen_Score.text = $"{_currentScore}";
@@ -252,7 +260,15 @@ public class ScoreManager : Singleton<ScoreManager>
         endScreen_Late.text = $"Late: {lateHits}";
         endScreen_Miss.text = $"Miss: {missHits}";
 
-        GameSceneController.Instance.LoadEndScreenOverlay();
+        var endScreen = GameSceneController.Instance.LoadEndScreenOverlay();
+        var originalPos = endScreen.transform.position;
+        endScreen.transform.position = new Vector3(originalPos.x, originalPos.y + 50, originalPos.z);
+        var mySequence = DOTween.Sequence();
+        mySequence.Append(endScreen.transform.DOMoveY(originalPos.y, 3f))
+            .InsertCallback(5.5f, () => endScreen_Accuracy.gameObject.SetActive(true))
+            .InsertCallback(6f, () => endScreen_MaxCombo.gameObject.SetActive(true))
+            .InsertCallback(6.5f, () => endScreen_MaxCombo.gameObject.SetActive(true));
+
     }
 
     private void UpdateScoreText()

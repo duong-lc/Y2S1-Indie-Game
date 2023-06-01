@@ -18,6 +18,8 @@ public class GameSceneController : Singleton<GameSceneController>
 
     [SerializeField] private TMP_Text[] artists;
     [SerializeField] private TMP_Text[] songTitles;
+
+    [SerializeField] private GameObject visual;
     
     private MidiData _midiData;
     private GameModeData _gameModeData;
@@ -44,7 +46,8 @@ public class GameSceneController : Singleton<GameSceneController>
         ToggleInGameHUD(true);
         pauseOverlay.SetActive(false);
         endGameOverlay.SetActive(false);
-
+        visual.SetActive(true);
+        
         foreach (var artist in artists) {
             artist.text = _midiData.artist;
         }
@@ -53,7 +56,7 @@ public class GameSceneController : Singleton<GameSceneController>
         }
     }
 
-    public void LoadEndScreenOverlay()
+    public GameObject LoadEndScreenOverlay()
     {
         GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
         SongManager.PauseSong();
@@ -61,6 +64,9 @@ public class GameSceneController : Singleton<GameSceneController>
 
         ToggleInGameHUD(false);
         endGameOverlay.SetActive(true);
+        visual.SetActive(false);
+
+        return endGameOverlay;
     }
     
     public void LoadPauseOverlay()

@@ -74,7 +74,21 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private TMP_Text accuracyText;
     [SerializeField] private TMP_Text accuracyShadowText;
     [SerializeField] private Slider slider;
+
     [Space] 
+    
+    [Header("End Screen Values")]
+    [SerializeField] private TMP_Text endScreen_Score;
+    [SerializeField] private TMP_Text endScreen_Accuracy;
+    [SerializeField] private TMP_Text endScreen_MaxCombo;
+    [SerializeField] private TMP_Text endScreen_Perfect;
+    [SerializeField] private TMP_Text endScreen_Early;
+    [SerializeField] private TMP_Text endScreen_Late;
+    [SerializeField] private TMP_Text endScreen_Miss;
+    [SerializeField] private TMP_Text endScreen_Ratings;
+    [SerializeField] private GameObject endScreen_HighScoreNotice;
+    [SerializeField] private GameObject endScreen_FCNotice;
+
     private MidiData _midiData;
     private GameModeData _gameModeData;
 
@@ -97,6 +111,11 @@ public class ScoreManager : Singleton<ScoreManager>
     private Tweener _scaleComboTweener;
     private Ratings _ratings;
     
+    private int perfectHits;
+    private int earlyHits;
+    private int lateHits;
+    private int missHits;
+    
     public int MissCount => _missCount;
     public int CurrentCombo => _currentCombo;
     public int MaxCombo => _maxCombo;
@@ -114,8 +133,9 @@ public class ScoreManager : Singleton<ScoreManager>
         EventDispatcher.Instance.AddListener(EventType.NoteHitEarlyEvent, param => OnHit((HitMarkInitData) param));
         EventDispatcher.Instance.AddListener(EventType.NoteHitPerfectEvent, param => OnHit((HitMarkInitData) param));
         EventDispatcher.Instance.AddListener(EventType.NoteHitLateEvent, param => OnHit((HitMarkInitData) param));
-        
         EventDispatcher.Instance.AddListener(EventType.NoteMissEvent, param => OnHit((HitMarkInitData) param));
+        
+        this.AddListener(EventType.GameEndedEvent, param => CacheHighScore());
     }
 
     // Start is called before the first frame update
@@ -128,10 +148,35 @@ public class ScoreManager : Singleton<ScoreManager>
 
         hitAudioSource.volume = _gameModeData.hitVolume;
         missAudioSource.volume = _gameModeData.hitVolume;
+        
+        perfectHits = 0;
+        earlyHits = 0;
+        lateHits = 0;
+        missHits = 0;
     }
 
     private void OnHit(HitMarkInitData param)
     {
+        switch (param.cond)
+        {
+            case HitCondition.Early:
+                earlyHits++;
+                break;
+            case HitCondition.EarlyPerfect:
+                perfectHits++;
+                break;
+            case HitCondition.LatePerfect:
+                perfectHits++;
+                break;
+            case HitCondition.Late:
+                lateHits++;
+                break;
+            case HitCondition.Miss:
+                missHits++;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
         var scoreData = _gameModeData.GetScoreData(param.cond);
         if (scoreData == null) { NCLogger.Log($"null score data", LogLevel.ERROR); }
         
@@ -159,11 +204,11 @@ public class ScoreManager : Singleton<ScoreManager>
         UpdateAccuracyText();
     }
 
-    private void GetRatings()
+    private Ratings GetRatings()
     {
         _ratings = AccuracyFloat switch
         {
-            < 50 => Ratings.Fail,
+            < 50 => Ratings.F,
             <= 60 => Ratings.D,
             <= 70 => Ratings.C,
             <= 80 => Ratings.B,
@@ -171,11 +216,43 @@ public class ScoreManager : Singleton<ScoreManager>
             <= 100 => Ratings.S,
             _ => _ratings
         };
+        return _ratings;
     }
 
     private void CacheHighScore()
     {
+        endScreen_HighScoreNotice.SetActive(false);
+        endScreen_FCNotice.SetActive(false);
         
+        if (_currentScore > _midiData.score)
+        {
+            _midiData.score = _currentScore;
+            _midiData.ratings = GetRatings();
+            _midiData.accuracy = AccuracyFloat;
+            _midiData.maxCombo = _maxCombo;
+            _midiData.perfectHits = perfectHits;
+            _midiData.earlyHits = earlyHits;
+            _midiData.lateHits = lateHits;
+            _midiData.missHits = missHits;
+            
+            endScreen_HighScoreNotice.SetActive(true);
+        }
+
+        if (missHits == 0)
+        {
+            endScreen_FCNotice.SetActive(true);
+        }
+        
+        endScreen_Accuracy.text = $"Accuracy: " + AccuracyFloat.ToString("#.##");
+        endScreen_MaxCombo.text = $"Max Combo: {_maxCombo}";
+        endScreen_Ratings.text = $"{GetRatings()}";
+        endScreen_Score.text = $"{_currentScore}";
+        endScreen_Perfect.text = $"Perfect: {perfectHits}";
+        endScreen_Early.text = $"Early: {earlyHits}";
+        endScreen_Late.text = $"Late: {lateHits}";
+        endScreen_Miss.text = $"Miss: {missHits}";
+
+        GameSceneController.Instance.LoadEndScreenOverlay();
     }
 
     private void UpdateScoreText()
@@ -213,5 +290,10 @@ public class ScoreManager : Singleton<ScoreManager>
         comboText.transform.position = _comboTCache.position;
         comboText.transform.localScale = Vector3.one;
         // NCLogger.Log($" reset scale {comboText.transform.localScale}");
+    }
+
+    public void DisplayScoreScreen()
+    {
+        
     }
 }

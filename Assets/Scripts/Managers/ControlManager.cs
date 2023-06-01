@@ -72,22 +72,22 @@ namespace Managers
                     kvp.Value.collider.Lane.HighlightSprite.enabled = true;
                     if(!NoteInteractInputDown(kvp.Value.collider)) continue;
                 }
-
+            
                 if (Input.GetKeyUp(kvp.Value.Input)) {
                     kvp.Value.collider.Lane.HighlightSprite.enabled = false;
                     if(!NoteInteractInputUp(kvp.Value.collider)) continue;
                 }
             }
-
+            
             // NCLogger.Log($"print out touching");
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
                 var ray = camera.ScreenPointToRay(touch.position);
-                Debug.DrawRay(camera.transform.position, ray.direction * 100, Color.green, 5f);
+                //Debug.DrawRay(camera.transform.position, ray.direction * 100, Color.green, 5f);
                 //NCLogger.Log($"{touchPos}");
             }
-
+            
             if (Input.touchCount > 0)
             {
                 foreach (Touch t in Input.touches)

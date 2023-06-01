@@ -85,7 +85,8 @@ public class UIParallax : MonoBehaviour
  
      void Update()
      {
-          _img.uvRect = new Rect(_img.uvRect.position + new Vector2(_x,_y) * Time.deltaTime,_img.uvRect.size);
+          if(_img != null)
+               _img.uvRect = new Rect(_img.uvRect.position + new Vector2(_x,_y) * Time.deltaTime,_img.uvRect.size);
      }
 
 }

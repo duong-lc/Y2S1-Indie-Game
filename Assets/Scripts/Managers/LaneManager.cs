@@ -71,7 +71,8 @@ namespace Managers
             if (canEnd)
             {
                 yield return new WaitForSeconds(3f + _gameModeData.NoteTime);
-                SongManager.Instance.audioSource.DOFade(0, 3f);
+                var tween = SongManager.Instance.audioSource.DOFade(0, 3f);
+                tween.OnComplete(() => this.FireEvent(EventType.GameEndedEvent));
             }
         }
         

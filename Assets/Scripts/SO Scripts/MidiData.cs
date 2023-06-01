@@ -15,7 +15,7 @@ public enum Ratings
     B,
     C,
     D,
-    Fail
+    F
 }
 
 
@@ -61,5 +61,9 @@ public class MidiData : SerializedScriptableObject
    public int earlyHits;
    public int lateHits;
    public int missHits;
+
+   [Header("Song Misc Info")] 
+   public string artist;
+   public string songTitle;
 }
 

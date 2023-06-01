@@ -3,20 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Events;
 using Core.Logging;
+using Core.Patterns;
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using EventType = Core.Events.EventType;
 
-public class GameSceneController : MonoBehaviour
+public class GameSceneController : Singleton<GameSceneController>
 {
+    [SerializeField] private GameObject endGameOverlay;
     [SerializeField] private GameObject pauseOverlay;
     [SerializeField] private GameObject[] inGameHUDs;
 
+    [SerializeField] private TMP_Text[] artists;
+    [SerializeField] private TMP_Text[] songTitles;
+    
+    private MidiData _midiData;
+    private GameModeData _gameModeData;
+    
+    
     private void Awake()
     {
+        _midiData = GameModeManager.Instance.CurrentMidiData;
+        _gameModeData = GameModeManager.Instance.GameModeData;
+        
         if(!pauseOverlay) NCLogger.Log($"pauseOverlay not assigned", LogLevel.ERROR);
         if(inGameHUDs.Length == 0) NCLogger.Log($"inGameHUD not assigned", LogLevel.ERROR);
+
+        //this.AddListener(EventType.GameEndedEvent, param => LoadEndScreenOverlay());
+        
     }
 
     private void Start()
@@ -27,10 +43,29 @@ public class GameSceneController : MonoBehaviour
 
         ToggleInGameHUD(true);
         pauseOverlay.SetActive(false);
+        endGameOverlay.SetActive(false);
+
+        foreach (var artist in artists) {
+            artist.text = _midiData.artist;
+        }
+        foreach (var songTitle in songTitles) {
+            songTitle.text = _midiData.songTitle;
+        }
     }
 
+    public void LoadEndScreenOverlay()
+    {
+        GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
+        SongManager.PauseSong();
+        Time.timeScale = 0;
+
+        ToggleInGameHUD(false);
+        endGameOverlay.SetActive(true);
+    }
+    
     public void LoadPauseOverlay()
     {
+        NCLogger.Log($"lmao xd");
         // GameModeManager.SetGameState(GameModeManager.GameState.PauseMode);
         GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
         SongManager.PauseSong();

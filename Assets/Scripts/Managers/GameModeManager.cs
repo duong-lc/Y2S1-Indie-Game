@@ -56,7 +56,6 @@ public class GameModeManager : Singleton<GameModeManager>
     private void Start()
     {
         Application.targetFrameRate = 60;
-        Camera.main.aspect = 16f / 9f;
-        Screen.SetResolution(800, 450, true);
+        //Screen.SetResolution(800, 450, true);
     }
 }

@@ -36,7 +36,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0, g: 0.57129, b: 2, a: 1}
+    value: {r: 2.670157, g: 1.7662126, b: 0.79349, a: 1}
   fastMode:
     overrideState: 1
     value: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 32.50917, y: 77.5093}
+    value: {x: 31.042917, y: 76.04304}
   minLuminance:
     overrideState: 1
     value: -0.65
@@ -145,19 +145,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b77c5407dc277943b591ade9e6b18c5, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 37
+    value: -31.1
   intensityX:
     overrideState: 1
     value: 1
   intensityY:
     overrideState: 1
-    value: 0.481
+    value: 0.649
   centerX:
     overrideState: 1
     value: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   gradingMode:
-    overrideState: 1
+    overrideState: 0
     value: 0
   externalLut:
     overrideState: 0
@@ -220,16 +220,16 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -10.6
+    value: 20.1
   tint:
     overrideState: 1
-    value: 26
+    value: -12.4
   colorFilter:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -29
   saturation:
     overrideState: 0
     value: 0
@@ -1500,7 +1500,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.35
   fastMode:
     overrideState: 1
     value: 1
@@ -1516,7 +1516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1553,13 +1553,13 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 1, g: 0.7688679, b: 0.9866656, a: 1}
+    value: {r: 0, g: 0, b: 0, a: 1}
   center:
     overrideState: 1
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.324
+    value: 0.223
   smoothness:
     overrideState: 1
     value: 0.422
@@ -1570,9 +1570,9 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mask:
-    overrideState: 0
-    value: {fileID: 0}
+    overrideState: 1
+    value: {fileID: 2800000, guid: 82feb0de7affcf941a6f235960f84a28, type: 3}
     defaultState: 1
   opacity:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.904

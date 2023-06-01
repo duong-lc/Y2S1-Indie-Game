@@ -64,9 +64,9 @@ namespace NoteClasses
         public override IEnumerator RunRoutine()
         {
             while (!canRelease) {
-                if (NoteTime - TimeSinceInstantiated <= 1 && _doOnce)
+                if (NoteTime - TimeSinceInstantiated <= 1/* && _doOnce*/)
                 {
-                    _doOnce = false;
+                    // _doOnce = false;
                     _outlineSR.DOFade(.8f, 1f);
                     outline.transform.DOScale(1.1f, 1f);
                 }
@@ -84,7 +84,7 @@ namespace NoteClasses
             // NCLogger.Log($"current note hit cond {hitCond} ");
             
             if (GameModeManager.Instance.CurrentGameState != GameState.PlayMode) {
-                NCLogger.Log($"GameState should be PlayMode when it's {GameModeManager.Instance.CurrentGameState}", LogLevel.ERROR);
+                // NCLogger.Log($"GameState should be PlayMode when it's {GameModeManager.Instance.CurrentGameState}", LogLevel.ERROR);
                 return;
             }
             OnNoteMissNormalNote();

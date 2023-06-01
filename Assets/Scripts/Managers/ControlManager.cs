@@ -83,23 +83,21 @@ namespace Managers
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-                var touchPos = camera.ScreenToWorldPoint(touch.position);
-                NCLogger.Log($"{touchPos}");
+                var ray = camera.ScreenPointToRay(touch.position);
+                Debug.DrawRay(camera.transform.position, ray.direction * 100, Color.green, 5f);
+                //NCLogger.Log($"{touchPos}");
             }
 
             if (Input.touchCount > 0)
             {
                 foreach (Touch t in Input.touches)
                 {
-                    var TEMPposition = camera.ScreenToWorldPoint(Input.GetTouch(t.fingerId).position);
-                    var position = GetWorldPositionOnPlane(TEMPposition, 0);
+                    var ray = camera.ScreenPointToRay(Input.GetTouch(t.fingerId).position);
                     if (Input.GetTouch(t.fingerId).phase == TouchPhase.Began)
                     {
-                        Debug.DrawLine(position, camera.transform.position, Color.green);
+                        
                         NCLogger.Log($"print out touching");
-                        var hits = Physics.RaycastAll(camera.transform.position,
-                            (position - camera.transform.position).normalized,
-                            Mathf.Infinity);
+                        var hits = Physics.RaycastAll(ray, Mathf.Infinity);
                         foreach (var hit in hits)
                         {
                             foreach (var data in _gameModeData.LaneControllerData.Values)
@@ -115,11 +113,7 @@ namespace Managers
                     }
                     if (Input.GetTouch(t.fingerId).phase == TouchPhase.Ended)
                     {
-                        //(camera.transform.position + camera.transform.forward *4)
-                        NCLogger.Log($"print out releasing");
-                        var hits = Physics.RaycastAll(camera.transform.position,
-                            (position - camera.transform.position).normalized,
-                            Mathf.Infinity);
+                        var hits = Physics.RaycastAll(ray, Mathf.Infinity);
                         foreach (var hit in hits)
                         {
                             foreach (var data in _gameModeData.LaneControllerData.Values)

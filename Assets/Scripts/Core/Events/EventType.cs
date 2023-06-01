@@ -22,5 +22,6 @@ namespace Core.Events {
         
         StartSongEvent,
         LaneFinishSpawningEvent,
+        PauseTransitionEvent,
     }
 }

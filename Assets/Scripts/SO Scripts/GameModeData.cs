@@ -22,8 +22,8 @@ public class LaneControllerData
 public class GameModeData : SerializedScriptableObject
 {
     [TitleGroup("Settings")]
-    [Range(0,1)]
-    public float volume;
+    [Range(0,1)] public float volume;
+    [Range(0, 1)] public float hitVolume;
     
     [TitleGroup("Scene Data")]
     public string mainMenuSceneName;

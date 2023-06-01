@@ -11,17 +11,22 @@ using EventType = Core.Events.EventType;
 public class GameSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseOverlay;
-    [SerializeField] private GameObject inGameHUD;
+    [SerializeField] private GameObject[] inGameHUDs;
 
     private void Awake()
     {
         if(!pauseOverlay) NCLogger.Log($"pauseOverlay not assigned", LogLevel.ERROR);
-        if(!inGameHUD) NCLogger.Log($"inGameHUD not assigned", LogLevel.ERROR);
+        if(inGameHUDs.Length == 0) NCLogger.Log($"inGameHUD not assigned", LogLevel.ERROR);
     }
 
     private void Start()
     {
-        LoadReturnToGame();
+        GameModeManager.Instance.CurrentGameState = GameState.PlayMode;
+        SongManager.PlaySong();
+        Time.timeScale = 1;
+
+        ToggleInGameHUD(true);
+        pauseOverlay.SetActive(false);
     }
 
     public void LoadPauseOverlay()
@@ -30,31 +35,43 @@ public class GameSceneController : MonoBehaviour
         GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
         SongManager.PauseSong();
         Time.timeScale = 0;
-        
-        inGameHUD.SetActive(false);
+
+        ToggleInGameHUD(false);
         pauseOverlay.SetActive(true);    
+        this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Pause);
     }
 
     public void LoadReturnToGame()
     {
         // GameModeManager.SetGameState(GameModeManager.GameState.PlayMode);
+        NCLogger.Log($"asdsadsadawsda");
         GameModeManager.Instance.CurrentGameState = GameState.PlayMode;
         SongManager.PlaySong();
         Time.timeScale = 1;
+
+        ToggleInGameHUD(true);
+        //pauseOverlay.SetActive(false);
         
-        inGameHUD.SetActive(true);
-        pauseOverlay.SetActive(false);
-        
+        this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Playing);
         EventDispatcher.Instance.FireEvent(EventType.UnPauseEvent);
     }
 
     public void LoadRestartLevel()
     {
+        this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Return);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadReturnToLevelSelectionScene()
     {
         SceneManager.LoadScene(GameModeManager.Instance.GameModeData.levelSelectionSceneName);
+    }
+
+    private void ToggleInGameHUD(bool state)
+    {
+        foreach (var hud in inGameHUDs)
+        {
+            hud.SetActive(state);
+        }
     }
 }

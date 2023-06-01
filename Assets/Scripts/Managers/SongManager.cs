@@ -33,7 +33,7 @@ namespace Managers
             _gameModeData = GameModeManager.Instance.GameModeData;
             if(!_midiData) NCLogger.Log($"midiData is {_midiData}", LogLevel.ERROR);
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
-
+            
             audioSource.volume = _gameModeData.volume;
 
             /*

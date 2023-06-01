@@ -125,6 +125,9 @@ public class ScoreManager : Singleton<ScoreManager>
         _mainCam = Camera.main;
 
         _comboTCache = comboText.transform;
+
+        hitAudioSource.volume = _gameModeData.hitVolume;
+        missAudioSource.volume = _gameModeData.hitVolume;
     }
 
     private void OnHit(HitMarkInitData param)

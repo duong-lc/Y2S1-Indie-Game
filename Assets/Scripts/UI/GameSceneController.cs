@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using Core.Events;
 using Core.Logging;
 using Core.Patterns;
+using GabrielBigardi.SpriteAnimator;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using EventType = Core.Events.EventType;
 
@@ -24,9 +26,14 @@ public class GameSceneController : Singleton<GameSceneController>
     private MidiData _midiData;
     private GameModeData _gameModeData;
     
-    
+    private TransitionState state;
+    private bool _consumeInput = false;
+
+    [SerializeField] private PostProcessVolume volume;
     private void Awake()
     {
+        this.AddListener(EventType.GlobalTransitionCompleteEvent, param => state = (TransitionState) param);
+        
         _midiData = GameModeManager.Instance.CurrentMidiData;
         _gameModeData = GameModeManager.Instance.GameModeData;
         
@@ -37,11 +44,21 @@ public class GameSceneController : Singleton<GameSceneController>
         
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        GameModeManager.Instance.CurrentGameState = GameState.PlayMode;
-        SongManager.PlaySong();
         Time.timeScale = 1;
+        volume.profile = GameModeManager.Instance.colorGradingProfile;
+        SongManager.PlaySong();
+        state = TransitionState.In;
+        _consumeInput = true;
+        GameModeManager.Instance.CurrentGameState = GameState.PlayMode;
+        
+        this.FireEvent(EventType.GlobalTransitionEvent, TransitionState.Out);
+        while (state == TransitionState.In) {
+            yield return null;
+        }
+        _consumeInput = false;
+        
 
         ToggleInGameHUD(true);
         pauseOverlay.SetActive(false);
@@ -56,7 +73,7 @@ public class GameSceneController : Singleton<GameSceneController>
         }
     }
 
-    public GameObject LoadEndScreenOverlay()
+    public void LoadEndScreenOverlay()
     {
         GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
         SongManager.PauseSong();
@@ -65,13 +82,11 @@ public class GameSceneController : Singleton<GameSceneController>
         ToggleInGameHUD(false);
         endGameOverlay.SetActive(true);
         visual.SetActive(false);
-
-        return endGameOverlay;
     }
     
     public void LoadPauseOverlay()
     {
-        NCLogger.Log($"lmao xd");
+        //NCLogger.Log($"lmao xd");
         // GameModeManager.SetGameState(GameModeManager.GameState.PauseMode);
         GameModeManager.Instance.CurrentGameState = GameState.PauseMode;
         SongManager.PauseSong();
@@ -99,13 +114,33 @@ public class GameSceneController : Singleton<GameSceneController>
 
     public void LoadRestartLevel()
     {
-        this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Return);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+        //this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Return);
+        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName);
     }
 
     public void LoadReturnToLevelSelectionScene()
     {
-        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.levelSelectionSceneName);
+        if (_consumeInput) return;
+        Time.timeScale = 1;
+        _consumeInput = true;
+        StartCoroutine(
+            LoadSceneRoutine(
+                () => SceneManager.LoadScene(GameModeManager.Instance.GameModeData.levelSelectionSceneName)));
+    }
+    
+    private IEnumerator LoadSceneRoutine(Action callback)
+    {
+        this.FireEvent(EventType.GlobalTransitionEvent, TransitionState.In);
+
+
+        while (state != TransitionState.In) {
+            NCLogger.Log($"IM STUCKKKK");
+            yield return null;
+        }
+        NCLogger.Log($"GET ME OUT OF HEREEE1212121");
+        this.FireEvent(EventType.GlobalTransitionEvent, TransitionState.Out);
+        callback.Invoke();
     }
 
     private void ToggleInGameHUD(bool state)

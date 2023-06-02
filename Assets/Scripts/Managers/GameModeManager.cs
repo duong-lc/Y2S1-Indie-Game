@@ -6,6 +6,7 @@ using Core.Logging;
 using Core.Patterns;
 using SO_Scripts;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using EventType = Core.Events.EventType;
 
@@ -26,6 +27,9 @@ public class GameModeManager : Singleton<GameModeManager>
     [SerializeField] private MidiData currentMidiData;
     // [SerializeField] private PoolData poolData;
 
+    public PostProcessProfile noColorGradingProfile;
+    public PostProcessProfile colorGradingProfile;
+    
     // public PoolData PoolData => poolData;
     public MidiData CurrentMidiData => currentMidiData;
     public GameModeData GameModeData => gameModeData;
@@ -50,7 +54,7 @@ public class GameModeManager : Singleton<GameModeManager>
         if(!CurrentMidiData) NCLogger.Log($"midiData is {CurrentMidiData}", LogLevel.ERROR);
         if(!GameModeData) NCLogger.Log($"midiData is {GameModeData}", LogLevel.ERROR);
         
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

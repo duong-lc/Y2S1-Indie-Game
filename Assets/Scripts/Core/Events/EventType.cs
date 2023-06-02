@@ -23,6 +23,9 @@ namespace Core.Events {
         StartSongEvent,
         LaneFinishSpawningEvent,
         PauseTransitionEvent,
-        GameEndedEvent
+        GameEndedEvent,
+        EndGameTransitionEvent,
+        GlobalTransitionEvent,
+        GlobalTransitionCompleteEvent,
     }
 }

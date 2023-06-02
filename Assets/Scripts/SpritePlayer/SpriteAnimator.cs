@@ -1,13 +1,23 @@
 using System;
+using Core.Events;
 using UnityEngine;
+using UnityEngine.UI;
+using EventType = Core.Events.EventType;
 
 namespace GabrielBigardi.SpriteAnimator
 {
+    public enum TransitionState
+    {
+        None,
+        In,
+        Out
+    }
+    
     public class SpriteAnimator : MonoBehaviour
     {
         [SerializeField] private bool _playAutomatically = true;
         [SerializeField] private SpriteAnimationObject _spriteAnimationObject;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Image _spriteRenderer;
 
         private SpriteAnimation _currentAnimation;
         private float _animationTime = 0.0f;
@@ -20,6 +30,13 @@ namespace GabrielBigardi.SpriteAnimator
 
         // Events
         public event Action OnAnimationComplete;
+        public TransitionState state;
+        
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            this.AddListener(EventType.GlobalTransitionEvent, param => Play((TransitionState) param, 0));
+        }
 
         private void OnEnable()
         {
@@ -56,10 +73,39 @@ namespace GabrielBigardi.SpriteAnimator
                 return null;
             }
 
+            if (name == "normal") state = TransitionState.In;
+            if (name == "reverse") state = TransitionState.Out;
+            
             Play(GetAnimationByName(name), startFrame);
             return this;
         }
 
+        public SpriteAnimator Play(TransitionState name, int startFrame = 0)
+        {
+            string str = null;
+            state = name;
+            switch (name)
+            {
+                case TransitionState.In:
+                    str = "normal";
+                    break;
+                case TransitionState.Out:
+                    str = "reverse";
+                    break;
+            }
+            
+            if (!HasAnimation(str))
+            {
+                Debug.LogError($"Animation with name '{name}' not found");
+                return null;
+            }
+
+           
+            
+            Play(GetAnimationByName(str), startFrame);
+            return this;
+        }
+        
         public SpriteAnimator Play(SpriteAnimation spriteAnimation, int startFrame = 0)
         {
             if (spriteAnimation == null)
@@ -145,6 +191,7 @@ namespace GabrielBigardi.SpriteAnimator
                 var animationDuration = (frameDuration * (_currentAnimation.Frames.Count)) * 10;
                 if (_animationTime >= animationDuration)
                 {
+                    this.FireEvent(EventType.GlobalTransitionCompleteEvent, state);
                     OnAnimationComplete?.Invoke();
                     OnAnimationComplete = null;
                 }

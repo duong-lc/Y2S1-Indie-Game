@@ -76,23 +76,12 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private Slider slider;
 
     [Space] 
-    
-    [Header("End Screen Values")]
-    [SerializeField] private TMP_Text endScreen_Score;
-    [SerializeField] private TMP_Text endScreen_Accuracy;
-    [SerializeField] private TMP_Text endScreen_MaxCombo;
-    [SerializeField] private TMP_Text endScreen_Perfect;
-    [SerializeField] private TMP_Text endScreen_Early;
-    [SerializeField] private TMP_Text endScreen_Late;
-    [SerializeField] private TMP_Text endScreen_Miss;
-    [SerializeField] private TMP_Text endScreen_Ratings;
-    [SerializeField] private GameObject endScreen_HighScoreNotice;
-    [SerializeField] private GameObject endScreen_FCNotice;
+    [SerializeField] private EndGameTransition endGameScreen;
 
     private MidiData _midiData;
     private GameModeData _gameModeData;
 
-    private float AccuracyFloat =>(_currentScore / _currentPerfectScore) * 100;
+    public float AccuracyFloat =>(_currentScore / _currentPerfectScore) * 100;
     private int _currentScore;
 
     private float _totalCurrentScore = 0;
@@ -111,14 +100,15 @@ public class ScoreManager : Singleton<ScoreManager>
     private Tweener _scaleComboTweener;
     private Ratings _ratings;
     
-    private int perfectHits;
-    private int earlyHits;
-    private int lateHits;
-    private int missHits;
+    public int perfectHits;
+    public int earlyHits;
+    public int lateHits;
+    public int missHits;
     
     public int MissCount => _missCount;
     public int CurrentCombo => _currentCombo;
     public int MaxCombo => _maxCombo;
+    public int CurrentScore => _currentScore;
     
     
     private ObjectPool[] _notePoolArray;
@@ -204,7 +194,7 @@ public class ScoreManager : Singleton<ScoreManager>
         UpdateAccuracyText();
     }
 
-    private Ratings GetRatings()
+    public Ratings GetRatings()
     {
         _ratings = AccuracyFloat switch
         {
@@ -221,17 +211,6 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void CacheHighScore()
     {
-        endScreen_HighScoreNotice.SetActive(false);
-        endScreen_FCNotice.SetActive(false);
-        endScreen_Accuracy.gameObject.SetActive(false);
-        endScreen_MaxCombo.gameObject.SetActive(false);
-        endScreen_Ratings.gameObject.SetActive(false);
-        endScreen_Score.gameObject.SetActive(false);
-        endScreen_Perfect.gameObject.SetActive(false);
-        endScreen_Early.gameObject.SetActive(false);
-        endScreen_Late.gameObject.SetActive(false);
-        endScreen_Miss.gameObject.SetActive(false);
-        
         if (_currentScore > _midiData.score)
         {
             _midiData.score = _currentScore;
@@ -242,33 +221,16 @@ public class ScoreManager : Singleton<ScoreManager>
             _midiData.earlyHits = earlyHits;
             _midiData.lateHits = lateHits;
             _midiData.missHits = missHits;
-            
-            endScreen_HighScoreNotice.SetActive(true);
+
+            endGameScreen.isHighScore = true;
         }
 
         if (missHits == 0)
         {
-            endScreen_FCNotice.SetActive(true);
+            endGameScreen.isFullCombo = true;
         }
         
-        endScreen_Accuracy.text = $"Accuracy: " + AccuracyFloat.ToString("#.##") + "%";
-        endScreen_MaxCombo.text = $"Max Combo: {_maxCombo}";
-        endScreen_Ratings.text = $"{GetRatings()}";
-        endScreen_Score.text = $"{_currentScore}";
-        endScreen_Perfect.text = $"Perfect: {perfectHits}";
-        endScreen_Early.text = $"Early: {earlyHits}";
-        endScreen_Late.text = $"Late: {lateHits}";
-        endScreen_Miss.text = $"Miss: {missHits}";
-
-        var endScreen = GameSceneController.Instance.LoadEndScreenOverlay();
-        var originalPos = endScreen.transform.position;
-        endScreen.transform.position = new Vector3(originalPos.x, originalPos.y + 50, originalPos.z);
-        var mySequence = DOTween.Sequence();
-        mySequence.Append(endScreen.transform.DOMoveY(originalPos.y, 3f))
-            .InsertCallback(5.5f, () => endScreen_Accuracy.gameObject.SetActive(true))
-            .InsertCallback(6f, () => endScreen_MaxCombo.gameObject.SetActive(true))
-            .InsertCallback(6.5f, () => endScreen_MaxCombo.gameObject.SetActive(true));
-
+        this.FireEvent(EventType.EndGameTransitionEvent);
     }
 
     private void UpdateScoreText()

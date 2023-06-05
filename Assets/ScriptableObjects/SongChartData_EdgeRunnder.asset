@@ -1269,7 +1269,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  songClip: {fileID: 8300000, guid: 7702513067aaea14fb97e52d05622ee0, type: 3}
+  songClip: {fileID: 8300000, guid: efb7ac4bbedd79e4da82a1e7861d7625, type: 3}
   songDelayInSeconds: 0
   fileLocation: HSOTD.mid
   TotalRawNoteCount: 66

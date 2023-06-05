@@ -94,9 +94,9 @@ namespace Managers
             foreach (var laneMidiData in _midiData.laneMidiData.Values) {
                 if (!laneMidiData.allNoteOnLaneList.IsNullOrEmpty())
                 {
-                    //laneMidiData.allNoteOnLaneList.Clear();
+                    laneMidiData.allNoteOnLaneList.Clear();
                     NCLogger.Log($"something is NOT empty");
-                    return;
+                    //return;
                 }
             }
 

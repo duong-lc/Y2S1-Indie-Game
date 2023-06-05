@@ -84,8 +84,8 @@ public class PauseTransition : MonoBehaviour
                     t2 += .1f;
                 }
                 foreach (var item in disc) {
-                    pauseSequence.Insert(.5f, item.transform.DOLocalMoveX(DiscPauseLocalX, 0.4f));
-                    pauseSequence.Insert(.5f, item.transform.DOLocalRotate(
+                    pauseSequence.Insert(.8f, item.transform.DOLocalMoveX(DiscPauseLocalX, 0.4f));
+                    pauseSequence.Insert(.8f, item.transform.DOLocalRotate(
                         new Vector3(item.transform.localRotation.eulerAngles.x, item.transform.localRotation.eulerAngles.y, 0), 
                         0.4f));
                 }

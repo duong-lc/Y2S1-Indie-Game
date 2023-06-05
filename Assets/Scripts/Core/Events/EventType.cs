@@ -27,5 +27,7 @@ namespace Core.Events {
         EndGameTransitionEvent,
         GlobalTransitionEvent,
         GlobalTransitionCompleteEvent,
+        
+        UpdateStatsLevelSelectionEvent,
     }
 }

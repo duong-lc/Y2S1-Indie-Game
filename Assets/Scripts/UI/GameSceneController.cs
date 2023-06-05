@@ -81,7 +81,7 @@ public class GameSceneController : Singleton<GameSceneController>
 
         ToggleInGameHUD(false);
         endGameOverlay.SetActive(true);
-        visual.SetActive(false);
+        //visual.SetActive(false);
     }
     
     public void LoadPauseOverlay()
@@ -114,9 +114,12 @@ public class GameSceneController : Singleton<GameSceneController>
 
     public void LoadRestartLevel()
     {
+        if (_consumeInput) return;
         Time.timeScale = 1;
-        //this.FireEvent(EventType.PauseTransitionEvent, PauseTransition.RibbonState.Return);
-        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName);
+        _consumeInput = true;
+        StartCoroutine(
+            LoadSceneRoutine(
+                () =>  SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName)));
     }
 
     public void LoadReturnToLevelSelectionScene()
@@ -132,13 +135,10 @@ public class GameSceneController : Singleton<GameSceneController>
     private IEnumerator LoadSceneRoutine(Action callback)
     {
         this.FireEvent(EventType.GlobalTransitionEvent, TransitionState.In);
-
-
+        
         while (state != TransitionState.In) {
-            NCLogger.Log($"IM STUCKKKK");
             yield return null;
         }
-        NCLogger.Log($"GET ME OUT OF HEREEE1212121");
         this.FireEvent(EventType.GlobalTransitionEvent, TransitionState.Out);
         callback.Invoke();
     }

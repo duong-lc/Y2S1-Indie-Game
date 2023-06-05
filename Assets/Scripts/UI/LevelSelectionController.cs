@@ -24,7 +24,7 @@ public class LevelSelectionController : MonoBehaviour
     private IEnumerator Start()
     {
         Time.timeScale = 1;
-        volume.profile = GameModeManager.Instance.noColorGradingProfile;
+        volume.profile = GameModeManager.Instance.colorGradingProfilelvl;
         state = TransitionState.In;
         _consumeInput = true;
         GameModeManager.Instance.CurrentGameState = GameState.LevelSelection;
@@ -67,8 +67,13 @@ public class LevelSelectionController : MonoBehaviour
         callback.Invoke();
     }
     
-    public void PlayTest()
+    public void EnterGameplay()
     {
-        SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName);
+        if (_consumeInput) return;
+            _consumeInput = true;
+            StartCoroutine(
+                LoadSceneRoutine(
+                    () =>   SceneManager.LoadScene(GameModeManager.Instance.GameModeData.gamePlaySceneName)));
+    
     }
 }

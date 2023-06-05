@@ -16,7 +16,7 @@ namespace Managers
 {
     public class SongManager : Singleton<SongManager>
     {
-        private MidiData _midiData;
+        [SerializeField] private MidiData _midiData;
         private GameModeData _gameModeData;
         public AudioSource audioSource; //audio source to play the song
         public static MidiFile MidiFile;//static ref to midi file, this is where it will load on run
@@ -47,6 +47,9 @@ namespace Managers
             //     ReadFromFile();
             // }
             //StartCoroutine(GetRequest("https://www.dropbox.com/s/ibrp3ki2z69sjbm/HSOTD.mid?dl=1"));
+#if UNITY_EDITOR
+            ReadFromFile();
+#endif
         }
 
         private IEnumerator GetRequest(string url)
@@ -122,7 +125,7 @@ namespace Managers
         [Button("Compile Current Midi Data")]
         private void ReadFromFile()
         {
-             MidiFile = MidiFile.Read(Application.dataPath +"/"+ _midiData.fileLocation);
+             MidiFile = MidiFile.Read(Application.streamingAssetsPath +"/"+ _midiData.fileLocation);
              // var obj = Resources.Load(Application.streamingAssetsPath + "/" + _midiData.fileLocation);
              
            //convert midi data to necessary data for rhythm game, append them all to list

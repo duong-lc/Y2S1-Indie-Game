@@ -29,9 +29,15 @@ public class GameModeManager : Singleton<GameModeManager>
 
     public PostProcessProfile noColorGradingProfile;
     public PostProcessProfile colorGradingProfile;
+    public PostProcessProfile colorGradingProfilelvl;
     
     // public PoolData PoolData => poolData;
-    public MidiData CurrentMidiData => currentMidiData;
+    public MidiData CurrentMidiData
+    {
+        get => currentMidiData;
+        set => currentMidiData = value;
+    }
+
     public GameModeData GameModeData => gameModeData;
     
     private GameState _gameState;
@@ -54,7 +60,7 @@ public class GameModeManager : Singleton<GameModeManager>
         if(!CurrentMidiData) NCLogger.Log($"midiData is {CurrentMidiData}", LogLevel.ERROR);
         if(!GameModeData) NCLogger.Log($"midiData is {GameModeData}", LogLevel.ERROR);
         
-        // DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

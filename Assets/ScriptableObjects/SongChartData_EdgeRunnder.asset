@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d16113f939bba78429498462f0ca293f, type: 3}
-  m_Name: SongChartData
+  m_Name: SongChartData_EdgeRunnder
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -59,295 +59,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 15
-    - Name: 
-      Entry: 7
-      Data: 4|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 13.64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 17.276
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 17.909
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 20.142
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 8|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 21.231
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 9|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 21.863
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 26.089
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 11|Data_Classes.NoteSliderType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 2
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
-      Entry: 4
-      Data: 26.578
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 28.66
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 12|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 29.732
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 13|Data_Classes.NoteSliderType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 2
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
-      Entry: 4
-      Data: 31.151
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 33.837
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 14|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 36.401
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 15|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 38.899
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 16|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 41.444
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 17|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 41.765
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 18|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 4
-    - Name: octaveNum
-      Entry: 3
-      Data: 3
-    - Name: timeStamp
-      Entry: 4
-      Data: 42.08
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -368,20 +80,20 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 19|LaneMidiData, Assembly-CSharp
+      Data: 4|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
       Data: 2
     - Name: allNoteOnLaneList
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+      Data: 5|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 13
     - Name: 
       Entry: 7
-      Data: 21|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 6|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -399,7 +111,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 7|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -417,7 +129,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 8|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -435,7 +147,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 9|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -462,7 +174,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 10|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -480,7 +192,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 11|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -498,7 +210,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 27|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 12|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -525,7 +237,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 13|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -543,7 +255,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 14|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -561,7 +273,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 30|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 15|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -579,7 +291,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 16|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -597,7 +309,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 32|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 17|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -615,7 +327,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 33|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 18|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -651,20 +363,20 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 34|LaneMidiData, Assembly-CSharp
+      Data: 19|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
       Data: 1
     - Name: allNoteOnLaneList
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+      Data: 20|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 13
     - Name: 
       Entry: 7
-      Data: 36|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 21|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -691,7 +403,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 37|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 22|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -709,7 +421,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 38|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 23|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -727,7 +439,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 39|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 24|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -745,7 +457,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 40|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 25|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -772,7 +484,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 41|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 26|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -790,7 +502,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 42|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 27|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -808,7 +520,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 43|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 28|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -826,7 +538,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 44|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 29|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -853,7 +565,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 45|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 30|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -871,7 +583,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 46|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 31|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -889,7 +601,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 47|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 32|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -907,7 +619,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 48|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 33|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -943,20 +655,20 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 49|LaneMidiData, Assembly-CSharp
+      Data: 34|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
       Data: 0
     - Name: allNoteOnLaneList
       Entry: 7
-      Data: 50|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+      Data: 35|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 16
     - Name: 
       Entry: 7
-      Data: 51|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 36|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -974,7 +686,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 52|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 37|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -992,7 +704,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 53|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 38|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1010,7 +722,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 54|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 39|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1028,7 +740,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 55|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 40|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1046,7 +758,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 56|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 41|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1064,7 +776,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 57|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 42|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 2
@@ -1091,7 +803,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 58|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 43|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1109,7 +821,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 59|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 44|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1127,7 +839,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 60|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 45|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1145,7 +857,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 61|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 46|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1163,7 +875,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 62|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 47|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1181,7 +893,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 63|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 48|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1199,7 +911,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 64|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 49|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1217,7 +929,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 65|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 50|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1235,7 +947,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 66|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 51|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
       Data: 1
@@ -1271,7 +983,7 @@ MonoBehaviour:
       Data: 
   songClip: {fileID: 8300000, guid: 130259b4fa72a8546ab9c968b2de6812, type: 3}
   songDelayInSeconds: 0
-  fileLocation: 
+  fileLocation: HSOTD.mid
   TotalRawNoteCount: 66
   noteNormalPrefab: {fileID: 7503693863679007523, guid: 8de00af407265554183b8e33f17111b0, type: 3}
   noteSliderPrefab: {fileID: 2580888399268996792, guid: fb6a6acc262e8204cbe7f65ad8194cb1, type: 3}
@@ -1285,5 +997,5 @@ MonoBehaviour:
   earlyHits: 2
   lateHits: 7
   missHits: 8
-  artist: KK & TAR
-  songTitle: HSOTD
+  artist: Rosa Walton (SpicyCaramel Remix)
+  songTitle: I Want To Stay At Your House (Hardstyle remix)

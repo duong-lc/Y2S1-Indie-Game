@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.52
+    value: 0.6
   threshold:
     overrideState: 1
     value: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 2.670157, g: 1.7662126, b: 0.79349, a: 1}
+    value: {r: 3.1612997, g: 1.2265383, b: 1.0587372, a: 1}
   fastMode:
     overrideState: 1
     value: 0
@@ -65,19 +65,19 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 31.042917, y: 76.04304}
+    value: {x: 48.81801, y: 93.81819}
   minLuminance:
     overrideState: 1
-    value: -0.65
+    value: -0.78
   maxLuminance:
     overrideState: 1
     value: 9
   keyValue:
     overrideState: 1
-    value: 0.88
+    value: 0.84
   eyeAdaptation:
     overrideState: 1
-    value: 0
+    value: 1
   speedUp:
     overrideState: 1
     value: 2
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1

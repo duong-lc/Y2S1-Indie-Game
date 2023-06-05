@@ -34,7 +34,7 @@ namespace Core.Patterns {
             else if(_instance.GetInstanceID()!=GetInstanceID()){
                 Destroy(gameObject);
                 //throw new System.Exception(string.Format("Instance of {0} already exists, removing {1}",GetType().FullName,ToString()));
-                NCLogger.Log($"removing duplicate", LogLevel.ERROR);
+                NCLogger.Log($"removing duplicate", LogLevel.WARNING);
             }
         }
 

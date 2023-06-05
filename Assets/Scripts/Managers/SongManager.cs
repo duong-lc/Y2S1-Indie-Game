@@ -35,7 +35,7 @@ namespace Managers
             if(!_gameModeData) NCLogger.Log($"midiData is {_gameModeData}", LogLevel.ERROR);
             
             audioSource.volume = _gameModeData.volume;
-
+            audioSource.clip = _midiData.songClip; 
             /*
             checking if the "StreamingAssets" path is a website or not, depending on the platform that loads the midi file
                     for example, windows, mac, linux = file location where as webgl = website

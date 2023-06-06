@@ -16,6 +16,10 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 7279105763972304832, guid: 5f04a5968a0e1624cb711f1f7339f201, type: 3}
     - {fileID: 7279105763972304832, guid: ac6f9984350cb304385b8bdae2e50b10, type: 3}
     - {fileID: 1995304790187793672, guid: fccfe18f61e0e7f48ba96d439a3c599a, type: 3}
@@ -225,8 +229,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: collider
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -261,8 +265,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: collider
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -297,8 +301,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: collider
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -333,8 +337,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: collider
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -387,7 +391,7 @@ MonoBehaviour:
       Data: false
     - Name: hitMarkPrefab
       Entry: 10
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -414,7 +418,7 @@ MonoBehaviour:
       Data: false
     - Name: hitMarkPrefab
       Entry: 10
-      Data: 1
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -441,7 +445,7 @@ MonoBehaviour:
       Data: false
     - Name: hitMarkPrefab
       Entry: 10
-      Data: 1
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -468,7 +472,7 @@ MonoBehaviour:
       Data: false
     - Name: hitMarkPrefab
       Entry: 10
-      Data: 2
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
@@ -495,7 +499,7 @@ MonoBehaviour:
       Data: true
     - Name: hitMarkPrefab
       Entry: 10
-      Data: 3
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -558,15 +562,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  volume: 0.1
-  hitVolume: 0.1
+  volume: 0.224
+  hitVolume: 0.044
   mainMenuSceneName: MainMenu
   levelSelectionSceneName: LevelSelection
   gamePlaySceneName: SampleScene
   optionSceneName: 
   inputDelayInMS: 0
   songDelayInSeconds: 0
-  noteTime: 5
+  noteTime: 3
   noteSpawnZ: 50
   noteTapZ: -10.5
   noteLayerMask:

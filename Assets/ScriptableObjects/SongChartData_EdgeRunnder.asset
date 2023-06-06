@@ -46,20 +46,20 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: $v
       Entry: 7
       Data: 2|LaneMidiData, Assembly-CSharp
     - Name: laneOctave
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: allNoteOnLaneList
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 15
+      Data: 57
     - Name: 
       Entry: 7
       Data: 4|Data_Classes.NoteNormalType, Assembly-CSharp
@@ -68,13 +68,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 13.64
+      Data: 11.906
     - Name: 
       Entry: 8
       Data: 
@@ -86,13 +86,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 17.276
+      Data: 12.656
     - Name: 
       Entry: 8
       Data: 
@@ -104,13 +104,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 17.909
+      Data: 23.531
     - Name: 
       Entry: 8
       Data: 
@@ -122,13 +122,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 20.142
+      Data: 24.656
     - Name: 
       Entry: 8
       Data: 
@@ -140,31 +140,40 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 21.231
+      Data: 25.781
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 9|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
-    - Name: timeStamp
+      Data: 1
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
       Entry: 4
-      Data: 21.863
+      Data: 34.031
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 34.781
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -176,40 +185,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 26.089
+      Data: 39.656
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 11|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+      Data: 1
+    - Name: timeStamp
       Entry: 4
-      Data: 26.578
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 28.66
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 40.031
     - Name: 
       Entry: 8
       Data: 
@@ -221,40 +221,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 29.732
+      Data: 46.031
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 13|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+      Data: 1
+    - Name: timeStamp
       Entry: 4
-      Data: 31.151
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 33.837
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 48.375
     - Name: 
       Entry: 8
       Data: 
@@ -266,13 +257,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 36.401
+      Data: 55.031
     - Name: 
       Entry: 8
       Data: 
@@ -284,31 +275,40 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 38.899
+      Data: 57.093
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|Data_Classes.NoteNormalType, Assembly-CSharp
+      Data: 16|Data_Classes.NoteSliderType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
-    - Name: timeStamp
+      Data: 1
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
       Entry: 4
-      Data: 41.444
+      Data: 64.406
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 65.531
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -320,13 +320,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 41.765
+      Data: 68.531
     - Name: 
       Entry: 8
       Data: 
@@ -338,47 +338,52 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 42.08
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 76.031
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 
-    - Name: $k
+      Data: 19|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
       Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 7
-      Data: 19|LaneMidiData, Assembly-CSharp
-    - Name: laneOctave
+      Data: 1
+    - Name: laneOrientation
       Entry: 3
-      Data: 2
-    - Name: allNoteOnLaneList
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
-        mscorlib
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 76.406
     - Name: 
-      Entry: 12
-      Data: 13
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 76.781
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 7
       Data: 21|Data_Classes.NoteNormalType, Assembly-CSharp
@@ -387,13 +392,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 16.104
+      Data: 77.156
     - Name: 
       Entry: 8
       Data: 
@@ -405,13 +410,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 18.562
+      Data: 77.531
     - Name: 
       Entry: 8
       Data: 
@@ -423,40 +428,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 18.723
+      Data: 77.906
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 24|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+      Data: 1
+    - Name: timeStamp
       Entry: 4
-      Data: 20.437
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 20.758
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 78.281
     - Name: 
       Entry: 8
       Data: 
@@ -468,13 +464,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 21.589
+      Data: 78.656
     - Name: 
       Entry: 8
       Data: 
@@ -486,40 +482,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 22.178
+      Data: 79.031
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 27|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 27|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+      Data: 1
+    - Name: timeStamp
       Entry: 4
-      Data: 23.598
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 23.963
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 79.406
     - Name: 
       Entry: 8
       Data: 
@@ -531,13 +518,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 25.178
+      Data: 79.781
     - Name: 
       Entry: 8
       Data: 
@@ -549,13 +536,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 25.962
+      Data: 80.156
     - Name: 
       Entry: 8
       Data: 
@@ -567,13 +554,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 28.928
+      Data: 80.531
     - Name: 
       Entry: 8
       Data: 
@@ -585,13 +572,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 30.374
+      Data: 80.906
     - Name: 
       Entry: 8
       Data: 
@@ -603,13 +590,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 31.017
+      Data: 81.281
     - Name: 
       Entry: 8
       Data: 
@@ -621,71 +608,67 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 3
+      Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 32.276
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 82.031
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 7
-      Data: 34|LaneMidiData, Assembly-CSharp
-    - Name: laneOctave
-      Entry: 3
-      Data: 1
-    - Name: allNoteOnLaneList
-      Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 13
-    - Name: 
-      Entry: 7
-      Data: 36|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 34|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+    - Name: timeStamp
       Entry: 4
-      Data: 11.035
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 13.64
+      Data: 82.406
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 82.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 83.156
     - Name: 
       Entry: 8
       Data: 
@@ -697,13 +680,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 16.024
+      Data: 83.531
     - Name: 
       Entry: 8
       Data: 
@@ -715,13 +698,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 16.178
+      Data: 83.906
     - Name: 
       Entry: 8
       Data: 
@@ -733,40 +716,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 18.642
+      Data: 84.281
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 40|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 40|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+    - Name: timeStamp
       Entry: 4
-      Data: 19.741
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 20.142
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 84.656
     - Name: 
       Entry: 8
       Data: 
@@ -778,13 +752,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 24.713
+      Data: 85.031
     - Name: 
       Entry: 8
       Data: 
@@ -796,13 +770,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 25.345
+      Data: 85.406
     - Name: 
       Entry: 8
       Data: 
@@ -814,40 +788,31 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 26.089
+      Data: 85.781
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 44|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 44|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+    - Name: timeStamp
       Entry: 4
-      Data: 26.578
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 28.66
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 86.156
     - Name: 
       Entry: 8
       Data: 
@@ -859,13 +824,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 30.535
+      Data: 86.531
     - Name: 
       Entry: 8
       Data: 
@@ -877,13 +842,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 30.696
+      Data: 86.906
     - Name: 
       Entry: 8
       Data: 
@@ -895,13 +860,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 31.633
+      Data: 87.281
     - Name: 
       Entry: 8
       Data: 
@@ -913,47 +878,52 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: octaveNum
       Entry: 3
       Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 32.417
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 87.656
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 
-    - Name: $k
+      Data: 49|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
       Entry: 3
       Data: 1
-    - Name: $v
-      Entry: 7
-      Data: 49|LaneMidiData, Assembly-CSharp
-    - Name: laneOctave
+    - Name: laneOrientation
       Entry: 3
-      Data: 0
-    - Name: allNoteOnLaneList
-      Entry: 7
-      Data: 50|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
-        mscorlib
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 87.843
     - Name: 
-      Entry: 12
-      Data: 16
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 50|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 1
+    - Name: octaveNum
+      Entry: 3
+      Data: 1
+    - Name: timeStamp
+      Entry: 4
+      Data: 88.031
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 7
       Data: 51|Data_Classes.NoteNormalType, Assembly-CSharp
@@ -965,10 +935,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 9.857
+      Data: 90.281
     - Name: 
       Entry: 8
       Data: 
@@ -983,10 +953,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 10.178
+      Data: 90.656
     - Name: 
       Entry: 8
       Data: 
@@ -1001,10 +971,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 10.463
+      Data: 91.031
     - Name: 
       Entry: 8
       Data: 
@@ -1019,10 +989,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 10.784
+      Data: 91.406
     - Name: 
       Entry: 8
       Data: 
@@ -1037,10 +1007,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 20.919
+      Data: 91.781
     - Name: 
       Entry: 8
       Data: 
@@ -1055,37 +1025,28 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 24.374
+      Data: 92.156
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 57|Data_Classes.NoteSliderType, Assembly-CSharp
+      Data: 57|Data_Classes.NoteNormalType, Assembly-CSharp
     - Name: noteID
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: laneOrientation
       Entry: 3
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
-    - Name: sliderData
-      Entry: 7
-      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
-    - Name: timeStampKeyDown
+      Data: 1
+    - Name: timeStamp
       Entry: 4
-      Data: 24.863
-    - Name: timeStampKeyUp
-      Entry: 4
-      Data: 25.66
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 92.531
     - Name: 
       Entry: 8
       Data: 
@@ -1100,10 +1061,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 27.381
+      Data: 92.906
     - Name: 
       Entry: 8
       Data: 
@@ -1118,10 +1079,10 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 27.696
+      Data: 93.281
     - Name: 
       Entry: 8
       Data: 
@@ -1136,49 +1097,44 @@ MonoBehaviour:
       Data: 1
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: timeStamp
       Entry: 4
-      Data: 27.98
+      Data: 93.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 61|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
-      Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 1
-    - Name: octaveNum
-      Entry: 3
-      Data: 0
-    - Name: timeStamp
-      Entry: 4
-      Data: 28.178
-    - Name: 
-      Entry: 8
       Data: 
-    - Name: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
       Entry: 7
-      Data: 62|Data_Classes.NoteNormalType, Assembly-CSharp
-    - Name: noteID
+      Data: 61|LaneMidiData, Assembly-CSharp
+    - Name: laneOctave
       Entry: 3
-      Data: 1
-    - Name: laneOrientation
-      Entry: 3
-      Data: 1
-    - Name: octaveNum
-      Entry: 3
-      Data: 0
-    - Name: timeStamp
-      Entry: 4
-      Data: 28.339
+      Data: 2
+    - Name: allNoteOnLaneList
+      Entry: 7
+      Data: 62|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+        mscorlib
     - Name: 
-      Entry: 8
-      Data: 
+      Entry: 12
+      Data: 50
     - Name: 
       Entry: 7
       Data: 63|Data_Classes.NoteNormalType, Assembly-CSharp
@@ -1187,13 +1143,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: timeStamp
       Entry: 4
-      Data: 28.499
+      Data: 13.031
     - Name: 
       Entry: 8
       Data: 
@@ -1205,13 +1161,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: timeStamp
       Entry: 4
-      Data: 29.142
+      Data: 13.218
     - Name: 
       Entry: 8
       Data: 
@@ -1223,13 +1179,13 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: timeStamp
       Entry: 4
-      Data: 33.214
+      Data: 16.968
     - Name: 
       Entry: 8
       Data: 
@@ -1241,13 +1197,3216 @@ MonoBehaviour:
       Data: 1
     - Name: laneOrientation
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: octaveNum
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: timeStamp
       Entry: 4
-      Data: 33.401
+      Data: 17.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 67|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 18.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 68|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 23.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 69|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 23.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 70|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 24.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 71|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 25.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 72|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 25.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 73|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 29.343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 74|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 33.562
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 75|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 36.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 76|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 37.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 77|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 38.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 78|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 43.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 79|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 43.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 80|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 51.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 81|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 51.468
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 52.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 82|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 58.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 83|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 62.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 84|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 62.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 85|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 62.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 86|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 63.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 87|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 63.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 88|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 64.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 89|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 66.843
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 68.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 90|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 71.062
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 91|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 71.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 92|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 93|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 94|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 95|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 96|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 97|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 98|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 75.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 99|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 75.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 100|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 81.843
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 101|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 102|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 103|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 104|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 105|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 87.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 106|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 87.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 107|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 88.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 108|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 88.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 109|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 110|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 111|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 112|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 2
+    - Name: octaveNum
+      Entry: 3
+      Data: 2
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 94.031
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 100.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 7
+      Data: 113|LaneMidiData, Assembly-CSharp
+    - Name: laneOctave
+      Entry: 3
+      Data: 3
+    - Name: allNoteOnLaneList
+      Entry: 7
+      Data: 114|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 61
+    - Name: 
+      Entry: 7
+      Data: 115|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 11.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 116|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 11.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 117|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 12.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 118|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 17.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 119|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 19.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 120|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 22.968
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 121|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 23.718
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 122|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 24.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 123|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 24.843
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 124|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 26.343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 125|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 28.968
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 126|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 33.562
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 127|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 39.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 128|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 41.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 129|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 43.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 130|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 45.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 131|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 45.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 132|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 47.812
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 133|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 49.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 134|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 51.468
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 52.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 135|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 54.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 136|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 55.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 137|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 56.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 138|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 57.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 139|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 60.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 140|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 60.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 141|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 61.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 142|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 61.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 143|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 61.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 144|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 65.531
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 66.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 145|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 68.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 146|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 72.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 147|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 72.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 148|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 75.843
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 149|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 76.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 150|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 76.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 151|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 76.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 152|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 77.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 153|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 77.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 154|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 77.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 155|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 78.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 156|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 78.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 157|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 79.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 158|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 79.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 159|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 79.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 160|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 80.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 161|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 80.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 162|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 80.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 163|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 81.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 164|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 81.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 165|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 83.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 166|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 84.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 167|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 84.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 168|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 169|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 170|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 88.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 171|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 88.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 172|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 173|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 174|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: timeStamp
+      Entry: 4
+      Data: 89.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 175|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 3
+    - Name: octaveNum
+      Entry: 3
+      Data: 3
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 94.031
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 100.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: 176|LaneMidiData, Assembly-CSharp
+    - Name: laneOctave
+      Entry: 3
+      Data: 4
+    - Name: allNoteOnLaneList
+      Entry: 7
+      Data: 177|System.Collections.Generic.List`1[[Data_Classes.BaseNoteType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 63
+    - Name: 
+      Entry: 7
+      Data: 178|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 17.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 179|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 18.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 180|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 23.343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 181|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 24.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 182|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 26.531
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 28.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 183|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 29.718
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 184|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 30.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 185|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 34.031
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 34.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 186|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 35.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 187|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 37.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 188|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 38.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 189|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 39.093
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 190|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 40.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 191|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 42.468
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 192|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 44.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 193|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 46.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 194|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 49.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 195|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 50.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 196|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 53.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 197|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 57.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 198|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 58.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 199|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 58.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 200|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 59.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 201|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 59.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 202|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 59.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 203|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 64.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 204|Data_Classes.NoteSliderType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 2
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: sliderData
+      Entry: 7
+      Data: Data_Classes.NoteData+SliderData, Assembly-CSharp
+    - Name: timeStampKeyDown
+      Entry: 4
+      Data: 66.843
+    - Name: timeStampKeyUp
+      Entry: 4
+      Data: 68.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 205|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 70.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 206|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 70.593
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 207|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 208|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 209|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 73.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 210|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 211|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 212|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 74.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 213|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 75.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 214|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 75.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 215|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 82.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 216|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 82.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 217|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 82.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 218|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 83.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 219|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 83.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 220|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 83.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 221|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 84.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 222|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 84.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 223|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 224|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 225|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 85.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 226|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 227|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 228|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 86.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 229|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 87.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 230|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 87.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 231|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 90.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 232|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 90.656
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 233|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 91.031
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 234|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 91.406
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 235|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 91.781
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 236|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 92.156
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 237|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 92.531
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 238|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 92.906
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 239|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 93.281
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 240|Data_Classes.NoteNormalType, Assembly-CSharp
+    - Name: noteID
+      Entry: 3
+      Data: 1
+    - Name: laneOrientation
+      Entry: 3
+      Data: 4
+    - Name: octaveNum
+      Entry: 3
+      Data: 4
+    - Name: timeStamp
+      Entry: 4
+      Data: 93.656
     - Name: 
       Entry: 8
       Data: 
@@ -1271,19 +4430,20 @@ MonoBehaviour:
       Data: 
   songClip: {fileID: 8300000, guid: efb7ac4bbedd79e4da82a1e7861d7625, type: 3}
   songDelayInSeconds: 0
-  fileLocation: HSOTD.mid
-  TotalRawNoteCount: 66
+  fileLocation: Edgerunner.mid
+  TotalRawNoteCount: 244
   noteNormalPrefab: {fileID: 7503693863679007523, guid: 8de00af407265554183b8e33f17111b0, type: 3}
   noteSliderPrefab: {fileID: 2580888399268996792, guid: fb6a6acc262e8204cbe7f65ad8194cb1, type: 3}
   noteRestrictionNormalNote: 0
   noteRestrictionSliderNote: 2
-  ratings: 1
-  accuracy: 81.510414
-  maxCombo: 27
-  score: 15650
-  perfectHits: 50
-  earlyHits: 3
-  lateHits: 7
-  missHits: 4
+  ratings: 0
+  accuracy: 98.40967
+  maxCombo: 116
+  score: 77350
+  perfectHits: 257
+  earlyHits: 1
+  lateHits: 3
+  missHits: 1
   artist: Rosa Walton (SpicyCaramel Remix)
   songTitle: I Want To Stay At Your House (Hardstyle remix)
+  albumCover: {fileID: 21300000, guid: a2ebbcdbef2032642b109be07af10362, type: 3}

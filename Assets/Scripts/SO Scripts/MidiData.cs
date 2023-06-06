@@ -23,7 +23,8 @@ public enum Ratings
 public class LaneMidiData
 {
     [SerializeField] [Range(0, 8)] private int laneOctave;
-    [ReadOnly] public List<BaseNoteType> allNoteOnLaneList = new();
+    
+    public List<BaseNoteType> allNoteOnLaneList = new();
 
     public int LaneOctave => laneOctave;
 }
@@ -65,5 +66,6 @@ public class MidiData : SerializedScriptableObject
    [Header("Song Misc Info")] 
    public string artist;
    public string songTitle;
+   public Sprite albumCover;
 }
 

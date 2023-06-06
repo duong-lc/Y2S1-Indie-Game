@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using EventType = Core.Events.EventType;
 
 public class GameSceneController : Singleton<GameSceneController>
@@ -20,7 +21,7 @@ public class GameSceneController : Singleton<GameSceneController>
 
     [SerializeField] private TMP_Text[] artists;
     [SerializeField] private TMP_Text[] songTitles;
-
+    [SerializeField] private Image cover;
     [SerializeField] private GameObject visual;
     
     private MidiData _midiData;
@@ -71,6 +72,8 @@ public class GameSceneController : Singleton<GameSceneController>
         foreach (var songTitle in songTitles) {
             songTitle.text = _midiData.songTitle;
         }
+
+        cover.sprite = _midiData.albumCover;
     }
 
     public void LoadEndScreenOverlay()
